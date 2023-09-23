@@ -1,25 +1,23 @@
-"use client";
 import AccountProfile from "@/components/navbar/forms/AccountProfile";
-import React from "react";
 import { currentUser } from "@clerk/nextjs";
 
 type pageProps = {};
 
 const page: React.FC<pageProps> = async () => {
   const user = await currentUser();
+  const userInfo = {};
 
   //user clerk
   //userInfo MongoDb
   const userData = {
     id: user?.id,
-    userName: userInfo?.username || user?.username,
-    
+    username: userInfo?.username || user?.username,
+    bio: userInfo?.bio || "",
   };
 
   return (
-    <main className="flex flex-col justify-center">
-      <h1>ON BOARDING</h1>
-      <AccountProfile />
+    <main className="flex flex-col justify-center items-center h-screen">
+      <AccountProfile user={userData} />
     </main>
   );
 };
