@@ -16,10 +16,6 @@ type AccountProfileProps = {
 };
 
 const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
-  const [profile, setProfile] = useState({
-    username: "",
-    bio: "",
-  });
   const router = useRouter();
   const pathname = usePathname();
 
@@ -34,8 +30,8 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     await updateUser({
       userId: user.id,
-      username: profile.username,
-      bio: profile.bio,
+      username: form.getValues("username"),
+      bio: form.getValues("bio"),
       path: pathname,
     });
 
@@ -74,8 +70,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
         </label>
         <button type="submit">Edit Profile</button>
       </form>
-      {profile.username}
-      {profile.bio}
     </>
   );
 };
