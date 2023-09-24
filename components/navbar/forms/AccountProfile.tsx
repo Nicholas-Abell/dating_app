@@ -39,7 +39,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       <label>
         Bio:
         <textarea
-          type="text"
           name="bio"
           placeholder={user.bio}
           className="px-2 text-black ml-2"
