@@ -1,11 +1,16 @@
 import AccountProfile from "@/components/navbar/forms/AccountProfile";
+import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
+import { redirect } from "@clerk/nextjs/server";
 
 type pageProps = {};
 
 const page: React.FC<pageProps> = async () => {
   const user = await currentUser();
-  const userInfo = {};
+  if (!user) return null; // to avoid typescript warnings
+
+  const userInfo = await fetchUser(user?.id);
+  // if (userInfo?.onboarded) redirect(/);
 
   //user clerk
   //userInfo MongoDb

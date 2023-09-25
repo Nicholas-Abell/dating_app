@@ -1,6 +1,6 @@
 "use client";
 import { UserValidation } from "@/libs/validations/User";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -57,6 +57,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             type="text"
             name="username"
             className="px-2 text-black ml-2"
+            placeholder={user?.username}
           />
         </label>
         <label>
@@ -66,10 +67,12 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             name="bio"
             className="px-2 text-black ml-2"
             rows={10}
+            placeholder={user?.bio}
           />
         </label>
         <button type="submit">Edit Profile</button>
       </form>
+      {user?.bio}
     </>
   );
 };

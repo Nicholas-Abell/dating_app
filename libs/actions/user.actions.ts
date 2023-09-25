@@ -1,10 +1,9 @@
 "use server"
-
 import { revalidatePath } from "next/cache";
 import User from "../models/user.model";
 import { connectToDB } from "../mongoose"
 
-interface Params {
+type Params = {
     userId: string,
     username: string,
     bio: string,
@@ -30,3 +29,22 @@ export async function updateUser({userId, username, bio, path}: Params): Promise
     }
 
 } 
+
+export async function populateUsers(){
+    try {
+        connectToDB();
+        await User.find().then((doc) => console.log(doc));
+    } catch (error: any) {
+        throw new Error('fetchUser Error: ', error)
+    }
+}
+
+export async function fetchUser(userId: string): Promise<void> {
+    try {
+        connectToDB();
+        await User.findOne({id: userId})
+    } catch (error: any) {
+        throw new Error('fetchUser Error: ', error)
+    }
+}
+
