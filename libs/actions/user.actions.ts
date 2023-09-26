@@ -4,19 +4,25 @@ import User from "../models/user.model";
 import { connectToDB } from "../mongoose"
 
 type Params = {
-    userId: string,
-    username: string,
-    bio: string,
-    path: string
+    userId: string;
+    username: string;
+    bio: string;
+    path: string;
+    age: number;
+    height: number;
+    weight: number;
+    relationshipstatus: string;
+    lookingfor: string;
+    gender: string;
 }
 
-export async function updateUser({userId, username, bio, path}: Params): Promise<void> {
+export async function updateUser({userId, username, bio, path, age, height, weight, relationshipstatus, lookingfor, gender}: Params): Promise<void> {
     connectToDB();
 
     try {
         await User.findOneAndUpdate(
             {id: userId}, 
-            {username: username.toLowerCase(), bio, onboarded: true}, 
+            {username: username.toLowerCase(), bio, onboarded: true, age, height, weight, relationshipstatus, lookingfor, gender}, 
             {upsert: true}
             );
     

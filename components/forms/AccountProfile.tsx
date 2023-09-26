@@ -12,6 +12,7 @@ type AccountProfileProps = {
     id: string;
     username: string;
     bio: string;
+    age: number;
   };
 };
 
@@ -24,6 +25,12 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
     defaultValues: {
       username: "",
       bio: "",
+      age: 0,
+      height: 0,
+      weight: 0,
+      relationshipstatus: "",
+      lookingfor: "",
+      gender: "",
     },
   });
 
@@ -33,6 +40,12 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       username: form.getValues("username"),
       bio: form.getValues("bio"),
       path: pathname,
+      age: form.getValues("age"),
+      height: form.getValues("height"),
+      weight: form.getValues("weight"),
+      relationshipstatus: form.getValues("relationshipstatus"),
+      lookingfor: form.getValues("lookingfor"),
+      gender: form.getValues("gender"),
     });
 
     console.log("user updated");
@@ -68,6 +81,60 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             className="px-2 text-black ml-2"
             rows={10}
             placeholder={user?.bio}
+          />
+        </label>
+        <label>
+          Age:
+          <input
+            type="number"
+            {...form.register("age")}
+            name="age"
+            className="px-2 text-black ml-2"
+          />
+        </label>
+        <label>
+          height:
+          <input
+            type="number"
+            {...form.register("height")}
+            name="height"
+            className="px-2 text-black ml-2"
+          />
+        </label>
+        <label>
+          weight:
+          <input
+            type="number"
+            {...form.register("weight")}
+            name="weight"
+            className="px-2 text-black ml-2"
+          />
+        </label>
+        <label>
+          realtionship status:
+          <input
+            type="text"
+            {...form.register("relationshipstatus")}
+            name="relationshipstatus"
+            className="px-2 text-black ml-2"
+          />
+        </label>
+        <label>
+          lookingfor:
+          <input
+            type="text"
+            {...form.register("lookingfor")}
+            name="lookingfor"
+            className="px-2 text-black ml-2"
+          />
+        </label>
+        <label>
+          gender:
+          <input
+            type="text"
+            {...form.register("gender")}
+            name="gender"
+            className="px-2 text-black ml-2"
           />
         </label>
         <button type="submit">Edit Profile</button>

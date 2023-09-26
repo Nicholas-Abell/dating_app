@@ -1,4 +1,4 @@
-import AccountProfile from "@/components/navbar/forms/AccountProfile";
+import AccountProfile from "@/components/forms/AccountProfile";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "@clerk/nextjs/server";
@@ -18,6 +18,7 @@ const page: React.FC<pageProps> = async () => {
     id: user?.id,
     username: userInfo?.username || user?.username,
     bio: userInfo?.bio || "",
+    age: user?.age,
   };
 
   return (
