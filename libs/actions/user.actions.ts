@@ -23,17 +23,16 @@ export async function updateUser({userId, username, bio, path}: Params): Promise
             if(path === '/profile/edit'){
                 revalidatePath(path)
             }
-        
     } catch (error: any) {
         throw new Error(`Failed to create/update user: ${error.message}`)
     }
-
 } 
 
 export async function populateUsers(){
     try {
         connectToDB();
-        await User.find().then((doc) => console.log(doc));
+        const users = await User.find({})
+        return users;
     } catch (error: any) {
         throw new Error('fetchUser Error: ', error)
     }
@@ -42,7 +41,8 @@ export async function populateUsers(){
 export async function fetchUser(userId: string): Promise<void> {
     try {
         connectToDB();
-        await User.findOne({id: userId})
+        const user = await User.findOne({id: userId});
+        return user;
     } catch (error: any) {
         throw new Error('fetchUser Error: ', error)
     }
