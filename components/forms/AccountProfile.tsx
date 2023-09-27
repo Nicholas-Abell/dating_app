@@ -42,15 +42,15 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     await updateUser({
       userId: user.id,
-      username: form.getValues("username"), //values.username
-      bio: form.getValues("bio"), //values.bio
+      username: values.username, //values.username
+      bio: values.bio, //values.bio
       path: pathname,
-      age: form.getValues("age"),
-      height: form.getValues("height"),
-      weight: form.getValues("weight"),
-      relationshipstatus: form.getValues("relationshipstatus"),
-      lookingfor: form.getValues("lookingfor"),
-      gender: form.getValues("gender"),
+      age: values.age,
+      height: values.height,
+      weight: values.weight,
+      relationshipstatus: values.relationshipstatus,
+      lookingfor: values.lookingfor,
+      gender: values.gender,
     });
 
     console.log("user updated");
@@ -134,6 +134,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             {...form.register("lookingfor")}
             name="lookingfor"
             className="px-2 text-black ml-2"
+            placeholder={user?.lookingfor}
           />
         </label>
         <label>
@@ -143,6 +144,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             {...form.register("gender")}
             name="gender"
             className="px-2 text-black ml-2"
+            placeholder={user?.gender}
           />
         </label>
         <button type="submit">Edit Profile</button>

@@ -14,7 +14,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = () => {
         <p className="hidden lg:block">HOME</p>
       </Link>
       <Link
-        href="/onboarding"
+        href="/profile/edit"
         className="flex justify-center items-center gap-4 p-2"
       >
         <ImProfile size={25} className="text-white" />
