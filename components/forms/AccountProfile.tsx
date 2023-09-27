@@ -13,6 +13,11 @@ type AccountProfileProps = {
     username: string;
     bio: string;
     age: number;
+    height: number;
+    weight: number;
+    relationshipstatus: string;
+    lookingfor: string;
+    gender: string;
   };
 };
 
@@ -37,8 +42,8 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     await updateUser({
       userId: user.id,
-      username: form.getValues("username"),
-      bio: form.getValues("bio"),
+      username: form.getValues("username"), //values.username
+      bio: form.getValues("bio"), //values.bio
       path: pathname,
       age: form.getValues("age"),
       height: form.getValues("height"),
@@ -83,13 +88,14 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             placeholder={user?.bio}
           />
         </label>
-        <label>
+        {/* <label>
           Age:
           <input
             type="number"
             {...form.register("age")}
             name="age"
             className="px-2 text-black ml-2"
+            placeholder={user?.age.toString()}
           />
         </label>
         <label>
@@ -99,6 +105,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             {...form.register("height")}
             name="height"
             className="px-2 text-black ml-2"
+            placeholder={user?.height.toString()}
           />
         </label>
         <label>
@@ -109,7 +116,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             name="weight"
             className="px-2 text-black ml-2"
           />
-        </label>
+        </label> */}
         <label>
           realtionship status:
           <input
@@ -117,6 +124,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             {...form.register("relationshipstatus")}
             name="relationshipstatus"
             className="px-2 text-black ml-2"
+            placeholder={user?.relationshipstatus}
           />
         </label>
         <label>
