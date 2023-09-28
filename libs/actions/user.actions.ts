@@ -65,7 +65,7 @@ export async function populateUsers(userId: string) {
   }
 }
 
-export async function fetchUser(userId: string): Promise<void> {
+export async function fetchUser(userId: string) {
   try {
     connectToDB();
     const user = await User.findOne({ id: userId });
