@@ -1,8 +1,13 @@
-import { populateUsers } from "@/libs/actions/user.actions";
+import { fetchUser, populateUsers } from "@/libs/actions/user.actions";
+import { currentUser } from "@clerk/nextjs";
 import Link from "next/link";
 
 export default async function Home() {
-  let profiles = await populateUsers();
+  const user = await currentUser();
+  if (!user) return null; // to avoid typescript warnings
+
+  const userInfo = await fetchUser(user.id);
+  let profiles = await populateUsers(user.id);
 
   return (
     <section className="px-8">

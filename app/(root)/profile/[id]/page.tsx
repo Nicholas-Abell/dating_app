@@ -3,10 +3,6 @@ import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
 
-type pageProps = {
-  id: string;
-};
-
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
   if (!user) return null;
@@ -19,7 +15,7 @@ async function Page({ params }: { params: { id: string } }) {
       <h1>{userInfo?.username}</h1>
       <h1>{userInfo?.age}</h1>
       <h1>{userInfo?.bio}</h1>
-      <h1>{userInfo?.username}</h1>
+      <h1>{userInfo?.lookingfor}</h1>
     </section>
   );
 }

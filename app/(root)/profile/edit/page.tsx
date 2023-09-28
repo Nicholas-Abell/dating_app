@@ -9,7 +9,7 @@ type pageProps = {};
 export default async function Edit() {
   const user = await currentUser();
   if (!user) return null;
-  
+
   const userInfo = await fetchUser(user?.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
@@ -26,7 +26,7 @@ export default async function Edit() {
   };
 
   return (
-    <div>
+    <div className="w-full h-screen flex justify-center items-center">
       <AccountProfile user={userData} />
     </div>
   );

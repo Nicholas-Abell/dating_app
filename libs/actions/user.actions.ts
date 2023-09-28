@@ -55,10 +55,10 @@ export async function updateUser({
   }
 }
 
-export async function populateUsers() {
+export async function populateUsers(userId: string) {
   try {
     connectToDB();
-    const users = await User.find({});
+    const users = await User.find({id: {$ne: userId}});
     return users;
   } catch (error: any) {
     throw new Error("fetchUser Error: ", error);

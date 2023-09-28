@@ -149,7 +149,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
         </label>
         <button type="submit">Edit Profile</button>
       </form>
-      {user?.bio}
     </>
   );
 };
