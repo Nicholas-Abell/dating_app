@@ -84,21 +84,33 @@ export async function likeUser(userId: string, likeId: string){
 
       const userToLike = await User.findOne({ id: likeId });
       console.log('User to Like:', userToLike);
-
       const user = await User.findOne({ id: userId });
-      console.log('User', user);
 
       if(!user.likes.includes(likeId)){
+        //add liked profile to user array
         await User.findOneAndUpdate(
           {id: userId}, 
           { $push: { likes: likeId } }, 
-          {upsert: true}
+          {new: true}
         );
+        //add likedBy to target profile
+        await User.findOneAndUpdate(
+          {id: likeId}, 
+          { $push: { likedBy: userId } }, 
+          {new: true}
+        );        
       } else {
+        //remove liked profile to user array
         await User.findOneAndUpdate(
           {id: userId}, 
           { $pull: { likes: likeId } }, 
-          {upsert: true}
+          {new: true}
+        );
+        //remove likedBy to target profile
+        await User.findOneAndUpdate(
+          {id: likeId}, 
+          { $pull: { likedBy: userId } }, 
+          {new: true}
         );
       }
       revalidatePath("/");

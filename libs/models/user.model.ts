@@ -2,9 +2,11 @@ import mongoose, { Schema } from "mongoose";
 import { string } from "zod";
 
 const userSchema = new Schema({
-  likes: [{type: String}],
+  likes: [{type: String, unique: true}],
+  likedBy: [{type: String, unique: true}],
+  viewedBy: [{type: String, unique: true}],
   id: { type: String, require: true },
-  username: { type: String, require: true, unique: true },
+  username: { type: String, require: true},
   bio: { type: String },
   onboarded: { type: Boolean, default: false },
   age: { type: Number },
