@@ -14,6 +14,7 @@ type Params = {
   relationshipstatus: string;
   lookingfor: string;
   gender: string;
+  likes: [string]
 };
 
 export async function updateUser({
@@ -27,6 +28,7 @@ export async function updateUser({
   relationshipstatus,
   lookingfor,
   gender,
+  likes
 }: Params): Promise<void> {
   connectToDB();
 
@@ -43,6 +45,7 @@ export async function updateUser({
         relationshipstatus,
         lookingfor,
         gender,
+        likes
       },
       { upsert: true }
     );
@@ -74,3 +77,33 @@ export async function fetchUser(userId: string) {
     throw new Error("fetchUser Error: ", error);
   }
 }
+
+export async function likeUser(userId: string, likeId: string){
+ try {
+  connectToDB();
+
+      const userToLike = await User.findOne({ id: likeId });
+      console.log('User to Like:', userToLike);
+
+      const user = await User.findOne({ id: userId });
+      console.log('User', user);
+
+      if(!user.likes.includes(likeId)){
+        await User.findOneAndUpdate(
+          {id: userId}, 
+          { $push: { likes: likeId } }, 
+          {upsert: true}
+        );
+      } else {
+        await User.findOneAndUpdate(
+          {id: userId}, 
+          { $pull: { likes: likeId } }, 
+          {upsert: true}
+        );
+      }
+      revalidatePath("/");
+
+ } catch (error: any) {
+  throw new Error("likeUser Error: ", error);
+ } 
+}  

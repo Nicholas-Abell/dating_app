@@ -51,6 +51,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       relationshipstatus: values.relationshipstatus,
       lookingfor: values.lookingfor,
       gender: values.gender,
+      likes: [""],
     });
 
     console.log("user updated");
