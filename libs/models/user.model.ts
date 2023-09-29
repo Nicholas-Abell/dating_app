@@ -1,11 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import { string } from "zod";
 
 const userSchema = new Schema({
-  likes: [{type: String, unique: true}],
-  likedBy: [{type: String, unique: true}],
-  viewedBy: [{type: String, unique: true}],
-  id: { type: String, require: true },
   username: { type: String, require: true},
   bio: { type: String },
   onboarded: { type: Boolean, default: false },
@@ -44,6 +39,11 @@ const userSchema = new Schema({
       "Non-Binary",
     ],
   },
+  likes: [{type: String, unique: true}],
+  likedBy: [{type: String, unique: true}],
+  viewedBy: [{type: String, unique: true}],
+  id: { type: String, require: true },
+  convsersationIds: [{type: String, unique: true}],
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
