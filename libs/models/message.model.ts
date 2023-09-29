@@ -1,12 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
 const messageSchema = new Schema({
-    sentBy: {type: String}, //userID
+    sentBy: {type: String}, //userID or username?
     message: {type: String}
 });
 
-const conversationSchema = new Schema({
-    conversationId: {type: String, unique: true},
-    userIds: [{type: String, unique: true}],
-    conversation: [{type: messageSchema}]
-});
+const Message = mongoose.models.Message || mongoose.model("Message", messageSchema);
+
+export default Message;

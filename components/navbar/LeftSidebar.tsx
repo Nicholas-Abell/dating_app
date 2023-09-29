@@ -20,10 +20,13 @@ const LeftSidebar: React.FC<LeftSidebarProps> = () => {
         <ImProfile size={25} className="text-white" />
         <p className="hidden lg:block">PROFILE</p>
       </Link>
-      <div className="flex justify-center items-center gap-4 p-2">
+      <Link
+        href="/messages"
+        className="flex justify-center items-center gap-4 p-2"
+      >
         <BiMessageSquareDots size={30} className="text-white" />
         <p className="hidden lg:block">MESSAGES</p>
-      </div>
+      </Link>
       <div className="flex justify-center items-center gap-4 p-2">
         <AiFillSetting size={30} className="text-white" />
         <p className="hidden lg:block">HOME</p>
