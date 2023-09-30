@@ -14,7 +14,7 @@ type Params = {
   relationshipstatus: string;
   lookingfor: string;
   gender: string;
-  likes: [string]
+  likes: [string];
 };
 
 export async function updateUser({
@@ -28,7 +28,7 @@ export async function updateUser({
   relationshipstatus,
   lookingfor,
   gender,
-  likes
+  likes,
 }: Params): Promise<void> {
   connectToDB();
 
@@ -45,7 +45,7 @@ export async function updateUser({
         relationshipstatus,
         lookingfor,
         gender,
-        likes
+        likes,
       },
       { upsert: true }
     );
@@ -61,7 +61,7 @@ export async function updateUser({
 export async function populateUsers(userId: string) {
   try {
     connectToDB();
-    const users = await User.find({id: {$ne: userId}});
+    const users = await User.find({ id: { $ne: userId } });
     return users;
   } catch (error: any) {
     throw new Error("fetchUser Error: ", error);
@@ -78,44 +78,43 @@ export async function fetchUser(userId: string) {
   }
 }
 
-export async function likeUser(userId: string, likeId: string){
- try {
-  connectToDB();
+export async function likeUser(userId: string, likeId: string) {
+  try {
+    connectToDB();
 
-      const userToLike = await User.findOne({ id: likeId });
-      console.log('User to Like:', userToLike);
-      const user = await User.findOne({ id: userId });
+    const userToLike = await User.findOne({ id: likeId });
+    console.log("User to Like:", userToLike);
+    const user = await User.findOne({ id: userId });
 
-      if(!user.likes.includes(likeId)){
-        //add liked profile to user array
-        await User.findOneAndUpdate(
-          {id: userId}, 
-          { $push: { likes: likeId } }, 
-          {new: true}
-        );
-        //add likedBy to target profile
-        await User.findOneAndUpdate(
-          {id: likeId}, 
-          { $push: { likedBy: userId } }, 
-          {new: true}
-        );        
-      } else {
-        //remove liked profile to user array
-        await User.findOneAndUpdate(
-          {id: userId}, 
-          { $pull: { likes: likeId } }, 
-          {new: true}
-        );
-        //remove likedBy to target profile
-        await User.findOneAndUpdate(
-          {id: likeId}, 
-          { $pull: { likedBy: userId } }, 
-          {new: true}
-        );
-      }
-      revalidatePath("/");
-
- } catch (error: any) {
-  throw new Error("likeUser Error: ", error);
- } 
-}  
+    if (!user.likes.includes(likeId)) {
+      //add liked profile to user array
+      await User.findOneAndUpdate(
+        { id: userId },
+        { $push: { likes: likeId } },
+        { new: true }
+      );
+      //add likedBy to target profile
+      await User.findOneAndUpdate(
+        { id: likeId },
+        { $push: { likedBy: userId } },
+        { new: true }
+      );
+    } else {
+      //remove liked profile from user array
+      await User.findOneAndUpdate(
+        { id: userId },
+        { $pull: { likes: likeId } },
+        { new: true }
+      );
+      //remove likedBy from target profile
+      await User.findOneAndUpdate(
+        { id: likeId },
+        { $pull: { likedBy: userId } },
+        { new: true }
+      );
+    }
+    revalidatePath("/");
+  } catch (error: any) {
+    throw new Error("likeUser Error: ", error);
+  }
+}

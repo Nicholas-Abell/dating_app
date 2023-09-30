@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const userSchema = new Schema({
-  username: { type: String, require: true},
+  username: { type: String, require: true },
   bio: { type: String },
   onboarded: { type: Boolean, default: false },
   age: { type: Number },
@@ -39,11 +39,11 @@ const userSchema = new Schema({
       "Non-Binary",
     ],
   },
-  likes: [{type: String, unique: true}],
-  likedBy: [{type: String, unique: true}],
-  viewedBy: [{type: String, unique: true}],
+  likes: [{ type: mongoose.Types.ObjectId, ref: "User" }],
+  likedBy: [{ type: mongoose.Types.ObjectId, ref: "User" }],
+  viewedBy: [{ type: mongoose.Types.ObjectId, ref: "User" }],
   id: { type: String, require: true },
-  convsersationIds: [{type: String, unique: true}],
+  convsersationIds: [{ type: mongoose.Types.ObjectId, ref: "Conversation" }],
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
