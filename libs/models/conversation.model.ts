@@ -2,11 +2,13 @@ import mongoose, { Schema } from "mongoose";
 import Message from "./message.model";
 
 const conversationSchema = new Schema({
-    // conversationId: {type: String, unique: true},
-    userIds: [{type: String, unique: true}],
-    conversation: [{type: Message}]
+  conversationId: { type: String, unique: true },
+  users: [{ type: mongoose.Types.ObjectId, ref: "User" }],
+  conversation: [{ type: mongoose.Types.ObjectId, ref: "Message" }],
 });
 
-const Converstaion = mongoose.models.Convseration || mongoose.model("Conversation", conversationSchema);
+const Conversation =
+  mongoose.models.Conversation ||
+  mongoose.model("Conversation", conversationSchema);
 
-export default Converstaion;
+export default Conversation;
