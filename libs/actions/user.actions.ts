@@ -115,6 +115,6 @@ export async function likeUser(userId: string, likeId: string) {
     }
     revalidatePath("/");
   } catch (error: any) {
-    throw new Error("likeUser Error: ", error);
+    throw new Error(`likeUser Error: ${error.message}`);
   }
 }

@@ -39,9 +39,9 @@ const userSchema = new Schema({
       "Non-Binary",
     ],
   },
-  likes: [{ type: mongoose.Types.ObjectId, ref: "User" }],
-  likedBy: [{ type: mongoose.Types.ObjectId, ref: "User" }],
-  viewedBy: [{ type: mongoose.Types.ObjectId, ref: "User" }],
+  likes: [{ type: String }],
+  likedBy: [{ type: String }],
+  viewedBy: [{ type: String }],
   id: { type: String, require: true },
   convsersationIds: [{ type: mongoose.Types.ObjectId, ref: "Conversation" }],
 });

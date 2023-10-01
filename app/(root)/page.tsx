@@ -10,7 +10,7 @@ export default async function Home() {
   let profiles = await populateUsers(user.id);
 
   const checkLikedProfiles = (userId: string) => {
-    if (userInfo?.likes.includes(userId)) {
+    if (userInfo?.likes?.includes(userId)) {
       return true;
     } else return false;
   };
