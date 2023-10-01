@@ -43,7 +43,6 @@ const userSchema = new Schema({
   likedBy: [{ type: String }],
   viewedBy: [{ type: String }],
   id: { type: String, require: true },
-  convsersationIds: [{ type: mongoose.Types.ObjectId, ref: "Conversation" }],
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);

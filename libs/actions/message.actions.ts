@@ -1,9 +1,6 @@
 "use server";
-import { revalidatePath } from "next/cache";
-import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
 import Conversation from "../models/conversation.model";
-import mongoose from "mongoose";
 
 export async function fetchConversation(conversationId: string) {
   try {
@@ -11,17 +8,44 @@ export async function fetchConversation(conversationId: string) {
     const conversation = await Conversation.findOne({ id: conversationId });
     return conversation;
   } catch (error: any) {
-    throw new Error("fetchUser Error: ", error);
+    throw new Error("fetchConversation Error: ", error);
   }
 }
 
+export async function checkExistingConvsersation(
+  userId: string,
+  recieverId: string
+) {
+  const existingConversation = await Conversation.findOne({
+    users: { $all: [userId, recieverId] },
+  });
+  console.log("conversation found");
+  return existingConversation;
+}
+
 //create conversation if there isn't one
-export async function updateConversation(
-  conversationId: string,
-  users: [string]
+export async function createConversation(userId: string, recieverId: string) {
+  if (await checkExistingConvsersation(userId, recieverId)) return;
+  try {
+    const conversation = new Conversation({
+      users: [userId, recieverId],
+    });
+    await conversation.save();
+    console.log("conversation created");
+  } catch (error: any) {
+    console.log(`createConversation error: ${error.message}`);
+  }
+}
+
+export async function sendMessage(
+  userId: string,
+  reciverId: string,
+  messageText: string
 ) {
   try {
-    Conversation.findByIdAndUpdate({ id: conversationId }, { users: [users] });
-  } catch (error) {}
+    const existingConversation = checkExistingConvsersation(userId, reciverId);
+    if (!existingConversation) createConversation(userId, reciverId);
+  } catch (error: any) {
+    console.log(`sendMessage error: ${error.message}`);
+  }
 }
-//update conversation

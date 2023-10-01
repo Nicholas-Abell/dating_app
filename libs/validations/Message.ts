@@ -1,5 +1,5 @@
 import * as z from "zod";
 
-const messageValidation = {
+export const messageValidation = z.object({
   message: z.string().max(300),
-};
+});

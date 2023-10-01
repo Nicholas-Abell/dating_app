@@ -8,7 +8,7 @@ const page: React.FC<pageProps> = async () => {
   const user = await currentUser();
   if (!user) return null; // to avoid typescript warnings
 
-  const userInfo = await fetchUser(user.id);
+  const userInfo = await fetchUser(user?.id);
   // if (userInfo?.onboarded) redirect(/);
 
   //user clerk

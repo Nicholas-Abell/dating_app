@@ -83,7 +83,7 @@ export async function likeUser(userId: string, likeId: string) {
     connectToDB();
 
     const userToLike = await User.findOne({ id: likeId });
-    console.log("User to Like:", userToLike);
+    console.log("Like/Disliked: ", userToLike?.username);
     const user = await User.findOne({ id: userId });
 
     if (!user.likes.includes(likeId)) {
