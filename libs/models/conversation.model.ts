@@ -1,11 +1,14 @@
 import mongoose, { Schema } from "mongoose";
-import Message from "./message.model";
-import { type } from "os";
 
 const conversationSchema = new Schema({
   conversationId: { type: String, unique: true },
   users: [{ type: String }],
-  conversation: [{ type: mongoose.Types.ObjectId, ref: "Message" }],
+  message: [
+    {
+      content: String,
+      sentBy: String,
+    },
+  ],
 });
 
 const Conversation =

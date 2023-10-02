@@ -12,7 +12,27 @@ export async function fetchConversation(conversationId: string) {
   }
 }
 
-export async function checkExistingConvsersation(
+//create conversation if there isn't one
+export async function createConversation(
+  userId: string,
+  recieverId: string,
+  messageText: string
+) {
+  try {
+    const conversation = new Conversation({
+      users: [userId, recieverId],
+      message: { content: messageText, sentBy: userId },
+    });
+
+    await conversation.save();
+    const conversationID = conversation._id;
+    console.log("conversation created");
+  } catch (error: any) {
+    console.log(`createConversation error: ${error.message}`);
+  }
+}
+
+export async function checkExistingConversation(
   userId: string,
   recieverId: string
 ) {
@@ -23,28 +43,26 @@ export async function checkExistingConvsersation(
   return existingConversation;
 }
 
-//create conversation if there isn't one
-export async function createConversation(userId: string, recieverId: string) {
-  if (await checkExistingConvsersation(userId, recieverId)) return;
-  try {
-    const conversation = new Conversation({
-      users: [userId, recieverId],
-    });
-    await conversation.save();
-    console.log("conversation created");
-  } catch (error: any) {
-    console.log(`createConversation error: ${error.message}`);
-  }
-}
-
 export async function sendMessage(
   userId: string,
-  reciverId: string,
+  recieverId: string,
   messageText: string
 ) {
   try {
-    const existingConversation = checkExistingConvsersation(userId, reciverId);
-    if (!existingConversation) createConversation(userId, reciverId);
+    connectToDB();
+    const existingConversation = await checkExistingConversation(
+      userId,
+      recieverId
+    );
+    const conversationId = existingConversation?._id;
+    if (existingConversation) {
+      await Conversation.findOneAndUpdate(
+        { id: conversationId },
+        { $push: { message: { content: messageText, sentBy: userId } } }
+      );
+    } else {
+      createConversation(userId, recieverId, messageText);
+    }
   } catch (error: any) {
     console.log(`sendMessage error: ${error.message}`);
   }
