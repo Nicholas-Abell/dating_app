@@ -3,12 +3,11 @@ import {
   createConversation,
   sendMessage,
 } from "@/libs/actions/message.actions";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 type MessageProps = {
   userId: string;
-  userName: string;
+  username: string;
   recieverId: string;
   recieverName: string;
 };
@@ -16,21 +15,21 @@ type MessageProps = {
 const Message: React.FC<MessageProps> = ({
   userId,
   recieverId,
-  userName,
+  username,
   recieverName,
 }) => {
-  const [message, setMessage] = useState("");
+  const [messageText, setMessageText] = useState("");
   const [messageSent, setMessageSent] = useState(true);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    await createConversation(
+    await createConversation({
       recieverId,
       userId,
-      userName,
+      username,
       recieverName,
-      message
-    );
+      messageText,
+    });
     setMessageSent(false);
   };
 
@@ -39,7 +38,7 @@ const Message: React.FC<MessageProps> = ({
       {messageSent ? (
         <input
           onChange={(e) => {
-            setMessage(e.target.value);
+            setMessageText(e.target.value);
           }}
           name="message"
           type="text"

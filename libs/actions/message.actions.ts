@@ -2,6 +2,14 @@
 import { connectToDB } from "../mongoose";
 import Conversation from "../models/conversation.model";
 
+type params = {
+  userId: string;
+  recieverId: string;
+  messageText?: string;
+  username?: string;
+  recieverName?: string;
+};
+
 export async function fetchConversation(conversationId: string) {
   try {
     connectToDB();
@@ -13,17 +21,17 @@ export async function fetchConversation(conversationId: string) {
 }
 
 //create conversation if there isn't one
-export async function createConversation(
-  userId: string,
-  recieverId: string,
-  userName: string,
-  recieverName: string,
-  messageText: string,
-) {
+export async function createConversation({
+  userId,
+  recieverId,
+  username,
+  recieverName,
+  messageText,
+}: params) {
   try {
     const conversation = new Conversation({
       users: [
-        { id: userId, username: userName },
+        { id: userId, username: username },
         { id: recieverId, username: recieverName },
       ],
       message: { content: messageText, sentBy: userId },
@@ -48,10 +56,10 @@ export async function populateConversations(userId: string) {
   }
 }
 
-export async function checkExistingConversation(
-  userId: string,
-  recieverId: string
-) {
+export async function checkExistingConversation({
+  userId,
+  recieverId,
+}: params) {
   const existingConversation = await Conversation.findOne({
     users: { $all: [userId, recieverId] },
   });
@@ -59,19 +67,19 @@ export async function checkExistingConversation(
   return existingConversation;
 }
 
-export async function sendMessage(
-  userId: string,
-  recieverId: string,
-  messageText: string,
-  userName: string,
-  recieverName: string
-) {
+export async function sendMessage({
+  userId,
+  recieverId,
+  messageText,
+  username,
+  recieverName,
+}: params) {
   try {
     connectToDB();
-    const existingConversation = await checkExistingConversation(
+    const existingConversation = await checkExistingConversation({
       userId,
-      recieverId
-    );
+      recieverId,
+    });
     const conversationId = existingConversation?._id;
     if (existingConversation) {
       await Conversation.findOneAndUpdate(
@@ -79,13 +87,13 @@ export async function sendMessage(
         { $push: { message: { content: messageText, sentBy: userId } } }
       );
     } else {
-      createConversation(
-        userName,
+      createConversation({
+        username,
         userId,
         recieverName,
         recieverId,
-        messageText
-      );
+        messageText,
+      });
     }
   } catch (error: any) {
     console.log(`sendMessage error: ${error.message}`);

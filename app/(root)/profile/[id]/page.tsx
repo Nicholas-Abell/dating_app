@@ -20,7 +20,7 @@ async function Page({ params }: { params: { id: string } }) {
       <div className="absolute w-full h-screen flex flex-col bottom-12 justify-end items-center">
         <Message
           userId={userInfo?.id}
-          userName={userInfo?.username}
+          username={userInfo?.username}
           recieverId={profileInfo?.id}
           recieverName={profileInfo?.username}
         />
