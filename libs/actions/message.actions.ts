@@ -16,19 +16,35 @@ export async function fetchConversation(conversationId: string) {
 export async function createConversation(
   userId: string,
   recieverId: string,
-  messageText: string
+  userName: string,
+  recieverName: string,
+  messageText: string,
 ) {
   try {
     const conversation = new Conversation({
-      users: [userId, recieverId],
+      users: [
+        { id: userId, username: userName },
+        { id: recieverId, username: recieverName },
+      ],
       message: { content: messageText, sentBy: userId },
     });
 
     await conversation.save();
-    const conversationID = conversation._id;
     console.log("conversation created");
   } catch (error: any) {
     console.log(`createConversation error: ${error.message}`);
+  }
+}
+
+export async function populateConversations(userId: string) {
+  try {
+    connectToDB();
+    const conversations = await Conversation.find({
+      users: { $all: [userId] },
+    });
+    return conversations;
+  } catch (error: any) {
+    throw new Error("populateConversations Error: ", error);
   }
 }
 
@@ -46,7 +62,9 @@ export async function checkExistingConversation(
 export async function sendMessage(
   userId: string,
   recieverId: string,
-  messageText: string
+  messageText: string,
+  userName: string,
+  recieverName: string
 ) {
   try {
     connectToDB();
@@ -61,7 +79,13 @@ export async function sendMessage(
         { $push: { message: { content: messageText, sentBy: userId } } }
       );
     } else {
-      createConversation(userId, recieverId, messageText);
+      createConversation(
+        userName,
+        userId,
+        recieverName,
+        recieverId,
+        messageText
+      );
     }
   } catch (error: any) {
     console.log(`sendMessage error: ${error.message}`);

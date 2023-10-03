@@ -1,8 +1,6 @@
 import Message from "@/components/forms/Message";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
-import Link from "next/link";
-import { redirect } from "next/navigation";
 import React from "react";
 
 async function Page({ params }: { params: { id: string } }) {
@@ -20,7 +18,12 @@ async function Page({ params }: { params: { id: string } }) {
       <h1>{profileInfo?.bio}</h1>
       <h1>{profileInfo?.lookingfor}</h1>
       <div className="absolute w-full h-screen flex flex-col bottom-12 justify-end items-center">
-        <Message userId={userInfo?.id} recieverId={profileInfo?.id} />
+        <Message
+          userId={userInfo?.id}
+          userName={userInfo?.username}
+          recieverId={profileInfo?.id}
+          recieverName={profileInfo?.username}
+        />
       </div>
     </section>
   );

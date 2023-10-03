@@ -1,20 +1,36 @@
 "use client";
-import { sendMessage } from "@/libs/actions/message.actions";
+import {
+  createConversation,
+  sendMessage,
+} from "@/libs/actions/message.actions";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 type MessageProps = {
   userId: string;
+  userName: string;
   recieverId: string;
+  recieverName: string;
 };
 
-const Message: React.FC<MessageProps> = ({ userId, recieverId }) => {
+const Message: React.FC<MessageProps> = ({
+  userId,
+  recieverId,
+  userName,
+  recieverName,
+}) => {
   const [message, setMessage] = useState("");
   const [messageSent, setMessageSent] = useState(true);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    await sendMessage(userId, recieverId, message);
+    await createConversation(
+      recieverId,
+      userId,
+      userName,
+      recieverName,
+      message
+    );
     setMessageSent(false);
   };
 
