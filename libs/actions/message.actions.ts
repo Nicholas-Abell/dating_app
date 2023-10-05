@@ -60,8 +60,8 @@ export async function checkExistingConversation({
   userId,
   recieverId,
 }: params) {
-  const existingConversation = await Conversation.findOne({
-    users: { $all: [userId, recieverId] },
+  const existingConversation = await Conversation.find({
+    "concersations.users.id": { $all: [{ userId }, { recieverId }] },
   });
   console.log("conversation found");
   return existingConversation;
@@ -80,21 +80,25 @@ export async function sendMessage({
       userId,
       recieverId,
     });
-    const conversationId = existingConversation?._id;
+    // console.log(existingConversation);
     if (existingConversation) {
-      await Conversation.findOneAndUpdate(
-        { id: conversationId },
-        { $push: { message: { content: messageText, sentBy: userId } } }
-      );
-    } else {
-      createConversation({
-        username,
-        userId,
-        recieverName,
-        recieverId,
-        messageText,
-      });
-    }
+      console.log("yes");
+    } else console.log("no");
+    // const conversationId = existingConversation?._id;
+    // if (existingConversation) {
+    //   await Conversation.findOneAndUpdate(
+    //     { id: conversationId },
+    //     { $push: { message: { content: messageText, sentBy: userId } } }
+    //   );
+    // } else {
+    //   createConversation({
+    //     username,
+    //     userId,
+    //     recieverName,
+    //     recieverId,
+    //     messageText,
+    //   });
+    // }
   } catch (error: any) {
     console.log(`sendMessage error: ${error.message}`);
   }

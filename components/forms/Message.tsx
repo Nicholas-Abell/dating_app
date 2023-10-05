@@ -23,14 +23,14 @@ const Message: React.FC<MessageProps> = ({
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    await createConversation({
+    await sendMessage({
       recieverId,
       userId,
       username,
       recieverName,
       messageText,
     });
-    setMessageSent(false);
+    // setMessageSent(false);
   };
 
   return (
