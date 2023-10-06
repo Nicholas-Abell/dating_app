@@ -48,8 +48,9 @@ export async function populateConversations(userId: string) {
   try {
     connectToDB();
     const conversations = await Conversation.find({
-      users: { $all: [userId] },
+      "users.id": userId,
     });
+    console.log(conversations);
     return conversations;
   } catch (error: any) {
     throw new Error("populateConversations Error: ", error);
@@ -60,8 +61,8 @@ export async function checkExistingConversation({
   userId,
   recieverId,
 }: params) {
-  const existingConversation = await Conversation.find({
-    "concersations.users.id": { $all: [{ userId }, { recieverId }] },
+  const existingConversation = await Conversation.findOne({
+    $and: [{ "users.id": userId }, { "users.id": recieverId }],
   });
   console.log("conversation found");
   return existingConversation;
@@ -80,25 +81,20 @@ export async function sendMessage({
       userId,
       recieverId,
     });
-    // console.log(existingConversation);
+    console.log(existingConversation);
     if (existingConversation) {
-      console.log("yes");
-    } else console.log("no");
-    // const conversationId = existingConversation?._id;
-    // if (existingConversation) {
-    //   await Conversation.findOneAndUpdate(
-    //     { id: conversationId },
-    //     { $push: { message: { content: messageText, sentBy: userId } } }
-    //   );
-    // } else {
-    //   createConversation({
-    //     username,
-    //     userId,
-    //     recieverName,
-    //     recieverId,
-    //     messageText,
-    //   });
-    // }
+      await Conversation.findByIdAndUpdate(existingConversation._id, {
+        $push: { message: { content: messageText, sentBy: username } },
+      });
+    } else {
+      createConversation({
+        username,
+        userId,
+        recieverName,
+        recieverId,
+        messageText,
+      });
+    }
   } catch (error: any) {
     console.log(`sendMessage error: ${error.message}`);
   }

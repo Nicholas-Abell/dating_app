@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const conversationSchema = new Schema({
-  conversationId: { type: String, unique: true },
+  conversationId: { type: String },
   users: [{ id: String, username: String }],
   message: [
     {

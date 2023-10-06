@@ -6,9 +6,10 @@ import React from "react";
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
   if (!user) return null;
-  const userInfo = await fetchUser(user?.id);
 
+  const userInfo = await fetchUser(user?.id);
   const profileInfo = await fetchUser(params.id);
+  console.log(profileInfo);
   //   if (!userInfo?.onboarded) redirect("/onboarding");
 
   return (
