@@ -64,7 +64,6 @@ export async function checkExistingConversation({
   const existingConversation = await Conversation.findOne({
     $and: [{ "users.id": userId }, { "users.id": recieverId }],
   });
-  console.log("conversation found");
   return existingConversation;
 }
 
@@ -81,11 +80,11 @@ export async function sendMessage({
       userId,
       recieverId,
     });
-    console.log(existingConversation);
     if (existingConversation) {
       await Conversation.findByIdAndUpdate(existingConversation._id, {
         $push: { message: { content: messageText, sentBy: username } },
       });
+      console.log("message sent");
     } else {
       createConversation({
         username,
@@ -94,6 +93,7 @@ export async function sendMessage({
         recieverId,
         messageText,
       });
+      console.log("conversation created");
     }
   } catch (error: any) {
     console.log(`sendMessage error: ${error.message}`);
