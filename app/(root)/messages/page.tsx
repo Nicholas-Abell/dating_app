@@ -19,9 +19,12 @@ const page: React.FC<pageProps> = async () => {
       {conversations ? (
         conversations.map((convo) => (
           <>
-            {convo?.users[0]?.username}
-            <br />
-            {convo?.users[1]?.username}
+            {convo?.users[0]?.username !== userInfo?.username
+              ? convo?.users[0]?.username
+              : ""}
+            {convo?.users[1]?.username !== userInfo?.username
+              ? convo?.users[1]?.username
+              : ""}
           </>
         ))
       ) : (
