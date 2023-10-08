@@ -13,7 +13,8 @@ type params = {
 export async function fetchConversation(conversationId: string) {
   try {
     connectToDB();
-    const conversation = await Conversation.findOne({ id: conversationId });
+    const conversation = await Conversation.findOne({ _id: conversationId });
+    console.log("conversation fetched: " + conversation);
     return conversation;
   } catch (error: any) {
     throw new Error("fetchConversation Error: ", error);

@@ -1,6 +1,7 @@
 import { populateConversations } from "@/libs/actions/message.actions";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
+import Link from "next/link";
 import React from "react";
 
 type pageProps = {};
@@ -15,17 +16,36 @@ const page: React.FC<pageProps> = async () => {
   console.log(conversations);
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex flex-col pt-24 items-center">
       {conversations ? (
         conversations.map((convo) => (
-          <>
-            {convo?.users[0]?.username !== userInfo?.username
-              ? convo?.users[0]?.username
-              : ""}
-            {convo?.users[1]?.username !== userInfo?.username
-              ? convo?.users[1]?.username
-              : ""}
-          </>
+          <Link
+            href={`/messages/${convo?._id}`}
+            key={convo.id}
+            className="w-full flex items-center"
+          >
+            <div className="p-4">
+              <div className="bg-red-800 p-24" />
+            </div>
+            <div className="border-b w-full h-full flex flex-col justify-center">
+              <p>
+                {convo?.users[0]?.username !== userInfo?.username
+                  ? convo?.users[0]?.username
+                  : ""}
+                {convo?.users[1]?.username !== userInfo?.username
+                  ? convo?.users[1]?.username
+                  : ""}
+              </p>
+              <p className="font-bold">
+                {convo?.message[convo?.message.length - 1]?.sentBy !==
+                userInfo?.username
+                  ? "recieved: " +
+                    convo?.message[convo?.message.length - 1]?.content
+                  : "sent: " +
+                    convo?.message[convo?.message.length - 1]?.content}
+              </p>
+            </div>
+          </Link>
         ))
       ) : (
         <>no</>
