@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { string } from "zod";
 
 const userSchema = new Schema({
   username: { type: String, require: true },
@@ -38,6 +39,12 @@ const userSchema = new Schema({
       "Trans Woman",
       "Non-Binary",
     ],
+  },
+  race: {
+    type: String,
+  },
+  pronouns: {
+    type: String,
   },
   likes: [{ type: String }],
   likedBy: [{ type: String }],
