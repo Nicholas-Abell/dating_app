@@ -1,3 +1,4 @@
+import Message from "@/components/forms/Message";
 import { fetchConversation } from "@/libs/actions/message.actions";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
@@ -5,13 +6,14 @@ import { currentUser } from "@clerk/nextjs";
 async function Page({ params }: { params: { conversationId: string } }) {
   const user = await currentUser();
   if (!user) return null;
+  
   const userInfo = await fetchUser(user?.id);
 
   console.log("params:" + params.conversationId);
   const conversation = await fetchConversation(params?.conversationId);
 
   return (
-    <section className="h-screen w-full gap-4 flex flex-col justify-center items-center pt-8 lg:px-48">
+    <section className="h-screen w-full gap-4 flex flex-col justify-center items-center pt-8 px-4 lg:px-48">
       {conversation?.message.map((mess: any) => (
         <div
           className={`border-2 border-white rounded-xl px-12 py-4 ${
@@ -24,6 +26,12 @@ async function Page({ params }: { params: { conversationId: string } }) {
           <p>{mess.content}</p>
         </div>
       ))}
+      {/* <Message
+        userId={userInfo?.id}
+        username={userInfo?.username}
+        recieverId={profileInfo?.id}
+        recieverName={profileInfo?.username}
+      /> */}
     </section>
   );
 }

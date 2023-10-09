@@ -30,11 +30,14 @@ const Message: React.FC<MessageProps> = ({
       recieverName,
       messageText,
     });
-    // setMessageSent(false);
+    setMessageSent(false);
   };
 
   return (
-    <form onSubmit={onSubmit} className="w-full max-w-[380px]">
+    <form
+      onSubmit={onSubmit}
+      className="w-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
+    >
       {messageSent ? (
         <input
           onChange={(e) => {

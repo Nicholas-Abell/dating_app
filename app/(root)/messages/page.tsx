@@ -22,7 +22,7 @@ const page: React.FC<pageProps> = async () => {
           <Link
             href={`/messages/${convo?._id}`}
             key={convo.id}
-            className="w-full flex items-center"
+            className="w-full flex items-center hover:bg-gray-500 ease-in-out duration-200"
           >
             <div className="p-4">
               <div className="bg-red-800 p-24" />
