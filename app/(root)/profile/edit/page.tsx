@@ -23,6 +23,7 @@ export default async function Edit() {
     lookingfor: userInfo?.lookingfor || "",
     gender: userInfo?.gender || user.gender || "",
     relationshipstatus: userInfo?.relationshipstatus || "",
+    race: userInfo?.race || "",
   };
 
   return (
