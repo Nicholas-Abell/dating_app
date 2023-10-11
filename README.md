@@ -92,10 +92,6 @@ Our Dating App is built using the following technologies:
 - [Node.js](https://nodejs.org/): The JavaScript runtime used for the server.
 - [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/): Package managers for handling project dependencies.
 
-## Contributing
-
-We welcome contributions from the community! If you'd like to contribute to the project, please follow our [Contribution Guidelines](CONTRIBUTING.md).
-
 ## License
 
 This Dating App is open-source software licensed under the [MIT License](LICENSE).
