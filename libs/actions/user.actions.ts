@@ -15,6 +15,7 @@ type Params = {
   lookingfor: string;
   gender: string;
   likes: [string];
+  race: string;
 };
 
 export async function updateUser({
@@ -29,6 +30,7 @@ export async function updateUser({
   lookingfor,
   gender,
   likes,
+  race,
 }: Params): Promise<void> {
   connectToDB();
 
@@ -46,6 +48,7 @@ export async function updateUser({
         lookingfor,
         gender,
         likes,
+        race,
       },
       { upsert: true }
     );

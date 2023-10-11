@@ -18,6 +18,7 @@ type AccountProfileProps = {
     relationshipstatus: string;
     lookingfor: string;
     gender: string;
+    race: string;
   };
 };
 
@@ -36,14 +37,15 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       relationshipstatus: "",
       lookingfor: "",
       gender: "",
+      race: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     await updateUser({
       userId: user.id,
-      username: values.username, //values.username
-      bio: values.bio, //values.bio
+      username: values.username,
+      bio: values.bio,
       path: pathname,
       age: values.age,
       height: values.height,
@@ -52,6 +54,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       lookingfor: values.lookingfor,
       gender: values.gender,
       likes: [""],
+      race: values.race,
     });
 
     console.log("user updated");

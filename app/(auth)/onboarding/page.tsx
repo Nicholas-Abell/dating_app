@@ -23,6 +23,7 @@ const page: React.FC<pageProps> = async () => {
     weight: userInfo?.weight || 0,
     lookingfor: userInfo?.lookingfor || "",
     gender: userInfo?.gender || user.gender || "",
+    race: userInfo?.race || "",
     relationshipstatus: userInfo?.relationshipstatus || "",
   };
 

@@ -9,4 +9,5 @@ export const UserValidation = z.object({
   relationshipstatus: z.string(),
   lookingfor: z.string(),
   gender: z.string(),
+  race: z.string(),
 });
