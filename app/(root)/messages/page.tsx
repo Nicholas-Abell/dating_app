@@ -1,6 +1,7 @@
 import { populateConversations } from "@/libs/actions/message.actions";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
+import { User } from "@clerk/nextjs/server";
 import Link from "next/link";
 import React from "react";
 
@@ -16,41 +17,46 @@ const page: React.FC<pageProps> = async () => {
   console.log(conversations);
 
   return (
-    <div className="w-full h-screen flex flex-col pt-24 items-center">
-      {conversations ? (
-        conversations.map((convo) => (
-          <Link
-            href={`/messages/${convo?._id}`}
-            key={convo.id}
-            className="w-full flex items-center hover:bg-gray-500 ease-in-out duration-200"
-          >
-            <div className="p-4">
-              <div className="bg-red-800 p-24" />
-            </div>
-            <div className="border-b w-full h-full flex flex-col justify-center">
-              <p>
-                {convo?.users[0]?.username !== userInfo?.username
-                  ? convo?.users[0]?.username
-                  : ""}
-                {convo?.users[1]?.username !== userInfo?.username
-                  ? convo?.users[1]?.username
-                  : ""}
-              </p>
-              <p className="font-bold">
-                {convo?.message[convo?.message.length - 1]?.sentBy !==
-                userInfo?.username
-                  ? "recieved: " +
-                    convo?.message[convo?.message.length - 1]?.content
-                  : "sent: " +
-                    convo?.message[convo?.message.length - 1]?.content}
-              </p>
-            </div>
-          </Link>
-        ))
-      ) : (
-        <>no</>
-      )}
+    <div className="w-full h-screen">
+      <div className="pt-24">
+        <div className="max-w-3xl mx-auto">
+          {conversations.length > 0 ? (
+            conversations.map((convo) => (
+              <Link
+                href={`/messages/${convo?._id}`}
+                key={convo.id}
+                className="block border-b p-4 transition-transform transform hover:scale-105 hover:bg-slate-300 ease-in-out duration-200"
+              >
+                <div className="flex items-center">
+                  <div className="w-16 h-16 bg-red-800 rounded-full"></div>
+                  <div className="ml-4">
+                    <p className="text-lg font-semibold">
+                      {convo?.users
+                        .filter(
+                          (user: User) => user.username !== userInfo?.username
+                        )
+                        .map((user: User) => user.username)
+                        .join(", ")}
+                    </p>
+                    <p className="text-gray-600">
+                      {convo?.message[convo?.message.length - 1]?.sentBy !==
+                      userInfo?.username
+                        ? "Received: " +
+                          convo?.message[convo?.message.length - 1]?.content
+                        : "Sent: " +
+                          convo?.message[convo?.message.length - 1]?.content}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <div className="text-center p-4 text-gray-600">No messages</div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
+
 export default page;

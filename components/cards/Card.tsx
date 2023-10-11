@@ -28,27 +28,38 @@ const Card: React.FC<CardsProps> = ({
   const [isPending, startTransition] = useTransition();
 
   return (
-    <div className="bg-gray-200 p-8 w-[320px] h-[320px]">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden p-4 w-64">
       <Link href={href}>
-        <div className="w-full h-[70%] bg-red-800"></div>
+        <div className="w-full h-40 bg-red-800 bg-opacity-75 relative">
+          <div className="absolute top-2 left-2">
+            <p className="text-white text-lg font-semibold">{username}</p>
+          </div>
+        </div>
       </Link>
-      <p className="font-bold uppercase">{username}</p>
-      <p>{bio}</p>
+      <div className="p-4">
+        <p className="font-bold text-lg text-gray-800">{username}</p>
+        <p className="text-gray-600 text-sm">{bio}</p>
+      </div>
 
-      {!likedByUser ? (
-        <AiOutlineHeart
-          onClick={() => startTransition(() => handleLike(userId, likeId))}
-          size={25}
-          className="z-10 hover:text-red-600 cursor-pointer"
-        />
-      ) : (
-        <AiFillHeart
-          onClick={() => startTransition(() => handleLike(userId, likeId))}
-          size={25}
-          className="z-10 hover:text-gray-600 text-red-600"
-        />
-      )}
+      <div className="p-4 flex justify-between items-center">
+        <div>
+          {!likedByUser ? (
+            <AiOutlineHeart
+              onClick={() => startTransition(() => handleLike(userId, likeId))}
+              size={25}
+              className="cursor-pointer text-red-500 hover:text-red-600"
+            />
+          ) : (
+            <AiFillHeart
+              onClick={() => startTransition(() => handleLike(userId, likeId))}
+              size={25}
+              className="text-red-500 hover:text-red-600"
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 };
+
 export default Card;
