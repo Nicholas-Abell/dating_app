@@ -6,14 +6,14 @@ import { currentUser } from "@clerk/nextjs";
 async function Page({ params }: { params: { conversationId: string } }) {
   const user = await currentUser();
   if (!user) return null;
-  
+
   const userInfo = await fetchUser(user?.id);
 
   console.log("params:" + params.conversationId);
   const conversation = await fetchConversation(params?.conversationId);
 
   return (
-    <section className="h-screen w-full gap-4 flex flex-col justify-center items-center pt-8 px-4 lg:px-48">
+    <section className="h-screen w-full gap-4 flex flex-col items-center pt-8 px-4 lg:px-48 overflow-y-scroll scrollbar-hide">
       {conversation?.message.map((mess: any) => (
         <div
           className={`border-2 border-white rounded-xl px-12 py-4 ${
