@@ -17,7 +17,7 @@ async function Page({ params }: { params: { id: string } }) {
   console.log(profileInfo);
 
   return (
-    <section className="w-full min-h-screen relative flex flex-col pt-12 pb-24 items-center gap-4">
+    <section className="w-full min-h-screen relative flex flex-col pb-24 items-center gap-4">
       <div className="w-full h-[80vh] bg-emerald-800" />
       <div className="w-full min-h-screen relative flex flex-col pt-12 pb-24 px-8 items-center gap-4">
         <div className="w-full flex items-center pt-8 gap-12 text-4xl">
@@ -69,7 +69,7 @@ async function Page({ params }: { params: { id: string } }) {
           {params.id === userInfo?.id ? (
             <Link
               href="/profile/edit"
-              className="bg-yellow-500 px-4 py-2 rounded-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
+              className="bg-yellow-500 text-2xl px-24 py-2 rounded-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
             >
               <p>Edit Profile</p>
             </Link>
