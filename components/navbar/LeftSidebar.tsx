@@ -20,7 +20,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = async () => {
         <p className="hidden lg:block">HOME</p>
       </Link>
       <Link
-        href={`profile/${userInfo?.id}`}
+        href={`/profile/${userInfo?.id}`}
         className="flex justify-center items-center gap-4 p-2"
       >
         <ImProfile size={25} className="text-white" />
