@@ -7,10 +7,11 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 type CardsProps = {
   href: string;
   username: string;
-  bio: string;
+  gender: string;
   userId: string;
   likeId: string;
   likedByUser: boolean;
+  age: number;
 };
 
 const handleLike = (userId: string, likeId: string) => {
@@ -19,30 +20,23 @@ const handleLike = (userId: string, likeId: string) => {
 
 const Card: React.FC<CardsProps> = ({
   href,
-  username,
-  bio,
   userId,
   likeId,
   likedByUser,
+  username,
+  age,
+  gender,
 }) => {
   const [isPending, startTransition] = useTransition();
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden p-4 w-64">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden p-4 w-64 hover:scale-105 ease-in-out duration-300">
       <Link href={href}>
-        <div className="w-full h-40 bg-red-800 bg-opacity-75 relative">
-          <div className="absolute top-2 left-2">
-            <p className="text-white text-lg font-semibold">{username}</p>
-          </div>
-        </div>
+        <div className="w-full h-40 bg-red-800 bg-opacity-75 relative"></div>
       </Link>
-      <div className="p-4">
-        <p className="font-bold text-lg text-gray-800">{username}</p>
-        <p className="text-gray-600 text-sm">{bio}</p>
-      </div>
-
-      <div className="p-4 flex justify-between items-center">
-        <div>
+      <div className="px-4 pt-1">
+        <div className="flex justify-between">
+          <p className="font-bold text-lg text-gray-800">{username}</p>
           {!likedByUser ? (
             <AiOutlineHeart
               onClick={() => startTransition(() => handleLike(userId, likeId))}
@@ -57,6 +51,9 @@ const Card: React.FC<CardsProps> = ({
             />
           )}
         </div>
+        <p className="text-gray-600 text-sm">
+          {gender} - {age}
+        </p>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = async () => {
   const userInfo = await fetchUser(user?.id);
 
   return (
-    <div className="hidden md:flex flex-col sticky items-start gap-12 h-screen px-4 pt-48 left-0 top-0 bg-black z-10 text-white font-bold">
+    <div className="flex flex-col sticky items-start gap-12 h-screen px-4 pt-48 left-0 top-0 bg-black z-10 text-white font-bold">
       <Link href="/" className="flex justify-center items-center gap-4 p-2">
         <BiHome size={25} className="text-white" />
         <p className="hidden lg:block">HOME</p>

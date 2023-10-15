@@ -24,7 +24,8 @@ export default async function Home() {
             key={profile.id}
             href={`/profile/${profile.id}`}
             username={profile.username}
-            bio={profile.bio}
+            gender={profile.gender}
+            age={profile.age}
             userId={user.id}
             likeId={profile.id}
             likedByUser={checkLikedProfiles(profile.id)}
