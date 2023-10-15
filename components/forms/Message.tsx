@@ -45,7 +45,7 @@ const Message: React.FC<MessageProps> = ({
           }}
           name="message"
           type="text"
-          className="text-black p-4 placeholder:text-black w-full rounded-full"
+          className="text-black bg-teal-400 p-4 placeholder:text-black w-full rounded-full"
           placeholder="...say something"
         />
       ) : (
