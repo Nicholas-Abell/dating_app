@@ -16,9 +16,9 @@ export default async function Home() {
   };
 
   return (
-    <section className="px-8">
+    <section className="px-8 w-full">
       <h1 className="text-center text-4xl py-12">HOME</h1>
-      <div className="flex flex-wrap gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {profiles?.map((profile) => (
           <Card
             key={profile.id}

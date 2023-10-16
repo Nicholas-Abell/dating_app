@@ -30,7 +30,7 @@ const Card: React.FC<CardsProps> = ({
   const [isPending, startTransition] = useTransition();
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden p-4 w-64 hover:scale-105 ease-in-out duration-300">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden p-4 hover:scale-105 ease-in-out duration-300">
       <Link href={href}>
         <div className="w-full h-40 bg-red-800 bg-opacity-75 relative"></div>
       </Link>
