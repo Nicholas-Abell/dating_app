@@ -33,10 +33,13 @@ const LeftSidebar: React.FC<LeftSidebarProps> = async () => {
         <BiMessageSquareDots size={30} className="text-white" />
         <p className="hidden lg:block">MESSAGES</p>
       </Link>
-      <div className="flex justify-center items-center gap-4 p-2">
+      <Link
+        href="/settings"
+        className="flex justify-center items-center gap-4 p-2"
+      >
         <AiFillSetting size={30} className="text-white" />
         <p className="hidden lg:block">HOME</p>
-      </div>
+      </Link>
       <div className="flex justify-center items-center gap-4 p-2">
         <UserButton afterSignOutUrl="/sign-in" />
       </div>
