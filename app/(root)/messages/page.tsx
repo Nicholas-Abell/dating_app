@@ -31,15 +31,13 @@ const page: React.FC<pageProps> = async () => {
                 <div className="w-16 h-16 bg-red-800 rounded-full"></div>
                 <div className="ml-4">
                   <p className="text-lg font-semibold">
-                    {convo?.users
-                      .filter(
-                        (user: User) => user.username !== userInfo?.username
-                      )
-                      .map((user: User) => user.username)
-                      .join(", ")}
+                    {convo?.users[0].username !== userInfo?.username &&
+                      convo?.users[0].username}
+                    {convo?.users[1].username !== userInfo?.username &&
+                      convo?.users[1].username}
                   </p>
                   <p className="text-gray-600">
-                    {convo?.message[convo?.message.length - 1]?.sentBy !==
+                    {convo?.message[convo?.message.length - 1]?.sentBy ===
                     userInfo?.username
                       ? "Received: " +
                         convo?.message[convo?.message.length - 1]?.content

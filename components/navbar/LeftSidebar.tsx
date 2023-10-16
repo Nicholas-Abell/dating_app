@@ -4,7 +4,7 @@ import { BiHome, BiMessageSquareDots } from "react-icons/bi";
 import { ImProfile } from "react-icons/im";
 import { AiFillSetting } from "react-icons/ai";
 import { fetchUser } from "@/libs/actions/user.actions";
-import { currentUser } from "@clerk/nextjs";
+import { UserButton, currentUser } from "@clerk/nextjs";
 
 type LeftSidebarProps = {};
 
@@ -36,6 +36,9 @@ const LeftSidebar: React.FC<LeftSidebarProps> = async () => {
       <div className="flex justify-center items-center gap-4 p-2">
         <AiFillSetting size={30} className="text-white" />
         <p className="hidden lg:block">HOME</p>
+      </div>
+      <div className="flex justify-center items-center gap-4 p-2">
+        <UserButton afterSignOutUrl="/sign-in" />
       </div>
     </div>
   );
