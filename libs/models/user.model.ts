@@ -48,6 +48,7 @@ const userSchema = new Schema({
   likes: [{ type: String }],
   likedBy: [{ type: String }],
   viewedBy: [{ type: String }],
+  images: [{ type: String }],
   id: { type: String, require: true },
 });
 

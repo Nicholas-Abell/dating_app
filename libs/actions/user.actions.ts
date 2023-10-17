@@ -16,6 +16,7 @@ type Params = {
   gender: string;
   likes: [string];
   race: string;
+  images: [string];
 };
 
 export async function updateUser({
@@ -31,6 +32,7 @@ export async function updateUser({
   gender,
   likes,
   race,
+  images,
 }: Params): Promise<void> {
   connectToDB();
 
@@ -49,6 +51,7 @@ export async function updateUser({
         gender,
         likes,
         race,
+        images,
       },
       { upsert: true }
     );
