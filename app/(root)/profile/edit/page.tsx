@@ -27,7 +27,7 @@ export default async function Edit() {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full flex justify-center items-center overflow-y-scroll scrollbar-hide">
       <AccountProfile user={userData} />
     </div>
   );

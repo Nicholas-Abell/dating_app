@@ -130,10 +130,10 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
   ];
 
   return (
-    <section className="overflow-y-scroll">
+    <section className="w-full">
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-lg p-8 shadow-lg max-w-md mx-auto"
+        className="bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-lg p-8 shadow-lg w-full mx-auto"
       >
         <h2 className="text-2xl font-semibold text-center text-white mb-6">
           Edit Your Profile
