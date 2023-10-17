@@ -29,15 +29,15 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
   const form = useForm({
     resolver: zodResolver(UserValidation),
     defaultValues: {
-      username: "",
-      bio: "",
-      age: 0,
-      height: 0,
-      weight: 0,
-      relationshipstatus: "",
-      lookingfor: "",
-      gender: "",
-      race: "",
+      username: user?.username || "",
+      bio: user?.bio || "",
+      age: user?.age || 0,
+      height: user?.height || 0,
+      weight: user?.weight || 0,
+      relationshipstatus: user?.relationshipstatus || "",
+      lookingfor: user?.lookingfor || "",
+      gender: user?.gender || "",
+      race: user?.race || "",
     },
   });
 
@@ -56,6 +56,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       gender: values.gender,
       likes: [""],
       race: values.race,
+      images: [""],
     });
 
     console.log("user updated");
@@ -129,7 +130,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
   ];
 
   return (
-    <>
+    <section className="overflow-y-scroll">
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-lg p-8 shadow-lg max-w-md mx-auto"
@@ -204,6 +205,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
               name="weight"
               id="weight"
               className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+              placeholder={user?.weight.toString()}
             />
           </div>
 
@@ -219,7 +221,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
               name="relationshipstatus"
               id="relationshipstatus"
               className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              defaultValue={user?.relationshipstatus}
             >
               {enumRelationshipStatus.map((status) => (
                 <option key={status} value={status}>
@@ -241,7 +242,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
               name="lookingfor"
               id="lookingfor"
               className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              defaultValue={user?.lookingfor}
             >
               {enumLookingFor.map((option) => (
                 <option key={option} value={option}>
@@ -260,7 +260,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
               name="gender"
               id="gender"
               className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              defaultValue={user?.gender}
             >
               {enumGender.map((gender) => (
                 <option key={gender} value={gender}>
@@ -279,7 +278,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
               name="race"
               id="race"
               className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              defaultValue={user?.race}
             >
               {enumRace.map((race) => (
                 <option key={race} value={race}>
@@ -297,7 +295,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
           Save Changes
         </button>
       </form>
-    </>
+    </section>
   );
 };
 export default AccountProfile;
