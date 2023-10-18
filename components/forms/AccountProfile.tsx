@@ -38,11 +38,11 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       lookingfor: user?.lookingfor || "",
       gender: user?.gender || "",
       race: user?.race || "",
+      images: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
-    console.log("submit click");
     await updateUser({
       userId: user.id,
       username: values.username,
@@ -56,7 +56,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       gender: values.gender,
       likes: [""],
       race: values.race,
-      images: [""],
+      images: [values.images],
     });
 
     console.log("user updated");
@@ -138,154 +138,163 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
         <h2 className="text-2xl font-semibold text-center text-white mb-6">
           Edit Your Profile
         </h2>
-        <div className="space-y-4">
-          <div className="relative">
-            <label htmlFor="username" className="block text-white font-medium">
-              Username
-            </label>
-            <input
-              {...form.register("username")}
-              type="text"
-              name="username"
-              id="username"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder={user?.username}
-            />
-          </div>
 
-          <div className="relative">
-            <label htmlFor="bio" className="block text-white font-medium">
-              Bio
-            </label>
-            <textarea
-              {...form.register("bio")}
-              name="bio"
-              id="bio"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              rows={5}
-              placeholder={user?.bio}
-            />
-          </div>
+        <div>
+          <label htmlFor="images" className="block text-white font-medium">
+            Photos
+          </label>
+          <input
+            {...form.register("images")}
+            id="images"
+            type="file"
+            name="images"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+          />
+        </div>
 
-          <div className="relative">
-            <label htmlFor="age" className="block text-white font-medium">
-              Age
-            </label>
-            <input
-              type="number"
-              {...form.register("age")}
-              name="age"
-              id="age"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder={user?.age.toString()}
-            />
-          </div>
+        <div>
+          <label htmlFor="username" className="block text-white font-medium">
+            Username
+          </label>
+          <input
+            {...form.register("username")}
+            type="text"
+            name="username"
+            id="username"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+            placeholder={user?.username}
+          />
+        </div>
 
-          <div className="relative">
-            <label htmlFor="height" className="block text-white font-medium">
-              Height
-            </label>
-            <input
-              type="number"
-              {...form.register("height")}
-              name="height"
-              id="height"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder={user?.height.toString()}
-            />
-          </div>
+        <div>
+          <label htmlFor="bio" className="block text-white font-medium">
+            Bio
+          </label>
+          <textarea
+            {...form.register("bio")}
+            name="bio"
+            id="bio"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+            rows={5}
+            placeholder={user?.bio}
+          />
+        </div>
 
-          <div className="relative">
-            <label htmlFor="weight" className="block text-white font-medium">
-              Weight
-            </label>
-            <input
-              type="number"
-              {...form.register("weight")}
-              name="weight"
-              id="weight"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder={user?.weight.toString()}
-            />
-          </div>
+        <div>
+          <label htmlFor="age" className="block text-white font-medium">
+            Age
+          </label>
+          <input
+            type="number"
+            {...form.register("age")}
+            name="age"
+            id="age"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+            placeholder={user?.age.toString()}
+          />
+        </div>
 
-          <div className="relative">
-            <label
-              htmlFor="relationshipstatus"
-              className="block text-white font-medium"
-            >
-              Relationship Status
-            </label>
-            <select
-              {...form.register("relationshipstatus")}
-              name="relationshipstatus"
-              id="relationshipstatus"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-            >
-              {enumRelationshipStatus.map((status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div>
+          <label htmlFor="height" className="block text-white font-medium">
+            Height
+          </label>
+          <input
+            type="number"
+            {...form.register("height")}
+            name="height"
+            id="height"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+            placeholder={user?.height.toString()}
+          />
+        </div>
 
-          <div className="relative">
-            <label
-              htmlFor="lookingfor"
-              className="block text-white font-medium"
-            >
-              Looking For
-            </label>
-            <select
-              {...form.register("lookingfor")}
-              name="lookingfor"
-              id="lookingfor"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-            >
-              {enumLookingFor.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div>
+          <label htmlFor="weight" className="block text-white font-medium">
+            Weight
+          </label>
+          <input
+            type="number"
+            {...form.register("weight")}
+            name="weight"
+            id="weight"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+            placeholder={user?.weight.toString()}
+          />
+        </div>
 
-          <div className="relative">
-            <label htmlFor="gender" className="block text-white font-medium">
-              Gender
-            </label>
-            <select
-              {...form.register("gender")}
-              name="gender"
-              id="gender"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-            >
-              {enumGender.map((gender) => (
-                <option key={gender} value={gender}>
-                  {gender}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div>
+          <label
+            htmlFor="relationshipstatus"
+            className="block text-white font-medium"
+          >
+            Relationship Status
+          </label>
+          <select
+            {...form.register("relationshipstatus")}
+            name="relationshipstatus"
+            id="relationshipstatus"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+          >
+            {enumRelationshipStatus.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </div>
 
-          <div className="relative">
-            <label htmlFor="race" className="block text-white font-medium">
-              Race/Ethnicity
-            </label>
-            <select
-              {...form.register("race")}
-              name="race"
-              id="race"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-            >
-              {enumRace.map((race) => (
-                <option key={race} value={race}>
-                  {race}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div>
+          <label htmlFor="lookingfor" className="block text-white font-medium">
+            Looking For
+          </label>
+          <select
+            {...form.register("lookingfor")}
+            name="lookingfor"
+            id="lookingfor"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+          >
+            {enumLookingFor.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="gender" className="block text-white font-medium">
+            Gender
+          </label>
+          <select
+            {...form.register("gender")}
+            name="gender"
+            id="gender"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+          >
+            {enumGender.map((gender) => (
+              <option key={gender} value={gender}>
+                {gender}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="race" className="block text-white font-medium">
+            Race/Ethnicity
+          </label>
+          <select
+            {...form.register("race")}
+            name="race"
+            id="race"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+          >
+            {enumRace.map((race) => (
+              <option key={race} value={race}>
+                {race}
+              </option>
+            ))}
+          </select>
         </div>
 
         <button
