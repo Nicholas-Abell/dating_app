@@ -11,6 +11,8 @@
   "dependencies": {
     "@clerk/clerk-react": "^4.25.0",
     "@clerk/nextjs": "^4.24.1",
+    "@edgestore/react": "^0.1.4",
+    "@edgestore/server": "^0.1.4",
     "@hookform/resolvers": "^3.3.1",
     "@types/node": "20.6.3",
     "@types/react": "18.2.22",
@@ -30,6 +32,6 @@
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2",
-    "zod": "^3.22.2"
+    "zod": "^3.22.4"
   }
 }
