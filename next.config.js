@@ -5,7 +5,10 @@ const nextConfig = {
     serverComponentsExternalPackages: ["mongoose"],
   },
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "img.clerk.com" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "img.clerk.com" },
+      { protocol: "https", hostname: "files.edgestore.dev" },
+    ],
   },
 };
 
