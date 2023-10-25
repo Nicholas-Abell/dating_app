@@ -6,6 +6,7 @@ import { BsFillPersonFill, BsPersonHearts } from "react-icons/bs";
 import { BiRuler } from "react-icons/bi";
 import { FaTransgender } from "react-icons/fa";
 import { PiGlobeStandBold } from "react-icons/pi";
+import Image from "next/image";
 import Link from "next/link";
 
 async function Page({ params }: { params: { id: string } }) {
@@ -18,7 +19,18 @@ async function Page({ params }: { params: { id: string } }) {
 
   return (
     <section className="w-full min-h-screen relative flex flex-col pb-24 items-center gap-4">
-      <div className="w-full h-[80vh] bg-emerald-800" />
+      {profileInfo.images[0] ? (
+        <div>
+          <Image
+            src={profileInfo?.images[0]}
+            width={50}
+            height={50}
+            alt="image"
+          />
+        </div>
+      ) : (
+        <div className="w-full h-[80vh] bg-emerald-800" />
+      )}
       <div className="w-full min-h-screen relative flex flex-col pt-12 pb-24 px-8 items-center gap-4">
         <div className="w-full flex items-center pt-8 gap-12 text-4xl">
           <h1 className="font-bold uppercase">{profileInfo?.username}</h1>
