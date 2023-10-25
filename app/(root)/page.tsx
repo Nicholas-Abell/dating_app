@@ -29,6 +29,7 @@ export default async function Home() {
             userId={user.id}
             likeId={profile.id}
             likedByUser={checkLikedProfiles(profile.id)}
+            image={profile.images[0]}
           />
         ))}
       </div>

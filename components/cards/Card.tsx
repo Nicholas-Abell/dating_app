@@ -3,6 +3,7 @@ import { likeUser } from "@/libs/actions/user.actions";
 import Link from "next/link";
 import React, { useTransition } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import Image from "next/image";
 
 type CardsProps = {
   href: string;
@@ -12,6 +13,7 @@ type CardsProps = {
   likeId: string;
   likedByUser: boolean;
   age: number;
+  image?: string;
 };
 
 const handleLike = (userId: string, likeId: string) => {
@@ -26,13 +28,20 @@ const Card: React.FC<CardsProps> = ({
   username,
   age,
   gender,
+  image,
 }) => {
   const [isPending, startTransition] = useTransition();
 
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden p-4 hover:scale-105 ease-in-out duration-300">
       <Link href={href}>
-        <div className="w-full h-40 bg-red-800 bg-opacity-75 relative"></div>
+        {image ? (
+          <>
+            <Image src={image} alt={`${username} pic`} width={20} height={20} />
+          </>
+        ) : (
+          <div className="w-full h-40 bg-red-800 bg-opacity-75 relative"></div>
+        )}
       </Link>
       <div className="px-4 pt-1">
         <div className="flex justify-between">
