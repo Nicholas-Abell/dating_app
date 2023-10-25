@@ -64,6 +64,19 @@ export async function updateUser({
   }
 }
 
+export async function addUserImages(userId: string, imageUrl: string) {
+  try {
+    connectToDB();
+    await User.findOneAndUpdate(
+      { id: userId },
+      { $push: { images: imageUrl } },
+      { new: true }
+    );
+  } catch (error) {
+    console.log("addUserImage Error: " && error);
+  }
+}
+
 export async function populateUsers(userId: string) {
   try {
     connectToDB();

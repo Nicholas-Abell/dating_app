@@ -34,7 +34,7 @@ export default async function Edit() {
       <h2 className="text-2xl font-semibold text-center text-white mb-6">
         Edit Your Profile
       </h2>
-      <AccountPhotos />
+      <AccountPhotos user={userData} />
       <AccountProfile user={userData} />
     </div>
   );
