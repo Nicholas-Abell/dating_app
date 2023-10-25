@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { updateUser } from "@/libs/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
+import { AccountPhotos } from "./AccountPhotos";
 
 type AccountProfileProps = {
   user: {
@@ -131,27 +132,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
 
   return (
     <section className="w-full">
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-lg p-8 shadow-lg w-full mx-auto"
-      >
-        <h2 className="text-2xl font-semibold text-center text-white mb-6">
-          Edit Your Profile
-        </h2>
-
-        <div>
-          <label htmlFor="images" className="block text-white font-medium">
-            Photos
-          </label>
-          <input
-            {...form.register("images")}
-            id="images"
-            type="file"
-            name="images"
-            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-          />
-        </div>
-
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="username" className="block text-white font-medium">
             Username

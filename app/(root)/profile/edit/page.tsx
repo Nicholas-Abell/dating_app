@@ -1,3 +1,4 @@
+import { AccountPhotos } from "@/components/forms/AccountPhotos";
 import AccountProfile from "@/components/forms/AccountProfile";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
@@ -26,9 +27,14 @@ export default async function Edit() {
     race: userInfo?.race || "",
     images: [userInfo?.images] || "",
   };
+  //
 
   return (
-    <div className="w-full flex justify-center items-center overflow-y-scroll scrollbar-hide">
+    <div className="w-full flex flex-col justify-center items-center overflow-y-scroll scrollbar-hide bg-gradient-to-r from-black to-purple-500 text-white rounded-lg p-8 shadow-lg mx-auto">
+      <h2 className="text-2xl font-semibold text-center text-white mb-6">
+        Edit Your Profile
+      </h2>
+      <AccountPhotos />
       <AccountProfile user={userData} />
     </div>
   );
