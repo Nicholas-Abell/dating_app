@@ -42,6 +42,7 @@ const Card: React.FC<CardsProps> = ({
                 src={image}
                 alt={`${username} pic`}
                 fill
+                className=" object-cover"
               />
             </div>
           </>
