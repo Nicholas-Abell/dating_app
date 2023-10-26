@@ -20,13 +20,16 @@ async function Page({ params }: { params: { id: string } }) {
   return (
     <section className="w-full min-h-screen relative flex flex-col pb-24 items-center gap-4">
       {profileInfo.images[0] ? (
-        <div>
-          <Image
-            src={profileInfo?.images[0]}
-            width={50}
-            height={50}
-            alt="image"
-          />
+        <div className="w-full h-[80vh] relative md:grid grid-cols-3">
+          {profileInfo?.images.map((image: string, key: number) => (
+            <Image
+              key={key}
+              src={image}
+              fill
+              alt="image"
+              className="object-cover"
+            />
+          ))}
         </div>
       ) : (
         <div className="w-full h-[80vh] bg-emerald-800" />
