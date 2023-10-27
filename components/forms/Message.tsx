@@ -8,15 +8,19 @@ import React, { useState } from "react";
 type MessageProps = {
   userId: string;
   username: string;
+  image: string;
   recieverId: string;
   recieverName: string;
+  recieverImage: string;
 };
 
 const Message: React.FC<MessageProps> = ({
   userId,
   recieverId,
+  image,
   username,
   recieverName,
+  recieverImage,
 }) => {
   const [messageText, setMessageText] = useState("");
   const [messageSent, setMessageSent] = useState(true);
@@ -27,7 +31,9 @@ const Message: React.FC<MessageProps> = ({
       recieverId,
       userId,
       username,
+      image,
       recieverName,
+      recieverImage,
       messageText,
     });
     setMessageSent(false);

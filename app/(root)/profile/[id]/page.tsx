@@ -92,8 +92,10 @@ async function Page({ params }: { params: { id: string } }) {
             <Message
               userId={userInfo?.id}
               username={userInfo?.username}
+              image={userInfo?.images[0]}
               recieverId={profileInfo?.id}
               recieverName={profileInfo?.username}
+              recieverImage={profileInfo?.images[0]}
             />
           )}
         </div>

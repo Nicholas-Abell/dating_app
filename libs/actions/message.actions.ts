@@ -7,7 +7,9 @@ type params = {
   recieverId: string;
   messageText?: string;
   username?: string;
+  image?: string;
   recieverName?: string;
+  recieverImage?: string;
 };
 
 export async function fetchConversation(conversationId: string) {
@@ -26,14 +28,16 @@ export async function createConversation({
   userId,
   recieverId,
   username,
+  image,
   recieverName,
   messageText,
+  recieverImage,
 }: params) {
   try {
     const conversation = new Conversation({
       users: [
-        { id: userId, username: username },
-        { id: recieverId, username: recieverName },
+        { id: userId, username, image },
+        { id: recieverId, username: recieverName, image: recieverImage },
       ],
       message: { content: messageText, sentBy: userId },
     });
@@ -71,9 +75,11 @@ export async function checkExistingConversation({
 export async function sendMessage({
   userId,
   recieverId,
+  image,
   messageText,
   username,
   recieverName,
+  recieverImage,
 }: params) {
   try {
     connectToDB();
@@ -90,8 +96,10 @@ export async function sendMessage({
       createConversation({
         username,
         userId,
+        image,
         recieverName,
         recieverId,
+        recieverImage,
         messageText,
       });
       console.log("conversation created");

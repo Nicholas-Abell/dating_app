@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const conversationSchema = new Schema({
   conversationId: { type: String },
-  users: [{ id: String, username: String }],
+  users: [{ id: String, username: String, image: String }],
   message: [
     {
       content: String,
