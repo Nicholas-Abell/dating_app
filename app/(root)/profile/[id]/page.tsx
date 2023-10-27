@@ -56,7 +56,7 @@ async function Page({ params }: { params: { id: string } }) {
         </div>
         <div className="w-full flex flex-col py-8 gap-1">
           <p className="font-bold">ABOUT ME</p>
-          <div className="bg-gray-200 border rounded-xl p-4 max-w-[620px]">
+          <div className="bg-gray-200 text-black border rounded-xl p-4 max-w-[620px]">
             <p>{profileInfo?.bio}</p>
           </div>
         </div>

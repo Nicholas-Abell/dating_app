@@ -25,7 +25,7 @@ export default async function Edit() {
     gender: userInfo?.gender || user.gender || "",
     relationshipstatus: userInfo?.relationshipstatus || "",
     race: userInfo?.race || "",
-    images: [userInfo?.images] || "",
+    images: userInfo?.images || [""],
   };
   //
 
