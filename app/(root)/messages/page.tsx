@@ -1,7 +1,7 @@
 import { populateConversations } from "@/libs/actions/message.actions";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
-import { User } from "@clerk/nextjs/server";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -28,13 +28,23 @@ const page: React.FC<pageProps> = async () => {
               className="block border-b p-4 transition-transform transform hover:bg-slate-300 ease-in-out duration-200"
             >
               <div className="flex items-center">
-                <div className="w-16 h-16 bg-red-800 rounded-full"></div>
+                <div className="w-16 h-16 bg-red-800 rounded-full relative">
+                  <Image
+                    fill
+                    src={
+                      convo?.users[0].username !== userInfo?.username
+                        ? convo?.users[0].image
+                        : convo?.users[1].image
+                    }
+                    className=" object-cover rounded-full"
+                    alt="profile_img"
+                  />
+                </div>
                 <div className="ml-4">
                   <p className="text-lg font-semibold">
-                    {convo?.users[0].username !== userInfo?.username &&
-                      convo?.users[0].username}
-                    {convo?.users[1].username !== userInfo?.username &&
-                      convo?.users[1].username}
+                    {convo?.users[0].username !== userInfo?.username
+                      ? convo?.users[0].username
+                      : convo?.users[1].username}
                   </p>
                   <p className="text-gray-600">
                     {convo?.message[convo?.message.length - 1]?.sentBy ===
