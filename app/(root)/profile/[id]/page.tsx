@@ -8,6 +8,7 @@ import { FaTransgender } from "react-icons/fa";
 import { PiGlobeStandBold } from "react-icons/pi";
 import Image from "next/image";
 import Link from "next/link";
+import ImageCarousel from "@/components/shared/ImageCarousel";
 
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
@@ -21,15 +22,7 @@ async function Page({ params }: { params: { id: string } }) {
     <section className="w-full min-h-screen relative flex flex-col pb-24 items-center gap-4">
       {profileInfo.images[0] ? (
         <div className="w-full h-[80vh] relative md:grid grid-cols-3">
-          {profileInfo?.images.map((image: string, key: number) => (
-            <Image
-              key={key}
-              src={image}
-              fill
-              alt="image"
-              className="object-cover"
-            />
-          ))}
+          <ImageCarousel images={profileInfo?.images} />
         </div>
       ) : (
         <div className="w-full h-[80vh] bg-emerald-800" />
