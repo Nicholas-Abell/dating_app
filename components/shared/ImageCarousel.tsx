@@ -21,7 +21,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
   };
 
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full relative md:hidden">
       <button
         onClick={() => handleClick(-1)}
         className="z-10 absolute left-0 top-[50%] opacity-40 hover:opacity-100 cursor-pointer md:hidden"

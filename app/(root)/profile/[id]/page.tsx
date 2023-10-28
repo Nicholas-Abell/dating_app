@@ -21,8 +21,15 @@ async function Page({ params }: { params: { id: string } }) {
   return (
     <section className="w-full min-h-screen relative flex flex-col pb-24 items-center gap-4">
       {profileInfo.images[0] ? (
-        <div className="w-full h-[80vh] relative md:grid grid-cols-3">
+        <div className="w-full h-[80vh] relative">
           <ImageCarousel images={profileInfo?.images} />
+          <div className="w-full h-[80vh] hidden md:grid grid-cols-2">
+            {profileInfo.images.map((image: string, key: number) => (
+              <div key={key} className="relative">
+                <Image src={image} alt="pic" fill className="object-cover" />
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <div className="w-full h-[80vh] bg-emerald-800" />
