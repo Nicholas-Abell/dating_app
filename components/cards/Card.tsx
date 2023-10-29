@@ -37,7 +37,7 @@ const Card: React.FC<CardsProps> = ({
       <Link href={href}>
         {image ? (
           <>
-            <div className="w-full h-40 bg-red-800 bg-opacity-75 relative">
+            <div className="w-full h-[280px] bg-red-800 bg-opacity-75 relative">
               <Image
                 src={image}
                 alt={`${username} pic`}
@@ -47,7 +47,7 @@ const Card: React.FC<CardsProps> = ({
             </div>
           </>
         ) : (
-          <div className="w-full h-40 bg-red-800 bg-opacity-75 relative"></div>
+          <div className="w-full h-[280px] bg-red-800 bg-opacity-75 relative"></div>
         )}
       </Link>
       <div className="px-4 pt-1">
