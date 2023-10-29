@@ -10,5 +10,4 @@ export const UserValidation = z.object({
   lookingfor: z.string(),
   gender: z.string(),
   race: z.string(),
-  images: z.string(),
 });

@@ -19,7 +19,6 @@ type AccountProfileProps = {
     lookingfor: string;
     gender: string;
     race: string;
-    images: string[];
   };
 };
 
@@ -39,7 +38,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       lookingfor: user?.lookingfor || "",
       gender: user?.gender || "",
       race: user?.race || "",
-      images: "",
     },
   });
 
@@ -55,9 +53,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       relationshipstatus: values.relationshipstatus,
       lookingfor: values.lookingfor,
       gender: values.gender,
-      likes: [""],
       race: values.race,
-      images: [values.images],
     });
 
     console.log("user updated");
