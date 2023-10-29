@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useTransition } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Image from "next/image";
+import { BsPersonCircle } from "react-icons/bs";
 
 type CardsProps = {
   href: string;
@@ -37,7 +38,7 @@ const Card: React.FC<CardsProps> = ({
       <Link href={href}>
         {image ? (
           <>
-            <div className="w-full h-[280px] bg-red-800 bg-opacity-75 relative">
+            <div className="w-full h-[280px] bg-gray-400 bg-opacity-75 relative">
               <Image
                 src={image}
                 alt={`${username} pic`}
@@ -47,7 +48,9 @@ const Card: React.FC<CardsProps> = ({
             </div>
           </>
         ) : (
-          <div className="w-full h-[280px] bg-red-800 bg-opacity-75 relative"></div>
+          <div className="w-full flex items-center justify-center h-[280px] bg-slate-600 bg-opacity-75 relative text-gray-200">
+            <BsPersonCircle size={200} />
+          </div>
         )}
       </Link>
       <div className="px-4 pt-1">

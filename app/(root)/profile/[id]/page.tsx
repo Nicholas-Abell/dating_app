@@ -26,7 +26,7 @@ async function Page({ params }: { params: { id: string } }) {
         <div className="w-full h-[80vh] relative">
           <ImageCarousel images={profileInfo?.images} />
           <div
-            className={`w-full h-full hidden md:grid grid-rows-1 grid-cols-${imageCount}`}
+            className={`w-full h-full hidden md:grid grid-rows-1 grid-cols-3`}
           >
             {profileInfo.images.map((image: string, key: number) => (
               <div key={key} className="relative h-full">
