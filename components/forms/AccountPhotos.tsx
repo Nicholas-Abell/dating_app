@@ -30,53 +30,55 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
   const [url, setUrl] = useState("");
 
   return (
-    <div className="grid grid-cols-3 gap-4 justify-center items-center">
+    <div className="grid grid-cols-3 gap-2 justify-center items-center w-full">
       {user.images &&
         user.images.length > 0 &&
         user.images?.map((image, key) => (
-          <>
-            <div className="relative w-full h-full">
-              <button className="absolute z-10 top-0 left-0 text-black hover:text-red-600">
-                <RiDeleteBin5Fill size={25} />
-              </button>
-              <Image
-                src={image}
-                key={key}
-                className="object-cover"
-                alt="pic"
-                fill
-              />
-            </div>
-          </>
+          <div className="relative h-[40vh]" key={key}>
+            <button className="absolute z-10 top-0 left-0 text-black hover:text-red-600">
+              <RiDeleteBin5Fill size={25} />
+            </button>
+            <Image
+              src={image}
+              key={key}
+              className="object-cover"
+              alt="pic"
+              fill
+            />
+          </div>
         ))}
       <div>
-        <SingleImageDropzone
-          width={200}
-          height={200}
-          value={file}
-          onChange={(file) => {
-            setFile(file);
-          }}
-        />
-        <button
-          className="bg-gray-200 text-gray-700 rounded-full w-full"
-          onClick={async () => {
-            if (file) {
-              const res = await edgestore.publicFiles.upload({
-                file,
-                onProgressChange: (progress) => {
-                  // you can use this to show a progress bar
-                  console.log(progress);
-                },
-              });
-              setUrl(res.url);
-              addUserImages(user?.id, res.url);
-              console.log(res);
-            }
-          }}
-        >
-          Upload
-        </button>
+        {user.images && user.images.length < 3 && (
+          <>
+            <SingleImageDropzone
+              width={200}
+              height={200}
+              value={file}
+              onChange={(file) => {
+                setFile(file);
+              }}
+            />
+            <button
+              className="bg-gray-200 text-gray-700 rounded-full w-full"
+              onClick={async () => {
+                if (file) {
+                  const res = await edgestore.publicFiles.upload({
+                    file,
+                    onProgressChange: (progress) => {
+                      // you can use this to show a progress bar
+                      console.log(progress);
+                    },
+                  });
+                  setUrl(res.url);
+                  addUserImages(user?.id, res.url);
+                  console.log(res);
+                }
+              }}
+            >
+              Upload
+            </button>
+          </>
+        )}
         {"   " && url && <Link href={url}>Link</Link>}
       </div>
     </div>
