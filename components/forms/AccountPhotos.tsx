@@ -1,6 +1,6 @@
 "use client";
 
-import { addUserImages } from "@/libs/actions/user.actions";
+import { addUserImage, deleteUserImage } from "@/libs/actions/user.actions";
 import { SingleImageDropzone } from "../edgeStore/singleImageDropzone";
 import { useEdgeStore } from "@/libs/edgestore";
 import Link from "next/link";
@@ -35,7 +35,16 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
         user.images.length > 0 &&
         user.images?.map((image, key) => (
           <div className="relative h-[40vh] md:h-[80vh]" key={key}>
-            <button className="absolute z-10 top-0 left-0 text-black hover:text-red-600">
+            <button
+              className="absolute z-10 top-0 left-0 text-black hover:text-red-600"
+              onClick={async () => {
+                const res = await edgestore.publicFiles.delete({
+                  url: image,
+                });
+                deleteUserImage(user?.id, image);
+                console.log(res);
+              }}
+            >
               <RiDeleteBin5Fill size={25} />
             </button>
             <Image
@@ -70,7 +79,7 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
                     },
                   });
                   setUrl(res.url);
-                  addUserImages(user?.id, res.url);
+                  addUserImage(user?.id, res.url);
                   console.log(res);
                 }
               }}

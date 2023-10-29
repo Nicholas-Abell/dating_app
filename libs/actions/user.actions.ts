@@ -58,7 +58,7 @@ export async function updateUser({
   }
 }
 
-export async function addUserImages(userId: string, imageUrl: string) {
+export async function addUserImage(userId: string, imageUrl: string) {
   try {
     connectToDB();
     await User.findOneAndUpdate(
@@ -68,6 +68,18 @@ export async function addUserImages(userId: string, imageUrl: string) {
     );
   } catch (error) {
     console.log("addUserImage Error: " && error);
+  }
+}
+
+export async function deleteUserImage(userId: string, imageUrl: string) {
+  try {
+    connectToDB();
+    await User.findOneAndUpdate(
+      { id: userId },
+      { $pull: { images: imageUrl } }
+    );
+  } catch (error) {
+    console.log("deleteUserImage Error: " && error);
   }
 }
 
