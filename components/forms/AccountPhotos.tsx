@@ -31,22 +31,24 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
 
   return (
     <div className="grid grid-cols-3 gap-4 justify-center items-center">
-      {user.images?.map((image, key) => (
-        <>
-          <div className="relative w-full h-full">
-            <button className="absolute z-10 top-0 left-0 text-black hover:text-red-600">
-              <RiDeleteBin5Fill size={25} />
-            </button>
-            <Image
-              src={image}
-              key={key}
-              className="object-cover"
-              alt="pic"
-              fill
-            />
-          </div>
-        </>
-      ))}
+      {user.images &&
+        user.images.length > 0 &&
+        user.images?.map((image, key) => (
+          <>
+            <div className="relative w-full h-full">
+              <button className="absolute z-10 top-0 left-0 text-black hover:text-red-600">
+                <RiDeleteBin5Fill size={25} />
+              </button>
+              <Image
+                src={image}
+                key={key}
+                className="object-cover"
+                alt="pic"
+                fill
+              />
+            </div>
+          </>
+        ))}
       <div>
         <SingleImageDropzone
           width={200}

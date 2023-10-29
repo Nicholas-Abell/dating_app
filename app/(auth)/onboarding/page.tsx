@@ -28,7 +28,7 @@ const page: React.FC<pageProps> = async () => {
   };
 
   return (
-    <main className="flex flex-col justify-center items-center h-screen">
+    <main className="w-full flex flex-col justify-center items-center overflow-y-scroll scrollbar-hide bg-gradient-to-r from-black to-purple-500 text-white rounded-lg p-8 shadow-lg mx-auto">
       <AccountProfile user={userData} />
     </main>
   );

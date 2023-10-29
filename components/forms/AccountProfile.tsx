@@ -19,6 +19,7 @@ type AccountProfileProps = {
     lookingfor: string;
     gender: string;
     race: string;
+    images: string[];
   };
 };
 

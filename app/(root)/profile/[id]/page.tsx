@@ -23,10 +23,15 @@ async function Page({ params }: { params: { id: string } }) {
       {profileInfo.images[0] ? (
         <div className="w-full h-[80vh] relative">
           <ImageCarousel images={profileInfo?.images} />
-          <div className="w-full h-[80vh] hidden md:grid grid-cols-2">
+          <div className={`w-full h-[80vh] hidden md:grid grid-rows-1`}>
             {profileInfo.images.map((image: string, key: number) => (
               <div key={key} className="relative">
-                <Image src={image} alt="pic" fill className="object-cover" />
+                <Image
+                  src={image}
+                  alt="pic"
+                  fill
+                  className="object-cover object-center"
+                />
               </div>
             ))}
           </div>
