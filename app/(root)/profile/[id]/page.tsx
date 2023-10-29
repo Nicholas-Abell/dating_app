@@ -18,14 +18,18 @@ async function Page({ params }: { params: { id: string } }) {
   const profileInfo = await fetchUser(params.id);
   console.log(profileInfo);
 
+  let imageCount = profileInfo?.images.length;
+
   return (
     <section className="w-full min-h-screen relative flex flex-col pb-24 items-center gap-4">
       {profileInfo.images[0] ? (
         <div className="w-full h-[80vh] relative">
           <ImageCarousel images={profileInfo?.images} />
-          <div className={`w-full h-[80vh] hidden md:grid grid-rows-1`}>
+          <div
+            className={`w-full h-full hidden md:grid grid-rows-1 grid-cols-${imageCount}`}
+          >
             {profileInfo.images.map((image: string, key: number) => (
-              <div key={key} className="relative">
+              <div key={key} className="relative h-full">
                 <Image
                   src={image}
                   alt="pic"

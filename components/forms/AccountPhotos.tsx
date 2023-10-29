@@ -30,18 +30,18 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
   const [url, setUrl] = useState("");
 
   return (
-    <div className="grid grid-cols-3 gap-2 justify-center items-center w-full">
+    <div className="grid grid-rows-3 gap-2 justify-center items-center w-full">
       {user.images &&
         user.images.length > 0 &&
         user.images?.map((image, key) => (
-          <div className="relative h-[40vh]" key={key}>
+          <div className="relative h-[40vh] md:h-[80vh]" key={key}>
             <button className="absolute z-10 top-0 left-0 text-black hover:text-red-600">
               <RiDeleteBin5Fill size={25} />
             </button>
             <Image
               src={image}
               key={key}
-              className="object-cover"
+              className="object-cover object-center"
               alt="pic"
               fill
             />
