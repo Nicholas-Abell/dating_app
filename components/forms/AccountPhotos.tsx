@@ -30,7 +30,7 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
   const [url, setUrl] = useState("");
 
   return (
-    <div className="grid grid-rows-3 gap-2 justify-center items-center w-full">
+    <div className="grid grid-cols-3 gap-2 justify-center items-center w-full md:h-[80vh]">
       {user.images &&
         user.images.length > 0 &&
         user.images?.map((image, key) => (
