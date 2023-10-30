@@ -1,0 +1,40 @@
+{
+  "name": "date_app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@clerk/clerk-react": "^4.25.0",
+    "@clerk/nextjs": "^4.26.1",
+    "@edgestore/react": "^0.1.4",
+    "@edgestore/server": "^0.1.4",
+    "@hookform/resolvers": "^3.3.1",
+    "@types/node": "20.6.3",
+    "@types/react": "18.2.22",
+    "@types/react-dom": "18.2.7",
+    "autoprefixer": "10.4.16",
+    "eslint": "8.49.0",
+    "eslint-config-next": "14.0.0",
+    "lucide-react": "^0.288.0",
+    "mongodb": "^6.1.0",
+    "mongoose": "^7.5.2",
+    "next": "14.0.0",
+    "postcss": "8.4.30",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-hook-form": "^7.46.2",
+    "react-hook-form-resolvers": "^0.0.1",
+    "react-icons": "^4.11.0",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss": "3.3.3",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "5.2.2",
+    "zod": "^3.22.4"
+  }
+}
