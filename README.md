@@ -22,7 +22,6 @@ Welcome to our Dating App, a web application built using Next.js, MongoDB, and M
 Our dating app comes with several features to help users find and connect with potential partners:
 
 - User Registration: Users can sign up and create a profile with their personal details, photos, and preferences.
-- Matching Algorithm: The app employs a sophisticated matching algorithm to suggest potential matches based on user preferences and compatibility.
 - Profile Management: Users can edit and update their profiles, including adding new photos and information.
 - Messaging: Users can communicate with their matches via a messaging system, making it easy to get to know each other.
 - Privacy and Security: We prioritize user privacy and implement security measures to protect user data.
