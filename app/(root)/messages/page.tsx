@@ -1,7 +1,7 @@
 import LikedBy from "@/components/messages/LikedBy";
 import NoMessages from "@/components/messages/NoMessages";
 import { populateConversations } from "@/libs/actions/message.actions";
-import { fetchUser } from "@/libs/actions/user.actions";
+import { fetchUser, populateLikedBy } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,11 +16,13 @@ const page: React.FC<pageProps> = async () => {
 
   const userInfo = await fetchUser(user?.id);
   const conversations = await populateConversations(userInfo?.id);
+  const likedBy = await populateLikedBy(userInfo?.id);
 
   return (
     <div className="w-full h-screen overflow-y-scroll scrollbar-hide">
       <h2 className="p-4 font-bold text-3xl">Likes you</h2>
       <LikedBy />
+      {<p>{likedBy.map((user) => user.username)}</p>}
       <h1 className="p-4 font-bold text-3xl">Messages</h1>
       {conversations.length > 0 ? (
         conversations.map((convo) => {

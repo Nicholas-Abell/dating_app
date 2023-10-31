@@ -143,3 +143,14 @@ export async function likeUser(userId: string, likeId: string) {
     throw new Error(`likeUser Error: ${error.message}`);
   }
 }
+
+export async function populateLikedBy(userId: string) {
+  try {
+    connectToDB();
+    const likedBy = await User.find({ likedBy: userId });
+    console.log("liked by: ", likedBy);
+    return likedBy;
+  } catch (error: any) {
+    throw new Error("populateLikedBy Error: ", error);
+  }
+}
