@@ -38,7 +38,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = async () => {
         className="flex justify-center items-center gap-4 p-2"
       >
         <AiFillSetting size={30} className="text-white" />
-        <p className="hidden lg:block">HOME</p>
+        <p className="hidden lg:block">SETTINGS</p>
       </Link>
       <div className="flex justify-center items-center gap-4 p-2">
         <UserButton afterSignOutUrl="/sign-in" />
