@@ -1,3 +1,4 @@
+import LikedBy from "@/components/messages/LikedBy";
 import NoMessages from "@/components/messages/NoMessages";
 import { populateConversations } from "@/libs/actions/message.actions";
 import { fetchUser } from "@/libs/actions/user.actions";
@@ -18,6 +19,8 @@ const page: React.FC<pageProps> = async () => {
 
   return (
     <div className="w-full h-screen overflow-y-scroll scrollbar-hide">
+      <h2 className="p-4 font-bold text-3xl">Likes you</h2>
+      <LikedBy />
       <h1 className="p-4 font-bold text-3xl">Messages</h1>
       {conversations.length > 0 ? (
         conversations.map((convo) => {
