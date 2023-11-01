@@ -19,27 +19,9 @@ const page: React.FC<pageProps> = async () => {
   const likedBy = await populateLikedBy(userInfo?.id);
 
   return (
-    <div className="w-full h-screen overflow-y-scroll scrollbar-hide">
+    <main className="w-full h-screen overflow-y-scroll scrollbar-hide">
       <h2 className="p-4 font-bold text-3xl">Likes you</h2>
-      <LikedBy />
-      {
-        <div className="flex items-center justify-start overflow-x-scroll scrollbar-hide px-4">
-          {likedBy.map((likedYou, key) => (
-            <Link
-              key={key}
-              href={`/profile/${likedYou?.id}`}
-              className="w-16 h-16 bg-slate-600 text-gray-200 rounded-full relative flex justify-center items-center"
-            >
-              <Image
-                src={likedYou.images[0]}
-                fill
-                alt={likedYou.username.toString()}
-                className="object-cover rounded-full"
-              />
-            </Link>
-          ))}
-        </div>
-      }
+      <LikedBy likedBy={likedBy} />
       <h1 className="p-4 font-bold text-3xl">Messages</h1>
       {conversations.length > 0 ? (
         conversations.map((convo) => {
@@ -89,7 +71,7 @@ const page: React.FC<pageProps> = async () => {
       ) : (
         <NoMessages />
       )}
-    </div>
+    </main>
   );
 };
 
