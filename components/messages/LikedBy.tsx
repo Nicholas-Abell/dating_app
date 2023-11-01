@@ -1,14 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
+import User from "@/libs/models/user.model";
 
 type LikedByProps = {
-  likedBy: any;
+  likedBy: typeof User[];
 };
 
 const LikedBy: React.FC<LikedByProps> = ({ likedBy }) => {
   return (
-    <div className="flex items-center justify-start overflow-x-scroll scrollbar-hide px-4">
+    <div className="flex items-center justify-start overflow-x-scroll scrollbar-hide px-4 gap-8">
       {likedBy.map((likedYou: any, key: number) => (
         <Link
           key={key}
@@ -27,5 +28,3 @@ const LikedBy: React.FC<LikedByProps> = ({ likedBy }) => {
   );
 };
 export default LikedBy;
-
-//Show Image of all users that liked user
