@@ -1,19 +1,28 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { userInfo } from "os";
 import { BsPersonCircle } from "react-icons/bs";
 
+type User = {
+  image: string;
+  username: string;
+};
+
+type Message = {
+  sentBy: string;
+  content: string;
+};
+
 type MessagesProps = {
-  convo: any;
-  otherUser: any;
-  userInfo: any;
+  convo: { _id: string; id: string; users: User[]; message: Message[] };
+  otherUser: User;
+  userInfo: User;
 };
 
 const Messages: React.FC<MessagesProps> = ({ convo, otherUser, userInfo }) => {
   return (
     <Link
-      href={`/messages/${convo?._id}`}
+      href={`/messages/${convo._id}`}
       key={convo.id}
       className="block border-b p-4 transition-transform transform hover:bg-slate-300 ease-in-out duration-200"
     >
