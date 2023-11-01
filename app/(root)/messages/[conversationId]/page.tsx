@@ -13,18 +13,19 @@ async function Page({ params }: { params: { conversationId: string } }) {
   const conversation = await fetchConversation(params?.conversationId);
 
   return (
-    <section className="h-screen w-full gap-4 flex flex-col items-center pt-8 px-4 lg:px-48 overflow-y-scroll scrollbar-hide">
+    <section className="h-screen w-full gap-4 flex flex-col items-center pt-8 px-12 lg:px-48 overflow-y-scroll scrollbar-hide">
       {conversation?.message.map((mess: any) => (
-        <div
-          className={`border-2 border-white rounded-xl px-12 py-4 ${
-            mess.sentBy === userInfo?.username
-              ? " bg-green-400 mr-auto"
-              : "bg-blue-400 ml-auto"
-          }`}
-          key={mess._id}
-        >
-          <p>{mess.content}</p>
-        </div>
+        <>
+          {mess.sentBy === userInfo?.username ? (
+            <div className="border-2 border-white rounded-xl px-12 py-4 bg-blue-400 ml-auto">
+              {mess.content}
+            </div>
+          ) : (
+            <div className="border-2 border-white rounded-xl px-12 py-4 bg-green-400 mr-auto">
+              {mess.content}
+            </div>
+          )}
+        </>
       ))}
     </section>
   );
