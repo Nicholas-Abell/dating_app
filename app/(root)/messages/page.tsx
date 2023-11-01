@@ -22,7 +22,24 @@ const page: React.FC<pageProps> = async () => {
     <div className="w-full h-screen overflow-y-scroll scrollbar-hide">
       <h2 className="p-4 font-bold text-3xl">Likes you</h2>
       <LikedBy />
-      {<p>{likedBy.map((user) => user.username)}</p>}
+      {
+        <div className="flex items-center justify-start overflow-x-scroll scrollbar-hide px-4">
+          {likedBy.map((likedYou, key) => (
+            <Link
+              key={key}
+              href={`/profile/${likedYou?.id}`}
+              className="w-16 h-16 bg-slate-600 text-gray-200 rounded-full relative flex justify-center items-center"
+            >
+              <Image
+                src={likedYou.images[0]}
+                fill
+                alt={likedYou.username.toString()}
+                className="object-cover rounded-full"
+              />
+            </Link>
+          ))}
+        </div>
+      }
       <h1 className="p-4 font-bold text-3xl">Messages</h1>
       {conversations.length > 0 ? (
         conversations.map((convo) => {
@@ -38,7 +55,7 @@ const page: React.FC<pageProps> = async () => {
               className="block border-b p-4 transition-transform transform hover:bg-slate-300 ease-in-out duration-200"
             >
               <div className="flex items-center">
-                <div className="w-16 h-16 bg-slate-600 text-gray-200 rounded-full relative flex justify-center items-center">
+                <div className="w-24 h-24 bg-slate-600 text-gray-200 rounded-full relative flex justify-center items-center">
                   {otherUser.image ? (
                     <Image
                       fill
