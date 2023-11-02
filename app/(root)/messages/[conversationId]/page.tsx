@@ -19,12 +19,14 @@ async function Page({ params }: { params: { conversationId: string } }) {
       {conversation?.message.map((mess: any) => (
         <>
           {mess.sentBy === userInfo?.username ? (
-            <div className="border-2 border-white rounded-xl px-12 py-4 bg-blue-400 ml-auto">
-              {mess.content}
+            <div className="px-8 relative ml-auto">
+              <div className="border-2 border-white rounded-xl px-12 py-4 bg-slate-600">
+                {mess.content}
+              </div>
             </div>
           ) : (
             <div className="px-8 relative mr-auto">
-              <div className="border-2 border-white rounded-xl px-12 py-4 bg-green-400 ">
+              <div className="border-2 border-white rounded-xl px-12 py-4 bg-gray-500 ">
                 {mess.content}
                 <Link
                   href={`/profile/${otherUser.id}`}
