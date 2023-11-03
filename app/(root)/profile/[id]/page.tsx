@@ -9,14 +9,15 @@ import { PiGlobeStandBold } from "react-icons/pi";
 import Image from "next/image";
 import Link from "next/link";
 import ImageCarousel from "@/components/shared/ImageCarousel";
+import { redirect } from "next/navigation";
 
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
   if (!user) return null;
 
   const userInfo = await fetchUser(user?.id);
-  const profileInfo = await fetchUser(params.id);
-  console.log(profileInfo);
+  const profileInfo = await fetchUser(params?.id);
+  if (!userInfo?.onboarded) redirect("/onboarding");
 
   let imageCount = profileInfo?.images?.length;
 
