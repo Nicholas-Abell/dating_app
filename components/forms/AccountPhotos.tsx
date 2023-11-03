@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import { useRouter } from "next/navigation";
 
 type AccountPhotosProps = {
   user: {
@@ -25,6 +26,7 @@ type AccountPhotosProps = {
 };
 
 export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
+  const router = useRouter();
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
   const [url, setUrl] = useState("");
@@ -43,6 +45,7 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
                   url: image,
                 });
                 deleteUserImage(user?.id, image);
+                router.refresh();
                 console.log(res);
               }}
             >
@@ -87,7 +90,7 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
                   });
                   setUrl(res.url);
                   addUserImage(user?.id, res.url);
-                  console.log(res);
+                  router.refresh();
                 }
               }}
             >
