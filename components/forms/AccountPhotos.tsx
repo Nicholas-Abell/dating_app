@@ -28,6 +28,7 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
   const [url, setUrl] = useState("");
+  const [progress, setProgress] = useState(0);
 
   return (
     <div className="grid grid-cols-3 gap-2 justify-center items-center w-full md:h-[80vh]">
@@ -67,6 +68,12 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
                 setFile(file);
               }}
             />
+            <div className="h-[6px] w-44 border rounded overflow-hidden">
+              <div
+                className="h-full bg-white transition-all duration-150"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
             <button
               className="bg-gray-200 text-gray-700 rounded-full w-full"
               onClick={async () => {
@@ -74,7 +81,7 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
                   const res = await edgestore.publicFiles.upload({
                     file,
                     onProgressChange: (progress) => {
-                      // you can use this to show a progress bar
+                      setProgress(progress);
                       console.log(progress);
                     },
                   });
