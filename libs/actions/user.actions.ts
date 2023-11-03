@@ -144,13 +144,22 @@ export async function likeUser(userId: string, likeId: string) {
   }
 }
 
-export async function populateLikedBy(userId: string) {
+export async function findUsersThatLikedYou(userId: string) {
   try {
     connectToDB();
-    const likedBy = await User.find({ likedBy: userId });
-    console.log("liked by: ", likedBy);
-    return likedBy;
-  } catch (error: any) {
-    throw new Error("populateLikedBy Error: ", error);
+    const user = await fetchUser(userId);
+    if (!user) {
+      console.log("User not found.");
+      return [];
+    }
+    const likedByUserIds = user.likedBy;
+
+    const users = await User.find({ id: { $in: likedByUserIds } });
+
+    console.log("Users liked by the user: ", users);
+    return users;
+  } catch (error) {
+    console.error("Error finding users by likedBy:", error);
+    throw error;
   }
 }

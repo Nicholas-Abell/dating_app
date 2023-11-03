@@ -2,15 +2,18 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import User from "@/libs/models/user.model";
+import { findUsersThatLikedYou } from "@/libs/actions/user.actions";
 
 type LikedByProps = {
-  likedBy: typeof User[];
+  userId: string;
 };
 
-const LikedBy: React.FC<LikedByProps> = ({ likedBy }) => {
+const LikedBy: React.FC<LikedByProps> = async ({ userId }) => {
+  const likedz = await findUsersThatLikedYou(userId);
+
   return (
     <div className="flex items-center justify-start overflow-x-scroll scrollbar-hide px-4 gap-8">
-      {likedBy.map((likedYou: any, key: number) => (
+      {likedz.map((likedYou: any, key: number) => (
         <Link
           key={key}
           href={`/profile/${likedYou?.id}`}

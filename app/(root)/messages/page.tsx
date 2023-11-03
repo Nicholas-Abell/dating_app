@@ -2,7 +2,7 @@ import LikedBy from "@/components/messages/LikedBy";
 import Messages from "@/components/messages/Messages";
 import NoMessages from "@/components/messages/NoMessages";
 import { populateConversations } from "@/libs/actions/message.actions";
-import { fetchUser, populateLikedBy } from "@/libs/actions/user.actions";
+import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import React from "react";
 
@@ -14,16 +14,14 @@ const page: React.FC<pageProps> = async () => {
 
   const userInfo = await fetchUser(user?.id);
   const conversations = await populateConversations(userInfo?.id);
-  const likedBy = await populateLikedBy(userInfo?.id);
 
   return (
     <main className="w-full h-screen overflow-y-scroll scrollbar-hide">
       <h2 className="p-4 font-bold text-3xl">Likes you</h2>
-      <LikedBy likedBy={likedBy} />
-
+      <LikedBy userId={userInfo?.id} />
       <h1 className="p-4 font-bold text-3xl">Messages</h1>
       {conversations.length > 0 ? (
-        conversations.map((convo) => {
+        conversations.map((convo, key) => {
           const otherUser =
             convo?.users[0].username !== userInfo?.username
               ? convo?.users[0]
@@ -32,6 +30,7 @@ const page: React.FC<pageProps> = async () => {
           return (
             <>
               <Messages
+                key={key}
                 convo={convo}
                 otherUser={otherUser}
                 userInfo={userInfo}
@@ -47,3 +46,6 @@ const page: React.FC<pageProps> = async () => {
 };
 
 export default page;
+function findUsersThatlikeYou() {
+  throw new Error("Function not implemented.");
+}
