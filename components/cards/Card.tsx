@@ -1,7 +1,7 @@
 "use client";
 import { likeUser } from "@/libs/actions/user.actions";
 import Link from "next/link";
-import React, { useTransition } from "react";
+import React from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Image from "next/image";
 import { BsPersonCircle } from "react-icons/bs";
@@ -31,8 +31,6 @@ const Card: React.FC<CardsProps> = ({
   gender,
   image,
 }) => {
-  const [isPending, startTransition] = useTransition();
-
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden p-4 hover:scale-105 ease-in-out duration-300">
       <Link href={href}>
@@ -58,15 +56,15 @@ const Card: React.FC<CardsProps> = ({
           <p className="font-bold text-lg text-gray-800">{username}</p>
           {!likedByUser ? (
             <AiOutlineHeart
-              onClick={() => startTransition(() => handleLike(userId, likeId))}
+              onClick={() => handleLike(userId, likeId)}
               size={25}
               className="cursor-pointer text-red-500 hover:text-red-600"
             />
           ) : (
             <AiFillHeart
-              onClick={() => startTransition(() => handleLike(userId, likeId))}
+              onClick={() => handleLike(userId, likeId)}
               size={25}
-              className="text-red-500 hover:text-red-600"
+              className="cursor-pointer text-red-500 hover:text-red-600"
             />
           )}
         </div>
