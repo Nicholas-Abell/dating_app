@@ -20,13 +20,13 @@ async function Page({ params }: { params: { conversationId: string } }) {
         <>
           {mess.sentBy === userInfo?.username ? (
             <div className="px-8 relative ml-auto">
-              <div className="border-2 border-white rounded-xl px-12 py-4 bg-slate-600">
+              <div className="border-2 border-black rounded-xl px-12 py-4 bg-blue-300">
                 {mess.content}
               </div>
             </div>
           ) : (
             <div className="px-8 relative mr-auto">
-              <div className="border-2 border-white rounded-xl px-12 py-4 bg-gray-500 ">
+              <div className="border-2 border-black rounded-xl px-12 py-4 bg-green-300">
                 {mess.content}
                 <Link
                   href={`/profile/${otherUser.id}`}
