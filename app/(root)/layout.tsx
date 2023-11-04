@@ -22,7 +22,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <main className="flex bg-gradient-to-r from-black to-purple-500 text-gray-200">
+          <main className="flex">
             <LeftSidebar />
             <EdgeStoreProvider>{children}</EdgeStoreProvider>
           </main>
