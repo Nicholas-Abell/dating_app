@@ -1,4 +1,5 @@
 import Card from "@/components/cards/Card";
+import PaginationBar from "@/components/navbar/PaginationBar";
 import { fetchUser, fetchProfiles } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
@@ -6,7 +7,7 @@ import { redirect } from "next/navigation";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string };
 }) {
   const user = await currentUser();
 
@@ -26,8 +27,8 @@ export default async function Home({
   };
 
   return (
-    <section className="p-8 w-full">
-      <h1 className="text-center text-4xl py-12">HOME</h1>
+    <section className="px-8 pb-4 w-full min-h-screen flex justify-between flex-col">
+      <h1 className="text-4xl py-12">HOME</h1>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {profiles?.map((profile) => (
           <Card
@@ -43,6 +44,7 @@ export default async function Home({
           />
         ))}
       </div>
+      <PaginationBar page={searchParams.page} />
     </section>
   );
 }
