@@ -4,10 +4,6 @@ import React from "react";
 type loadingProps = {};
 
 const loading: React.FC<loadingProps> = () => {
-  return (
-    <>
-      <HomeSkeleton />
-    </>
-  );
+  return <HomeSkeleton />;
 };
 export default loading;
