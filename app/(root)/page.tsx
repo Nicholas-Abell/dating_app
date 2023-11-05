@@ -1,6 +1,7 @@
 import Card from "@/components/cards/Card";
 import { fetchUser, populateUsers } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export default async function Home({
   searchParams,
@@ -11,14 +12,13 @@ export default async function Home({
   if (!user) return null; // to avoid typescript warnings
 
   const userInfo = await fetchUser(user.id);
+  if (!userInfo?.onboarded) redirect("/onboarding");
 
-  let profiles = await populateUsers(user.id);
-
-  // const page = searchParams["page" ?? "1"];
-  // const per_page = searchParams["per_page"] ?? "20";
-  // const start = (Number(page) - 1) * Number(per_page);
-  // const end = start + Number(per_page);
-  // const profiles = profilesz.slice(start, end);
+  let profiles = await populateUsers(
+    user.id,
+    searchParams.page ? +searchParams.page : 1,
+    21
+  );
 
   const checkLikedProfiles = (userId: string) => {
     if (userInfo?.likes?.includes(userId)) {

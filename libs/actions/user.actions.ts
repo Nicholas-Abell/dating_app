@@ -83,10 +83,12 @@ export async function deleteUserImage(userId: string, imageUrl: string) {
   }
 }
 
-export async function populateUsers(userId: string) {
+export async function populateUsers(userId: string, pageNumber = 1, pageSize = 20) {
+  const skipAmount = (pageNumber - 1) * pageSize;
+
   try {
     connectToDB();
-    const users = await User.find({ id: { $ne: userId } });
+    const users = await User.find({ id: { $ne: userId } }).skip(skipAmount).limit(pageSize);
     return users;
   } catch (error: any) {
     throw new Error("fetchUser Error: ", error);
