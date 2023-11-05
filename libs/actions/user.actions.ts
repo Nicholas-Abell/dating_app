@@ -83,7 +83,7 @@ export async function deleteUserImage(userId: string, imageUrl: string) {
   }
 }
 
-export async function populateUsers(userId: string, pageNumber = 1, pageSize = 20) {
+export async function fetchProfiles(userId: string, pageNumber = 1, pageSize = 20) {
   const skipAmount = (pageNumber - 1) * pageSize;
 
   try {

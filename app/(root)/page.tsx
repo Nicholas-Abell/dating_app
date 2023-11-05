@@ -1,5 +1,5 @@
 import Card from "@/components/cards/Card";
-import { fetchUser, populateUsers } from "@/libs/actions/user.actions";
+import { fetchUser, fetchProfiles } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
@@ -9,12 +9,11 @@ export default async function Home({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const user = await currentUser();
-  if (!user) return null; // to avoid typescript warnings
 
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
-  let profiles = await populateUsers(
+  let profiles = await fetchProfiles(
     user.id,
     searchParams.page ? +searchParams.page : 1,
     21
