@@ -105,7 +105,7 @@ export async function fetchUser(userId: string) {
   }
 }
 
-export async function likeUser(userId: string, likeId: string) {
+export async function likeProfile(userId: string, likeId: string) {
   try {
     connectToDB();
 

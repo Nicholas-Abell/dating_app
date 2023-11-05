@@ -1,5 +1,5 @@
 "use client";
-import { likeUser } from "@/libs/actions/user.actions";
+import { likeProfile } from "@/libs/actions/user.actions";
 import Link from "next/link";
 import React from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -18,7 +18,7 @@ type CardsProps = {
 };
 
 const handleLike = (userId: string, likeId: string) => {
-  likeUser(userId, likeId);
+  likeProfile(userId, likeId);
 };
 
 const Card: React.FC<CardsProps> = ({
