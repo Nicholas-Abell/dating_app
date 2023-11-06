@@ -14,10 +14,12 @@ export default async function Home({
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
+  const profilePerPage = 20;
+
   let profiles = await fetchProfiles(
     user.id,
     searchParams.page ? +searchParams.page : 1,
-    21
+    profilePerPage
   );
 
   const checkLikedProfiles = (userId: string) => {
@@ -27,7 +29,7 @@ export default async function Home({
   };
 
   return (
-    <section className="px-8 pb-4 w-full min-h-screen flex justify-between flex-col">
+    <section className="px-8 pb-4 w-full min-h-screen flex justify-between flex-col overflow-y-scroll">
       <h1 className="text-4xl py-12">HOME</h1>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {profiles?.map((profile) => (
@@ -44,7 +46,11 @@ export default async function Home({
           />
         ))}
       </div>
-      <PaginationBar page={searchParams.page} />
+      <PaginationBar
+        page={searchParams.page}
+        profileCount={profiles.length}
+        profilePerPage={profilePerPage}
+      />
     </section>
   );
 }
