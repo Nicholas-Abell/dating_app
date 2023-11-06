@@ -50,6 +50,11 @@ const userSchema = new Schema({
   viewedBy: [{ type: String }],
   images: [{ type: String }],
   id: { type: String, require: true },
+  location: {
+    city: { type: String },
+    latitude: { type: Number },
+    longitude: { type: Number },
+  },
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);

@@ -189,6 +189,7 @@ export async function fetchAndUpdateUserLocation(userId: string) {
         { id: userId },
         {
           location: {
+            city: res.city,
             latitude: res.latitude,
             longitude: res.longitude,
           },
