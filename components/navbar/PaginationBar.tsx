@@ -25,16 +25,35 @@ const PaginationBar: React.FC<PaginationBarProps> = ({
   };
 
   return (
-    <div className="w-full flex justify-between items-center py-4">
+    <div className="w-full flex justify-between items-center py-4 border-t border-gray-200">
       <p>
         page {page === undefined ? "1" : page} of {totalPages}
       </p>
-      <div className="flex items-center gap-8">
-        <button onClick={() => handleClick(-1)}>Previous</button>
-        {pageNumber < totalPages ? (
-          <button onClick={() => handleClick(1)}>Next</button>
+      <div className="flex items-center gap-4">
+        {pageNumber === 0 ? (
+          <button
+            className="text-bold border border-black rounded-xl px-4 py-2 hover:bg-gray-200"
+            onClick={() => handleClick(-1)}
+          >
+            Previous
+          </button>
         ) : (
-          <div>Next</div>
+          <div className="text-bold border border-black rounded-xl px-4 py-2 bg-gray-200">
+            Previous
+          </div>
+        )}
+
+        {pageNumber < totalPages ? (
+          <button
+            className="text-bold border border-black rounded-xl px-4 py-2 hover:bg-gray-200"
+            onClick={() => handleClick(1)}
+          >
+            Next
+          </button>
+        ) : (
+          <div className="text-bold border border-black rounded-xl px-4 py-2 bg-gray-200">
+            Next
+          </div>
         )}
       </div>
     </div>
