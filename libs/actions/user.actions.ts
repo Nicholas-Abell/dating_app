@@ -2,6 +2,9 @@
 import { revalidatePath } from "next/cache";
 import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
+import { IPGeolocationAPI } from "../../node_modules/ip-geolocation-api-sdk-typescript/IPGeolocationAPI";
+import { GeolocationParams } from "ip-geolocation-api-sdk-typescript/GeolocationParams";
+import { json } from "stream/consumers";
 
 type Params = {
   userId: string;
@@ -83,12 +86,18 @@ export async function deleteUserImage(userId: string, imageUrl: string) {
   }
 }
 
-export async function fetchProfiles(userId: string, pageNumber = 1, pageSize = 20) {
+export async function fetchProfiles(
+  userId: string,
+  pageNumber = 1,
+  pageSize = 20
+) {
   const skipAmount = (pageNumber - 1) * pageSize;
 
   try {
     connectToDB();
-    const users = await User.find({ id: { $ne: userId } }).skip(skipAmount).limit(pageSize);
+    const users = await User.find({ id: { $ne: userId } })
+      .skip(skipAmount)
+      .limit(pageSize);
     return users;
   } catch (error: any) {
     throw new Error("fetchUser Error: ", error);
@@ -163,5 +172,31 @@ export async function findUsersThatLikedYou(userId: string) {
   } catch (error) {
     console.error("Error finding users by likedBy:", error);
     throw error;
+  }
+}
+export async function fetchAndUpdateUserLocation(userId: string) {
+  try {
+    connectToDB();
+    let ipgeolocationApi = new IPGeolocationAPI(
+      process.env.IP_GEOLOCATION_KEY,
+      false
+    );
+    let geolocationParams = new GeolocationParams();
+
+    ipgeolocationApi.getGeolocation(async (res) => {
+      console.log(res);
+      await User.findOneAndUpdate(
+        { id: userId },
+        {
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude,
+          },
+        },
+        { upsert: true }
+      );
+    }, geolocationParams);
+  } catch (error) {
+    console.error("Error fetchAndUpdateUserLocation error: ", error);
   }
 }
