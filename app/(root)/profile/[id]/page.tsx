@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ImageCarousel from "@/components/shared/ImageCarousel";
 import { redirect } from "next/navigation";
+import calculateDistance from "@/utils/getDistance";
 
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
@@ -20,6 +21,13 @@ async function Page({ params }: { params: { id: string } }) {
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   let imageCount = profileInfo?.images?.length;
+
+  let distance = calculateDistance(
+    userInfo.location?.latitude,
+    userInfo.location?.longitude,
+    profileInfo.location?.latitude,
+    profileInfo.location?.longitude
+  );
 
   return (
     <section className="w-full min-h-screen relative flex flex-col pb-24 items-center gap-4">
@@ -54,7 +62,7 @@ async function Page({ params }: { params: { id: string } }) {
             <div className="p-1 bg-green-400 rounded-full" />
             <p>Online Now</p>
           </div>
-          <p>21m away</p>
+          <p>{distance}m away</p>
         </div>
         <div className="w-full flex items-center gap-4">
           <div className="flex items-center gap-1">

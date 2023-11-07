@@ -15,7 +15,7 @@ export default function calculateDistance(
       Math.sin(dLon / 2);
   const c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const distance: number = earthRadiusMiles * c;
-  return distance;
+  return Math.round(distance);
 }
 
 function degreesToRadians(degrees: number): number {
