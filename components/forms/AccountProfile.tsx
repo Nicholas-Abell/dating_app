@@ -9,6 +9,7 @@ import {
   updateUser,
 } from "@/libs/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
+import * as userOptions from "../../utils/userOptions";
 
 type AccountProfileProps = {
   user: {
@@ -72,79 +73,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       router.push("/");
     }
   };
-
-  const enumRelationshipStatus = [
-    "No Response",
-    "Committed",
-    "Dating",
-    "Engaged",
-    "Exclusive",
-    "Married",
-    "Open Relationship",
-    "Partnered",
-    "Single",
-  ];
-
-  const enumSexualOrientation = [
-    "Straight",
-    "Gay",
-    "Bisexual",
-    "Lesbian",
-    "Homeflexible",
-    "Heteroflexible",
-    "Androsecual",
-    "Gynosecual",
-    "Sapiosexual",
-  ];
-
-  const enumLookingFor = [
-    "Chat",
-    "Dates",
-    "Friends",
-    "Hookups",
-    "Relationship",
-  ];
-
-  const enumGender = [
-    "Man",
-    "Cis Man",
-    "Trans Man",
-    "Woman",
-    "Cis Woman",
-    "Trans Woman",
-    "Non-Binary",
-  ];
-
-  const enumRace = [
-    "White",
-    "Black or African American",
-    "Asian",
-    "Hispanic or Latino",
-    "Native American or American Indian",
-    "Pacific Islander",
-    "Middle Eastern or Arab",
-    "Indigenous Peoples",
-    "Multiracial",
-    "Biracial",
-    "South Asian",
-    "East Asian",
-    "Southeast Asian",
-    "Central Asian",
-    "North African",
-    "Afro-Caribbean",
-    "Afro-Latino",
-    "European",
-    "Jewish",
-    "Roma or Romani",
-    "Inuit",
-    "Maori",
-    "Aboriginal Australian",
-    "First Nations",
-    "Other Indigenous Groups",
-    "Other/Mixed Race",
-    "Prefer Not to Say",
-    "Other",
-  ];
 
   return (
     <section className="w-full">
@@ -232,7 +160,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             id="relationshipstatus"
             className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
           >
-            {enumRelationshipStatus.map((status) => (
+            {userOptions.enumRelationshipStatus.map((status) => (
               <option key={status} value={status}>
                 {status}
               </option>
@@ -253,7 +181,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             id="sexualOrientation"
             className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
           >
-            {enumSexualOrientation.map((status) => (
+            {userOptions.enumSexualOrientation.map((status) => (
               <option key={status} value={status}>
                 {status}
               </option>
@@ -271,7 +199,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             id="lookingfor"
             className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
           >
-            {enumLookingFor.map((option) => (
+            {userOptions.enumLookingFor.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -289,7 +217,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             id="gender"
             className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
           >
-            {enumGender.map((gender) => (
+            {userOptions.enumGender.map((gender) => (
               <option key={gender} value={gender}>
                 {gender}
               </option>
@@ -307,7 +235,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             id="race"
             className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
           >
-            {enumRace.map((race) => (
+            {userOptions.enumRace.map((race) => (
               <option key={race} value={race}>
                 {race}
               </option>
