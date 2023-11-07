@@ -27,7 +27,6 @@ export default async function Edit() {
     race: userInfo?.race || "",
     images: userInfo?.images || [""],
   };
-  //
 
   return (
     <div className="w-full flex flex-col justify-center items-center overflow-y-scroll scrollbar-hide bg-gradient-to-r from-black to-purple-500 text-white rounded-lg p-8 shadow-lg mx-auto">

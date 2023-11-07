@@ -4,7 +4,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { updateUser } from "@/libs/actions/user.actions";
+import {
+  fetchAndUpdateUserLocation,
+  updateUser,
+} from "@/libs/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
 
 type AccountProfileProps = {
@@ -55,6 +58,8 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       gender: values.gender,
       race: values.race,
     });
+    
+    await fetchAndUpdateUserLocation(user.id);
 
     console.log("user updated");
 
