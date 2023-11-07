@@ -22,6 +22,7 @@ type AccountProfileProps = {
     lookingfor: string;
     gender: string;
     race: string;
+    sexualOrientation: string;
   };
 };
 
@@ -41,6 +42,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       lookingfor: user?.lookingfor || "",
       gender: user?.gender || "",
       race: user?.race || "",
+      sexualOrientation: user?.sexualOrientation || "",
     },
   });
 
@@ -57,8 +59,9 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       lookingfor: values.lookingfor,
       gender: values.gender,
       race: values.race,
+      sexualOrientation: values.sexualOrientation,
     });
-    
+
     await fetchAndUpdateUserLocation(user.id);
 
     console.log("user updated");
@@ -80,6 +83,18 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
     "Open Relationship",
     "Partnered",
     "Single",
+  ];
+
+  const enumSexualOrientation = [
+    "Straight",
+    "Gay",
+    "Bisexual",
+    "Lesbian",
+    "Homeflexible",
+    "Heteroflexible",
+    "Androsecual",
+    "Gynosecual",
+    "Sapiosexual",
   ];
 
   const enumLookingFor = [
@@ -218,6 +233,27 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
           >
             {enumRelationshipStatus.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label
+            htmlFor="sexualOrientation"
+            className="block text-white font-medium"
+          >
+            Sexual Orientation
+          </label>
+          <select
+            {...form.register("sexualOrientation")}
+            name="sexualOrientation"
+            id="sexualOrientation"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+          >
+            {enumSexualOrientation.map((status) => (
               <option key={status} value={status}>
                 {status}
               </option>

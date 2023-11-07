@@ -22,6 +22,7 @@ const userSchema = new Schema({
     ],
     default: "Single",
   },
+  sexualOrientation: {type: String},
   lookingfor: {
     type: String,
     enum: ["Chat", "Dates", "Friends", "Hookups", "Relationship"],

@@ -8,6 +8,7 @@ export const UserValidation = z.object({
   weight: z.coerce.number(),
   relationshipstatus: z.string(),
   lookingfor: z.string(),
+  sexualOrientation: z.string(),
   gender: z.string(),
   race: z.string(),
 });
