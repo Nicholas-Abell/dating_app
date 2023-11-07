@@ -12,7 +12,7 @@ export const UserValidation = z.object({
   race: z.string(),
 });
 
-export const locationValidation = z.object({
+export const LocationValidation = z.object({
   latitude: z.number(),
   longitude: z.number(),
   city: z.string(),
