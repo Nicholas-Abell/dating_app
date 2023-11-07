@@ -11,3 +11,9 @@ export const UserValidation = z.object({
   gender: z.string(),
   race: z.string(),
 });
+
+export const locationValidation = z.object({
+  latitude: z.number(),
+  longitude: z.number(),
+  city: z.string(),
+});
