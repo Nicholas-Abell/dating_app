@@ -1,6 +1,7 @@
 "use client";
 import { sendMessage } from "@/libs/actions/message.actions";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type MessageProps = {
   userId: string;
@@ -9,6 +10,7 @@ type MessageProps = {
   recieverId: string;
   recieverName: string;
   recieverImage: string;
+  conversationId?: string;
 };
 
 const Message: React.FC<MessageProps> = ({
@@ -18,8 +20,11 @@ const Message: React.FC<MessageProps> = ({
   username,
   recieverName,
   recieverImage,
+  conversationId,
 }) => {
+  const router = useRouter();
   const [messageText, setMessageText] = useState("");
+  const [key, setKey] = useState(1);
   const [messageSent, setMessageSent] = useState(true);
 
   const onSubmit = async (e: any) => {
@@ -32,14 +37,21 @@ const Message: React.FC<MessageProps> = ({
       recieverName,
       recieverImage,
       messageText,
+      conversationId,
     });
-    setMessageSent(false);
+    if (!conversationId) {
+      setMessageSent(false);
+    } else {
+      router.refresh();
+      setKey((key) => key + 1); //to force comp refresh and clear text field
+    }
   };
 
   return (
     <form
       onSubmit={onSubmit}
-      className="w-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
+      className="fixed bottom-10 w-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
+      key={key}
     >
       {messageSent ? (
         <input

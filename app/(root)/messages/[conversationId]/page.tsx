@@ -43,7 +43,6 @@ async function Page({ params }: { params: { conversationId: string } }) {
           </div>
         );
       })}
-      <div className="fixed w-full h-screen flex flex-col bottom-12 justify-end items-center">
         <Message
           userId={userInfo?.id}
           username={userInfo?.username}
@@ -51,8 +50,8 @@ async function Page({ params }: { params: { conversationId: string } }) {
           recieverId={profileInfo?.id}
           recieverName={profileInfo?.username}
           recieverImage={profileInfo?.images[0]}
+          conversationId={params.conversationId}
         />
-      </div>
     </section>
   );
 }

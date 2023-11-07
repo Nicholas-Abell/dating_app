@@ -98,25 +98,23 @@ async function Page({ params }: { params: { id: string } }) {
             <p>{profileInfo?.relationshipstatus}</p>
           </div>
         </div>
-        <div className="fixed w-full h-screen flex flex-col bottom-12 justify-end items-center">
-          {params.id === userInfo?.id ? (
-            <Link
-              href="/profile/edit"
-              className="bg-yellow-500 text-2xl px-24 py-2 rounded-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
-            >
-              <p>Edit Profile</p>
-            </Link>
-          ) : (
-            <Message
-              userId={userInfo?.id}
-              username={userInfo?.username}
-              image={userInfo?.images[0]}
-              recieverId={profileInfo?.id}
-              recieverName={profileInfo?.username}
-              recieverImage={profileInfo?.images[0]}
-            />
-          )}
-        </div>
+        {params.id === userInfo?.id ? (
+          <Link
+            href="/profile/edit"
+            className="fixed bottom-10 bg-yellow-500 text-2xl px-24 py-2 rounded-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
+          >
+            <p>Edit Profile</p>
+          </Link>
+        ) : (
+          <Message
+            userId={userInfo?.id}
+            username={userInfo?.username}
+            image={userInfo?.images[0]}
+            recieverId={profileInfo?.id}
+            recieverName={profileInfo?.username}
+            recieverImage={profileInfo?.images[0]}
+          />
+        )}
       </div>
     </section>
   );

@@ -4,7 +4,6 @@ import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
 import { IPGeolocationAPI } from "../../node_modules/ip-geolocation-api-sdk-typescript/IPGeolocationAPI";
 import { GeolocationParams } from "ip-geolocation-api-sdk-typescript/GeolocationParams";
-import { json } from "stream/consumers";
 
 type Params = {
   userId: string;
