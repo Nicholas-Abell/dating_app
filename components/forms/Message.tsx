@@ -1,8 +1,5 @@
 "use client";
-import {
-  createConversation,
-  sendMessage,
-} from "@/libs/actions/message.actions";
+import { sendMessage } from "@/libs/actions/message.actions";
 import React, { useState } from "react";
 
 type MessageProps = {

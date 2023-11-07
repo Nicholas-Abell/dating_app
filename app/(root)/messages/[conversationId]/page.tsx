@@ -1,9 +1,9 @@
+import Message from "@/components/forms/Message";
 import { fetchConversation } from "@/libs/actions/message.actions";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import { PiKeyReturnBold } from "react-icons/pi";
 
 async function Page({ params }: { params: { conversationId: string } }) {
   const user = await currentUser();
@@ -13,7 +13,7 @@ async function Page({ params }: { params: { conversationId: string } }) {
   const otherUser = conversation?.users.find(
     (user: any) => user.username !== userInfo?.username
   );
-  const otherUserInfo = await fetchUser(otherUser?.id);
+  const profileInfo = await fetchUser(otherUser?.id);
 
   return (
     <section className="h-screen w-full gap-4 flex flex-col items-center pt-8 px-12 lg:px-48 overflow-y-scroll scrollbar-hide">
@@ -34,8 +34,8 @@ async function Page({ params }: { params: { conversationId: string } }) {
               >
                 <Image
                   fill
-                  src={otherUserInfo.images[0]}
-                  alt={otherUser.username}
+                  src={profileInfo.images[0]}
+                  alt={profileInfo.username}
                   className="object-fill rounded-full"
                 />
               </Link>
@@ -43,6 +43,16 @@ async function Page({ params }: { params: { conversationId: string } }) {
           </div>
         );
       })}
+      <div className="fixed w-full h-screen flex flex-col bottom-12 justify-end items-center">
+        <Message
+          userId={userInfo?.id}
+          username={userInfo?.username}
+          image={userInfo?.images[0]}
+          recieverId={profileInfo?.id}
+          recieverName={profileInfo?.username}
+          recieverImage={profileInfo?.images[0]}
+        />
+      </div>
     </section>
   );
 }
