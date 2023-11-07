@@ -83,8 +83,6 @@ export async function sendMessage({
   username,
   recieverName,
   recieverImage,
-  path,
-  conversationId,
 }: params) {
   try {
     connectToDB();
@@ -108,7 +106,7 @@ export async function sendMessage({
         messageText,
       });
       console.log("conversation created");
-      if (path === `messages/${conversationId}`) revalidatePath(path);
+      revalidatePath("/messages");
     }
   } catch (error: any) {
     console.log(`sendMessage error: ${error.message}`);
