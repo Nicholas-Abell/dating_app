@@ -1,6 +1,7 @@
 "use server";
 import { connectToDB } from "../mongoose";
 import Conversation from "../models/conversation.model";
+import { revalidatePath } from "next/cache";
 
 type params = {
   userId: string;
@@ -10,6 +11,8 @@ type params = {
   image?: string;
   recieverName?: string;
   recieverImage?: string;
+  path?: string;
+  conversationId?: string;
 };
 
 export async function fetchConversation(conversationId: string) {
@@ -39,7 +42,7 @@ export async function createConversation({
         { id: userId, username, image },
         { id: recieverId, username: recieverName, image: recieverImage },
       ],
-      message: { content: messageText, sentBy: userId },
+      message: { content: messageText, sentBy: username },
     });
 
     await conversation.save();
@@ -80,6 +83,8 @@ export async function sendMessage({
   username,
   recieverName,
   recieverImage,
+  path,
+  conversationId,
 }: params) {
   try {
     connectToDB();
@@ -103,6 +108,7 @@ export async function sendMessage({
         messageText,
       });
       console.log("conversation created");
+      if (path === `messages/${conversationId}`) revalidatePath(path);
     }
   } catch (error: any) {
     console.log(`sendMessage error: ${error.message}`);
