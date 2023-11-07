@@ -28,14 +28,12 @@ const page: React.FC<pageProps> = async () => {
               : convo?.users[1];
 
           return (
-            <>
-              <Messages
-                key={key}
-                convo={convo}
-                otherUser={otherUser}
-                userInfo={userInfo}
-              />
-            </>
+            <Messages
+              key={key}
+              convo={convo}
+              otherUser={otherUser}
+              userInfo={userInfo}
+            />
           );
         })
       ) : (
@@ -46,6 +44,3 @@ const page: React.FC<pageProps> = async () => {
 };
 
 export default page;
-function findUsersThatlikeYou() {
-  throw new Error("Function not implemented.");
-}
