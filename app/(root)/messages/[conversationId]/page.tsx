@@ -3,6 +3,7 @@ import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { PiKeyReturnBold } from "react-icons/pi";
 
 async function Page({ params }: { params: { conversationId: string } }) {
   const user = await currentUser();
@@ -17,7 +18,7 @@ async function Page({ params }: { params: { conversationId: string } }) {
   return (
     <section className="h-screen w-full gap-4 flex flex-col items-center pt-8 px-12 lg:px-48 overflow-y-scroll scrollbar-hide">
       {conversation?.message.map((mess: any) => {
-        mess.sentBy === userInfo?.username ? (
+        return mess.sentBy === userInfo?.username ? (
           <div key={mess._id} className="px-8 relative ml-auto">
             <div className="border-2 border-black rounded-xl px-12 py-4 bg-blue-300">
               {mess.content}
