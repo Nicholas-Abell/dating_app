@@ -5,6 +5,7 @@ import { PiShapesLight } from "react-icons/pi";
 import { MdFamilyRestroom } from "react-icons/md";
 import * as userOptions from "../../utils/userOptions";
 import { GrRadialSelected, GrRadial } from "react-icons/gr";
+import { userInfo } from "os";
 
 type PreferencesFormProps = {
   user: {
@@ -116,14 +117,56 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
           ))}
         </div>
       )}
-      <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+      <button
+        onClick={() => setOptions({ ...options, age: !options.age })}
+        className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100"
+      >
         <p>Age</p>
         <BsChevronCompactRight size={25} className="text-blue-600" />
       </button>
-      <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+      {options.age && (
+        <div className="flex flex-col gap-2 px-12 py-4">
+          <div className="flex items-center gap-4">
+            <input
+              type="number"
+              // {...form.register("age")}
+              name="min"
+              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+              placeholder={user?.preferences?.age.min.toString()}
+            />
+            <input
+              type="number"
+              // {...form.register("age")}
+              name="max"
+              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+              placeholder={user?.preferences?.age.max.toString()}
+            />
+          </div>
+        </div>
+      )}
+      <button
+        onClick={() => setOptions({ ...options, distance: !options.distance })}
+        className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100"
+      >
         <p>Distance</p>
         <BsChevronCompactRight size={25} className="text-blue-600" />
       </button>
+      {options.distance && (
+        <div className="flex flex-col gap-2 px-12 py-4">
+          <div className="flex items-center gap-4">
+            <label htmlFor="distance" className="font-bold px-2">
+              within:
+            </label>
+            <input
+              type="number"
+              // {...form.register("distance")}
+              name="dietance"
+              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+              placeholder={user?.preferences?.distance.toString()}
+            />
+          </div>
+        </div>
+      )}
       <button
         onClick={() => setOptions({ ...options, desires: !options.desires })}
         className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100"
@@ -150,7 +193,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
           ))}
         </div>
       )}
-      <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+      {/* <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <MdFamilyRestroom size={50} />
         <p>FAMILY</p>
       </div>
@@ -165,7 +208,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
       <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
         <p>Wants Kids</p>
         <BsChevronCompactRight size={25} className="text-blue-600" />
-      </button>
+      </button> */}
     </main>
   );
 };
