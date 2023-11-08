@@ -2,15 +2,15 @@ import Message from "@/components/forms/Message";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import ImageCarousel from "@/components/shared/ImageCarousel";
+import calculateDistance from "@/utils/getDistance";
 import { BsFillPersonFill, BsPersonHearts } from "react-icons/bs";
 import { BiRuler } from "react-icons/bi";
 import { FaTransgender } from "react-icons/fa";
 import { PiGlobeStandBold } from "react-icons/pi";
-import Image from "next/image";
-import Link from "next/link";
-import ImageCarousel from "@/components/shared/ImageCarousel";
-import { redirect } from "next/navigation";
-import calculateDistance from "@/utils/getDistance";
 
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
@@ -69,8 +69,14 @@ async function Page({ params }: { params: { id: string } }) {
             <BsFillPersonFill size={20} />
             <p>{profileInfo?.gender}</p>
           </div>
-          <p>-</p>
-          <p>{profileInfo?.lookingfor}</p>
+          {profileInfo?.sexualOrientation ? (
+            <>
+              <p>-</p>
+              <p>{profileInfo?.sexualOrientation}</p>
+            </>
+          ) : (
+            ""
+          )}
         </div>
         <div className="w-full flex flex-col py-8 gap-1">
           <p className="font-bold">ABOUT ME</p>
