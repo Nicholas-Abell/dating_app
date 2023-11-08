@@ -32,10 +32,8 @@ export const enumLookingFor = [
 
 export const enumGender = [
   "Man",
-  "Cis Man",
   "Trans Man",
   "Woman",
-  "Cis Woman",
   "Trans Woman",
   "Non-Binary",
 ];
