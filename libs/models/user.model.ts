@@ -22,7 +22,7 @@ const userSchema = new Schema({
     ],
     default: "Single",
   },
-  sexualOrientation: {type: String},
+  sexualOrientation: { type: String },
   lookingfor: {
     type: String,
     enum: ["Chat", "Dates", "Friends", "Hookups", "Relationship"],
@@ -55,6 +55,15 @@ const userSchema = new Schema({
     city: { type: String },
     latitude: { type: Number },
     longitude: { type: Number },
+  },
+  preferences: {
+    age: { min: { type: Number }, max: { type: Number } },
+    distance: { type: Number },
+    relationshipstatus: { type: String },
+    lookingfor: { type: String },
+    gender: { type: String },
+    race: { type: String },
+    sexualOrientation: { type: String },
   },
 });
 
