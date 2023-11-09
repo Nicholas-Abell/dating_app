@@ -127,20 +127,28 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
       {options.age && (
         <div className="flex flex-col gap-2 px-12 py-4">
           <div className="flex items-center gap-4">
-            <input
-              type="number"
-              // {...form.register("age")}
-              name="min"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder={user?.preferences?.age.min.toString()}
-            />
-            <input
-              type="number"
-              // {...form.register("age")}
-              name="max"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder={user?.preferences?.age.max.toString()}
-            />
+            <label htmlFor="min">
+              min
+              <input
+                type="number"
+                // {...form.register("age")}
+                name="min"
+                className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+                placeholder={user?.preferences?.age.min.toString() || "18"}
+                min={18}
+              />
+            </label>
+            <label htmlFor="max">
+              max
+              <input
+                type="number"
+                // {...form.register("age")}
+                name="max"
+                className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+                placeholder={user?.preferences?.age.max.toString() || "100"}
+                min={18}
+              />
+            </label>
           </div>
         </div>
       )}
@@ -161,7 +169,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
               type="number"
               // {...form.register("distance")}
               name="dietance"
-              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+              className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
               placeholder={user?.preferences?.distance.toString()}
             />
           </div>
@@ -193,7 +201,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
           ))}
         </div>
       )}
-      {/* <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+      <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <MdFamilyRestroom size={50} />
         <p>FAMILY</p>
       </div>
@@ -208,7 +216,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
       <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
         <p>Wants Kids</p>
         <BsChevronCompactRight size={25} className="text-blue-600" />
-      </button> */}
+      </button>
     </main>
   );
 };
