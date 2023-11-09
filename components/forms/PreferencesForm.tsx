@@ -5,7 +5,6 @@ import { PiShapesLight } from "react-icons/pi";
 import { MdFamilyRestroom } from "react-icons/md";
 import * as userOptions from "../../utils/userOptions";
 import { GrRadialSelected, GrRadial } from "react-icons/gr";
-import { userInfo } from "os";
 
 type PreferencesFormProps = {
   user: {
@@ -85,8 +84,14 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
 
   return (
     <main className="w-full">
-      {selected.gender}
-      {selected.desires}
+      <div className="flex flex-col">
+        test
+        <div>gender {selected.gender}</div>
+        <div>desires {selected.desires}</div>
+        <div>min {selected.age.min}</div>
+        <div>max {selected.age.max}</div>
+        <div>distance {selected.distance}</div>
+      </div>
       <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <PiShapesLight size={50} />
         <p>BASIC</p>
@@ -131,22 +136,42 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
               min
               <input
                 type="number"
-                // {...form.register("age")}
+                // {...form.register("min")}
                 name="min"
+                id="min"
                 className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
                 placeholder={user?.preferences?.age.min.toString() || "18"}
                 min={18}
+                onChange={(e) =>
+                  setSelected({
+                    ...selected,
+                    age: {
+                      min: parseInt(e.target.value),
+                      max: selected.age.max,
+                    },
+                  })
+                }
               />
             </label>
             <label htmlFor="max">
               max
               <input
                 type="number"
-                // {...form.register("age")}
+                // {...form.register("max")}
                 name="max"
+                id="max"
                 className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
                 placeholder={user?.preferences?.age.max.toString() || "100"}
                 min={18}
+                onChange={(e) =>
+                  setSelected({
+                    ...selected,
+                    age: {
+                      min: selected.age.min,
+                      max: parseInt(e.target.value),
+                    },
+                  })
+                }
               />
             </label>
           </div>
@@ -162,15 +187,23 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
       {options.distance && (
         <div className="flex flex-col gap-2 px-12 py-4">
           <div className="flex items-center gap-4">
-            <label htmlFor="distance" className="font-bold px-2">
+            <label htmlFor="distance" className="px-2">
               within:
             </label>
             <input
               type="number"
               // {...form.register("distance")}
-              name="dietance"
+              name="distance"
+              id="distance"
               className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder={user?.preferences?.distance.toString()}
+              placeholder={user?.preferences?.distance.toString() || "50"}
+              min={50}
+              onChange={(e) =>
+                setSelected({
+                  ...selected,
+                  distance: parseInt(e.target.value),
+                })
+              }
             />
           </div>
         </div>
