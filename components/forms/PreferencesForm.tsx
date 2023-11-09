@@ -142,15 +142,22 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
                 className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
                 placeholder={user?.preferences?.age.min.toString() || "18"}
                 min={18}
-                onChange={(e) =>
+                value={selected.age.min}
+                onChange={(e) => {
+                  const minAge = parseInt(e.target.value);
+                  const maxAge = selected.age.max;
+
+                  // Ensure that minAge is not greater than maxAge
+                  const newMinAge = minAge > maxAge ? maxAge : minAge;
+
                   setSelected({
                     ...selected,
                     age: {
-                      min: parseInt(e.target.value),
-                      max: selected.age.max,
+                      min: newMinAge,
+                      max: maxAge,
                     },
-                  })
-                }
+                  });
+                }}
               />
             </label>
             <label htmlFor="max">
@@ -163,15 +170,22 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
                 className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
                 placeholder={user?.preferences?.age.max.toString() || "100"}
                 min={18}
-                onChange={(e) =>
+                value={selected.age.max}
+                onChange={(e) => {
+                  const maxAge = parseInt(e.target.value);
+                  const minAge = selected.age.min;
+
+                  // Ensure that maxAge is not less than minAge
+                  const newMaxAge = maxAge < minAge ? minAge : maxAge;
+
                   setSelected({
                     ...selected,
                     age: {
-                      min: selected.age.min,
-                      max: parseInt(e.target.value),
+                      min: minAge,
+                      max: newMaxAge,
                     },
-                  })
-                }
+                  });
+                }}
               />
             </label>
           </div>
