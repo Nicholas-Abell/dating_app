@@ -9,7 +9,7 @@ import {
   updateUser,
 } from "@/libs/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
-import * as userOptions from "../../utils/userOptions";
+import * as userOptions from "../../constants/userOptions";
 
 type AccountProfileProps = {
   user: {

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { BsChevronCompactRight } from "react-icons/bs";
 import { PiShapesLight } from "react-icons/pi";
 import { MdFamilyRestroom } from "react-icons/md";
-import * as userOptions from "../../utils/userOptions";
+import * as userOptions from "../../constants/userOptions";
 import { GrRadialSelected, GrRadial } from "react-icons/gr";
 
 type PreferencesFormProps = {
