@@ -18,3 +18,10 @@ export const LocationValidation = z.object({
   longitude: z.number(),
   city: z.string(),
 });
+
+export const PreferencesValidation = z.object({
+  gender: z.array(z.string()),
+  age: z.object({ min: z.number().min(18), max: z.number().min(18) }),
+  distance: z.number().min(50),
+  desires: z.array(z.string()),
+});
