@@ -63,6 +63,42 @@ export async function updateUser({
   }
 }
 
+type PreferenceParams = {
+  userId: string;
+  gender: string[];
+  min: number;
+  max: number;
+  distance: number;
+  desires: string[];
+};
+
+export async function updatePreferences({
+  userId,
+  // path: string,
+  gender,
+  min,
+  max,
+  distance,
+  desires,
+}: PreferenceParams) {
+  connectToDB();
+
+  try {
+    await User.findOneAndUpdate(
+      { id: userId },
+      {
+        preferences: { gender, age: { min, max }, distance, desires },
+      },
+      { upsert: true }
+    );
+    // if (path === "/") {
+    //   revalidatePath(path);
+    // }
+  } catch (error: any) {
+    throw new Error(`Failed to create/update user: ${error.message}`);
+  }
+}
+
 export async function addUserImage(userId: string, imageUrl: string) {
   try {
     connectToDB();
