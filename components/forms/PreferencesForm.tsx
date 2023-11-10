@@ -10,6 +10,7 @@ import { PreferencesValidation } from "@/libs/validations/User";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updatePreferences } from "@/libs/actions/user.actions";
+import { useRouter } from "next/navigation";
 
 type PreferencesFormProps = {
   user: {
@@ -29,6 +30,8 @@ type PreferencesFormProps = {
 };
 
 const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
+  const router = useRouter();
+
   const [options, setOptions] = useState({
     gender: false,
     age: false,
@@ -40,52 +43,55 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
     wantsKids: false,
   });
 
-  const form = useForm({
-    resolver: zodResolver(PreferencesValidation),
-    defaultValues: {
-      gender:
-        user?.preferences?.gender ||
-        (user?.gender === "Man" && user?.sexualOrientation === "Straight")
-          ? ["Woman"]
-          : [""],
-      age: {
-        min: user.preferences?.age.min || 18,
-        max: user.preferences?.age.max || 100,
-      },
-      distance: user.preferences?.distance || 5000,
-      desires: user.preferences?.desires || [""],
-    },
+  // const form = useForm({
+  //   resolver: zodResolver(PreferencesValidation),
+  //   defaultValues: {
+  //     gender:
+  //       user?.preferences?.gender ||
+  //       (user?.gender === "Man" && user?.sexualOrientation === "Straight")
+  //         ? ["Woman"]
+  //         : [""],
+  //     age: {
+  //       min: user.preferences?.age.min || 18,
+  //       max: user.preferences?.age.max || 100,
+  //     },
+  //     distance: user.preferences?.distance || 5000,
+  //     desires: user.preferences?.desires || [],
+  //   },
+  // });
+
+  const [selected, setSelected] = useState({
+    gender: user.preferences?.gender || [],
+    age: { min: 18, max: 100 }, //slider?
+    distance: 50, //max miles
+    desires: [],
   });
 
-  const onSubmit = async (values: z.infer<typeof PreferencesValidation>) => {
+  const handleSubmit = async () => {
     try {
       await updatePreferences({
-        userId: user?.id,
-        gender: values.gender,
-        min: values.age.min,
-        max: values.age.min,
-        distance: values.distance,
-        desires: values.desires,
+        userId: user.id,
+        gender: selected.gender,
+        min: selected.age.min,
+        max: selected.age.max,
+        distance: selected.distance,
+        desires: selected.desires,
       });
+
+      console.log("preferences updated");
+
+      router.push("/");
     } catch (error) {
       console.error("Failed to update preferences:", error);
     }
   };
 
-  const [selected, setSelected] = useState({
-    gender: [""],
-    age: { min: 18, max: 100 }, //slider?
-    distance: 50, //max miles
-    desires: [""],
-  });
-
   type Preferences = {
-    gender: string[];
-    age: number;
-    desires: string[];
-    distance: number;
+    gender?: string[] | undefined;
+    age?: number;
+    desires?: string[] | undefined;
+    distance?: number;
   };
-
   type Selected = {
     [key in keyof Preferences]: Preferences[key];
   };
@@ -288,7 +294,8 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
           ))}
         </div>
       )}
-      <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+      <button onClick={() => handleSubmit()}>Save</button>
+      {/* <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <MdFamilyRestroom size={50} />
         <p>FAMILY</p>
       </div>
@@ -303,7 +310,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
       <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
         <p>Wants Kids</p>
         <BsChevronCompactRight size={25} className="text-blue-600" />
-      </button>
+      </button> */}
     </main>
   );
 };
