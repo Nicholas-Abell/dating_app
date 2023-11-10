@@ -5,17 +5,25 @@ import { PiShapesLight } from "react-icons/pi";
 import { MdFamilyRestroom } from "react-icons/md";
 import * as userOptions from "../../constants/userOptions";
 import { GrRadialSelected, GrRadial } from "react-icons/gr";
+import { z } from "zod";
+import { PreferencesValidation } from "@/libs/validations/User";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { updatePreferences } from "@/libs/actions/user.actions";
 
 type PreferencesFormProps = {
   user: {
+    id: string;
+    sexualOrientation: string;
+    gender: string;
     preferences?: {
       age: { min: number; max: number };
       distance: number;
-      relationshipstatus: string;
-      lookingfor: string;
-      gender: string;
-      race: string;
-      sexualOrientation: string;
+      relationshipstatus: string[];
+      desires: string[];
+      gender: string[];
+      race: string[];
+      sexualOrientation: string[];
     };
   };
 };
@@ -31,6 +39,38 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
     hasKids: false,
     wantsKids: false,
   });
+
+  const form = useForm({
+    resolver: zodResolver(PreferencesValidation),
+    defaultValues: {
+      gender:
+        user?.preferences?.gender ||
+        (user?.gender === "Man" && user?.sexualOrientation === "Straight")
+          ? ["Woman"]
+          : [""],
+      age: {
+        min: user.preferences?.age.min || 18,
+        max: user.preferences?.age.max || 100,
+      },
+      distance: user.preferences?.distance || 5000,
+      desires: user.preferences?.desires || [""],
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof PreferencesValidation>) => {
+    try {
+      await updatePreferences({
+        userId: user?.id,
+        gender: values.gender,
+        min: values.age.min,
+        max: values.age.min,
+        distance: values.distance,
+        desires: values.desires,
+      });
+    } catch (error) {
+      console.error("Failed to update preferences:", error);
+    }
+  };
 
   const [selected, setSelected] = useState({
     gender: [""],
