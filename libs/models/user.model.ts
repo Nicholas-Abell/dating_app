@@ -59,11 +59,11 @@ const userSchema = new Schema({
   preferences: {
     age: { min: { type: Number }, max: { type: Number } },
     distance: { type: Number },
-    relationshipstatus: { type: String },
-    lookingfor: { type: String },
-    gender: { type: String },
-    race: { type: String },
-    sexualOrientation: { type: String },
+    relationshipstatus: [{ type: String }],
+    desires: [{ type: String }],
+    gender: [{ type: String }],
+    race: [{ type: String }],
+    sexualOrientation: [{ type: String }],
   },
 });
 
