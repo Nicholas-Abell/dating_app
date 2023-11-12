@@ -6,7 +6,6 @@ import { MessageValidation } from "@/libs/validations/Message";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { revalidatePath } from "next/cache";
 
 type MessageProps = {
   userId: string;
