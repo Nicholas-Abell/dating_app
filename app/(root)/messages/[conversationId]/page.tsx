@@ -16,7 +16,7 @@ async function Page({ params }: { params: { conversationId: string } }) {
   const profileInfo = await fetchUser(otherUser?.id);
 
   return (
-    <section className="h-screen w-full gap-4 flex flex-col items-center pt-8 px-12 lg:px-48 overflow-y-scroll scrollbar-hide">
+    <section className="h-screen w-full gap-4 flex flex-col items-center py-8 pb-32 lg:pb-48 px-12 lg:px-48 overflow-y-scroll scrollbar-hide">
       {conversation?.message.map((mess: any) => {
         return mess.sentBy === userInfo?.username ? (
           <div key={mess._id} className="px-8 relative ml-auto">
@@ -43,15 +43,15 @@ async function Page({ params }: { params: { conversationId: string } }) {
           </div>
         );
       })}
-        <Message
-          userId={userInfo?.id}
-          username={userInfo?.username}
-          image={userInfo?.images[0]}
-          recieverId={profileInfo?.id}
-          recieverName={profileInfo?.username}
-          recieverImage={profileInfo?.images[0]}
-          conversationId={params.conversationId}
-        />
+      <Message
+        userId={userInfo?.id}
+        username={userInfo?.username}
+        image={userInfo?.images[0]}
+        recieverId={profileInfo?.id}
+        recieverName={profileInfo?.username}
+        recieverImage={profileInfo?.images[0]}
+        conversationId={params.conversationId}
+      />
     </section>
   );
 }
