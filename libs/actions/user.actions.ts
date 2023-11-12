@@ -90,6 +90,7 @@ export async function updatePreferences({
       },
       { upsert: true }
     );
+    revalidatePath("/");
   } catch (error: any) {
     throw new Error(`Failed to update user: ${error.message}`);
   }
@@ -134,7 +135,7 @@ export async function fetchProfiles(
     const userPreferences = user?.preferences;
 
     const query = {
-      id: { $ne: userId }, 
+      id: { $ne: userId },
       gender: { $in: userPreferences.gender },
       age: { $lte: userPreferences.age.max, $gte: userPreferences.age.min },
     };
@@ -185,8 +186,6 @@ export async function fetchProfiles(
       { $skip: skipAmount },
       { $limit: pageSize },
     ]);
-
-    revalidatePath("/");
     return users;
   } catch (error: any) {
     console.error("Error in fetchProfiles: ", error);
