@@ -75,7 +75,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
   };
 
   return (
-    <section className="w-full bg-gray-200">
+    <section className="w-full bg-gray-400">
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="username" className="font-bold px-2">
@@ -92,7 +92,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
         </div>
 
         <div>
-          <label htmlFor="bio" className="font-bold px-2 bg-gray-200">
+          <label htmlFor="bio" className="font-bold px-2">
             Bio
           </label>
           <textarea
