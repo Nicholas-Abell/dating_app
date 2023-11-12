@@ -57,11 +57,26 @@ const userSchema = new Schema({
     longitude: { type: Number },
   },
   preferences: {
-    age: { min: { type: Number }, max: { type: Number } },
-    distance: { type: Number },
-    relationshipstatus: [{ type: String }],
-    desires: [{ type: String }],
-    gender: [{ type: String }],
+    age: {
+      min: { type: Number, default: 18 },
+      max: { type: Number, default: 100 },
+    },
+    distance: { type: Number, default: 9000 },
+    relationshipstatus: [{ type: String, default: [] }],
+    desires: [
+      {
+        type: String,
+        enum: ["Chat", "Dates", "Friends", "Hookups", "Relationship"],
+        default: ["Chat", "Dates", "Friends", "Hookups", "Relationship"],
+      },
+    ],
+    gender: [
+      {
+        type: String,
+        enum: ["Man", "Trans Man", "Woman", "Trans Woman", "Non-Binary"],
+        default: ["Man", "Trans Man", "Woman", "Trans Woman", "Non-Binary"],
+      },
+    ],
     race: [{ type: String }],
     sexualOrientation: [{ type: String }],
   },
