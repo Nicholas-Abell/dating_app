@@ -2,13 +2,8 @@
 import React, { useState } from "react";
 import { BsChevronCompactRight } from "react-icons/bs";
 import { PiShapesLight } from "react-icons/pi";
-import { MdFamilyRestroom } from "react-icons/md";
 import * as userOptions from "../../constants/userOptions";
 import { GrRadialSelected, GrRadial } from "react-icons/gr";
-import { z } from "zod";
-import { PreferencesValidation } from "@/libs/validations/User";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { updatePreferences } from "@/libs/actions/user.actions";
 import { useRouter } from "next/navigation";
 
@@ -43,28 +38,14 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
     wantsKids: false,
   });
 
-  // const form = useForm({
-  //   resolver: zodResolver(PreferencesValidation),
-  //   defaultValues: {
-  //     gender:
-  //       user?.preferences?.gender ||
-  //       (user?.gender === "Man" && user?.sexualOrientation === "Straight")
-  //         ? ["Woman"]
-  //         : [""],
-  //     age: {
-  //       min: user.preferences?.age.min || 18,
-  //       max: user.preferences?.age.max || 100,
-  //     },
-  //     distance: user.preferences?.distance || 5000,
-  //     desires: user.preferences?.desires || [],
-  //   },
-  // });
-
   const [selected, setSelected] = useState({
     gender: user.preferences?.gender || [],
-    age: { min: 18, max: 100 }, //slider?
-    distance: 50, //max miles
-    desires: [],
+    age: {
+      min: user.preferences?.age.min || 18,
+      max: user.preferences?.age.max || 100,
+    }, //slider?
+    distance: user.preferences?.distance || 50, //max miles
+    desires: user.preferences?.desires || [],
   });
 
   const handleSubmit = async () => {
@@ -91,9 +72,6 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
     age?: number;
     desires?: string[] | undefined;
     distance?: number;
-  };
-  type Selected = {
-    [key in keyof Preferences]: Preferences[key];
   };
 
   const toggleSelected = <T extends keyof Preferences>(
@@ -182,7 +160,6 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
               min
               <input
                 type="number"
-                // {...form.register("min")}
                 name="min"
                 id="min"
                 className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
@@ -210,7 +187,6 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
               max
               <input
                 type="number"
-                // {...form.register("max")}
                 name="max"
                 id="max"
                 className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
@@ -221,7 +197,6 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
                   const maxAge = parseInt(e.target.value);
                   const minAge = selected.age.min;
 
-                  // Ensure that maxAge is not less than minAge
                   const newMaxAge = maxAge < minAge ? minAge : maxAge;
 
                   setSelected({
@@ -252,7 +227,6 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
             </label>
             <input
               type="number"
-              // {...form.register("distance")}
               name="distance"
               id="distance"
               className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
