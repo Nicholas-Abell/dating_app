@@ -2,6 +2,11 @@
 import { sendMessage } from "@/libs/actions/message.actions";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { MessageValidation } from "@/libs/validations/Message";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { revalidatePath } from "next/cache";
 
 type MessageProps = {
   userId: string;
@@ -23,12 +28,14 @@ const Message: React.FC<MessageProps> = ({
   conversationId,
 }) => {
   const router = useRouter();
-  const [messageText, setMessageText] = useState("");
-  const [key, setKey] = useState(1);
   const [messageSent, setMessageSent] = useState(true);
 
-  const onSubmit = async (e: any) => {
-    e.preventDefault();
+  const form = useForm({
+    resolver: zodResolver(MessageValidation),
+    defaultValues: { content: "" },
+  });
+
+  const onSubmit = async (values: z.infer<typeof MessageValidation>) => {
     await sendMessage({
       recieverId,
       userId,
@@ -36,29 +43,26 @@ const Message: React.FC<MessageProps> = ({
       image,
       recieverName,
       recieverImage,
-      messageText,
+      content: values.content,
       conversationId,
     });
     if (!conversationId) {
       setMessageSent(false);
     } else {
+      form.reset();
       router.refresh();
-      setKey((key) => key + 1); //to force comp refresh and clear text field
     }
   };
 
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={form.handleSubmit(onSubmit)}
       className="fixed bottom-10 w-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
-      key={key}
     >
       {messageSent ? (
         <input
-          onChange={(e) => {
-            setMessageText(e.target.value);
-          }}
-          name="message"
+          {...form.register("content")}
+          name="content"
           type="text"
           className="text-black bg-teal-400 p-4 placeholder:text-black w-full rounded-full"
           placeholder="...say something"
