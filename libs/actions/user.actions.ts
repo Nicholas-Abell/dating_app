@@ -4,7 +4,6 @@ import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
 import { IPGeolocationAPI } from "../../node_modules/ip-geolocation-api-sdk-typescript/IPGeolocationAPI";
 import { GeolocationParams } from "ip-geolocation-api-sdk-typescript/GeolocationParams";
-import calculateDistance from "@/utils/getDistance";
 
 type Params = {
   userId: string;
@@ -75,7 +74,6 @@ type PreferenceParams = {
 
 export async function updatePreferences({
   userId,
-  // path: string,
   gender,
   min,
   max,
@@ -92,11 +90,8 @@ export async function updatePreferences({
       },
       { upsert: true }
     );
-    // if (path === "/") {
-    //   revalidatePath(path);
-    // }
   } catch (error: any) {
-    throw new Error(`Failed to create/update user: ${error.message}`);
+    throw new Error(`Failed to update user: ${error.message}`);
   }
 }
 
@@ -133,18 +128,15 @@ export async function fetchProfiles(
   const skipAmount = (pageNumber - 1) * pageSize;
 
   try {
-    // Connect to the database
     connectToDB();
 
-    // Fetch the user's preferences
     const user = await User.findOne({ id: userId });
     const userPreferences = user?.preferences;
 
     const query = {
-      id: { $ne: userId }, // Exclude the current user
+      id: { $ne: userId }, 
       gender: { $in: userPreferences.gender },
       age: { $lte: userPreferences.age.max, $gte: userPreferences.age.min },
-      // Add more conditions based on preferences if needed
     };
 
     const users = await User.aggregate([
