@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 type params = {
   userId: string;
   recieverId: string;
-  messageText?: string;
+  content?: string;
   username?: string;
   image?: string;
   recieverName?: string;
@@ -33,7 +33,7 @@ export async function createConversation({
   username,
   image,
   recieverName,
-  messageText,
+  content,
   recieverImage,
 }: params) {
   try {
@@ -42,7 +42,7 @@ export async function createConversation({
         { id: userId, username, image },
         { id: recieverId, username: recieverName, image: recieverImage },
       ],
-      message: { content: messageText, sentBy: username },
+      message: { content, sentBy: username },
     });
 
     await conversation.save();
@@ -79,7 +79,7 @@ export async function sendMessage({
   userId,
   recieverId,
   image,
-  messageText,
+  content,
   username,
   recieverName,
   recieverImage,
@@ -92,7 +92,7 @@ export async function sendMessage({
     });
     if (existingConversation) {
       await Conversation.findByIdAndUpdate(existingConversation._id, {
-        $push: { message: { content: messageText, sentBy: username } },
+        $push: { message: { content, sentBy: username } },
       });
       console.log("message sent");
     } else {
@@ -103,7 +103,7 @@ export async function sendMessage({
         recieverName,
         recieverId,
         recieverImage,
-        messageText,
+        content,
       });
       console.log("conversation created");
       revalidatePath("/messages");
