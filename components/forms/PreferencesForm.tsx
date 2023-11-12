@@ -6,6 +6,7 @@ import * as userOptions from "../../constants/userOptions";
 import { GrRadialSelected, GrRadial } from "react-icons/gr";
 import { updatePreferences } from "@/libs/actions/user.actions";
 import { useRouter } from "next/navigation";
+import { MdFamilyRestroom } from "react-icons/md";
 
 type PreferencesFormProps = {
   user: {
@@ -41,8 +42,8 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
   const [selected, setSelected] = useState({
     gender: user.preferences?.gender || [],
     age: {
-      min: user.preferences?.age.min || 18,
-      max: user.preferences?.age.max || 100,
+      min: user.preferences?.age?.min || 18,
+      max: user.preferences?.age?.max || 100,
     }, //slider?
     distance: user.preferences?.distance || 50, //max miles
     desires: user.preferences?.desires || [],
@@ -108,14 +109,6 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
 
   return (
     <main className="w-full">
-      <div className="flex flex-col">
-        test
-        <div>gender {selected.gender}</div>
-        <div>desires {selected.desires}</div>
-        <div>min {selected.age.min}</div>
-        <div>max {selected.age.max}</div>
-        <div>distance {selected.distance}</div>
-      </div>
       <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <PiShapesLight size={50} />
         <p>BASIC</p>
@@ -163,7 +156,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
                 name="min"
                 id="min"
                 className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-                placeholder={user?.preferences?.age.min.toString() || "18"}
+                placeholder={user?.preferences?.age?.min.toString() || "18"}
                 min={18}
                 value={selected.age.min}
                 onChange={(e) => {
@@ -190,7 +183,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
                 name="max"
                 id="max"
                 className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-                placeholder={user?.preferences?.age.max.toString() || "100"}
+                placeholder={user?.preferences?.age?.max.toString() || "100"}
                 min={18}
                 value={selected.age.max}
                 onChange={(e) => {
@@ -230,7 +223,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
               name="distance"
               id="distance"
               className="text-black w-full bg-gray-100 px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder={user?.preferences?.distance.toString() || "50"}
+              placeholder={user?.preferences?.distance?.toString() || "50"}
               min={50}
               onChange={(e) =>
                 setSelected({
@@ -268,8 +261,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
           ))}
         </div>
       )}
-      <button onClick={() => handleSubmit()}>Save</button>
-      {/* <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+      <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <MdFamilyRestroom size={50} />
         <p>FAMILY</p>
       </div>
@@ -284,7 +276,15 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
       <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
         <p>Wants Kids</p>
         <BsChevronCompactRight size={25} className="text-blue-600" />
-      </button> */}
+      </button>
+      <div className="w-full flex justify-center items-center py-4">
+        <button
+          className="bg-blue-500 text-xl text-white rounded-full px-12 py-4 font-bold hover:bg-blue-400 hover:text-gray-100"
+          onClick={() => handleSubmit()}
+        >
+          Save
+        </button>
+      </div>
     </main>
   );
 };
