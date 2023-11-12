@@ -4,6 +4,7 @@ import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
 import { IPGeolocationAPI } from "../../node_modules/ip-geolocation-api-sdk-typescript/IPGeolocationAPI";
 import { GeolocationParams } from "ip-geolocation-api-sdk-typescript/GeolocationParams";
+import calculateDistance from "@/utils/getDistance";
 
 type Params = {
   userId: string;
@@ -124,6 +125,24 @@ export async function deleteUserImage(userId: string, imageUrl: string) {
   }
 }
 
+// export async function fetchProfiles(
+//   userId: string,
+//   pageNumber = 1,
+//   pageSize = 20
+// ) {
+//   const skipAmount = (pageNumber - 1) * pageSize;
+
+//   try {
+//     connectToDB();
+//     const users = await User.find({ id: { $ne: userId } })
+//       .skip(skipAmount)
+//       .limit(pageSize);
+//     return users;
+//   } catch (error: any) {
+//     throw new Error("fetchUser Error: ", error);
+//   }
+// }
+
 export async function fetchProfiles(
   userId: string,
   pageNumber = 1,
@@ -132,13 +151,72 @@ export async function fetchProfiles(
   const skipAmount = (pageNumber - 1) * pageSize;
 
   try {
+    // Connect to the database
     connectToDB();
-    const users = await User.find({ id: { $ne: userId } })
-      .skip(skipAmount)
-      .limit(pageSize);
+
+    // Fetch the user's preferences
+    const user = await User.findOne({ id: userId });
+    const userPreferences = user?.preferences;
+
+    const query = {
+      id: { $ne: userId }, // Exclude the current user
+      gender: { $in: userPreferences.gender },
+      age: { $lte: userPreferences.age.max, $gte: userPreferences.age.min },
+      // Add more conditions based on preferences if needed
+    };
+
+    const users = await User.aggregate([
+      {
+        $addFields: {
+          distance: {
+            $multiply: [
+              {
+                $sqrt: {
+                  $sum: [
+                    {
+                      $pow: [
+                        {
+                          $subtract: [
+                            "$location.longitude",
+                            user?.location.longitude,
+                          ],
+                        },
+                        2,
+                      ],
+                    },
+                    {
+                      $pow: [
+                        {
+                          $subtract: [
+                            "$location.latitude",
+                            user?.location.latitude,
+                          ],
+                        },
+                        2,
+                      ],
+                    },
+                  ],
+                },
+              },
+              69, // Convert degrees to miles (approximate factor)
+            ],
+          },
+        },
+      },
+      {
+        $match: {
+          $and: [query, { distance: { $lte: userPreferences.distance } }],
+        },
+      },
+      { $skip: skipAmount },
+      { $limit: pageSize },
+    ]);
+
+    revalidatePath("/");
     return users;
   } catch (error: any) {
-    throw new Error("fetchUser Error: ", error);
+    console.error("Error in fetchProfiles: ", error);
+    throw new Error("fetchUser Error");
   }
 }
 
