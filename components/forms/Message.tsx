@@ -66,6 +66,7 @@ const Message: React.FC<MessageProps> = ({
           type="text"
           className="text-black bg-teal-400 p-4 placeholder:text-black w-full rounded-full"
           placeholder="...say something"
+          required
         />
       ) : (
         <div className="text-black p-4 w-full rounded-full bg-green-500 text-center">
