@@ -25,6 +25,7 @@ const page: React.FC<pageProps> = async () => {
     gender: userInfo?.gender || user.gender || "",
     race: userInfo?.race || "",
     relationshipstatus: userInfo?.relationshipstatus || "",
+    sexualOrientation: userInfo?.sexualOrientation || "",
   };
 
   return (
