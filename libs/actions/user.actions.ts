@@ -11,7 +11,8 @@ type Params = {
   bio: string;
   path: string;
   age: number;
-  height: number;
+  feet: number;
+  inches: Number;
   weight: number;
   relationshipstatus: string;
   lookingfor: string;
@@ -26,7 +27,8 @@ export async function updateUser({
   bio,
   path,
   age,
-  height,
+  feet,
+  inches,
   weight,
   relationshipstatus,
   lookingfor,
@@ -44,7 +46,7 @@ export async function updateUser({
         bio,
         onboarded: true,
         age,
-        height,
+        height: { feet, inches },
         weight,
         relationshipstatus,
         lookingfor,

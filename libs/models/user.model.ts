@@ -5,7 +5,7 @@ const userSchema = new Schema({
   bio: { type: String },
   onboarded: { type: Boolean, default: false },
   age: { type: Number },
-  height: { type: Number },
+  height: { feet: { type: Number }, inches: { type: Number } },
   weight: { type: Number },
   relationshipstatus: {
     type: String,
