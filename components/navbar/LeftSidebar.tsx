@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { BiHome, BiMessageSquareDots } from "react-icons/bi";
 import { ImProfile } from "react-icons/im";
-import { AiFillSetting } from "react-icons/ai";
+import { IoOptions } from "react-icons/io5";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { UserButton, currentUser } from "@clerk/nextjs";
 
@@ -37,7 +37,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = async () => {
         href="/preferences"
         className="flex justify-center items-center gap-4 p-2"
       >
-        <AiFillSetting size={30} className="text-white" />
+        <IoOptions size={30} className="text-white" />
         <p className="hidden lg:block">PREFERENCES</p>
       </Link>
       <div className="flex justify-center items-center gap-4 p-2">
