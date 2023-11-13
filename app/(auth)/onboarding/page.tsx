@@ -19,7 +19,10 @@ const page: React.FC<pageProps> = async () => {
     username: userInfo ? userInfo.username : user?.username,
     bio: userInfo?.bio || "",
     age: userInfo?.age || 0,
-    height: userInfo?.height || 0,
+    height: {
+      feet: userInfo?.height?.feet || 0,
+      inches: userInfo?.height?.inches || 0,
+    },
     weight: userInfo?.weight || 0,
     lookingfor: userInfo?.lookingfor || "",
     gender: userInfo?.gender || user.gender || "",

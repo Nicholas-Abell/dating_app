@@ -17,7 +17,7 @@ type AccountProfileProps = {
     username: string;
     bio: string;
     age: number;
-    height: number;
+    height: { feet: number; inches: number };
     weight: number;
     relationshipstatus: string;
     lookingfor: string;
@@ -37,7 +37,10 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       username: user?.username || "",
       bio: user?.bio || "",
       age: user?.age || 0,
-      height: user?.height || 0,
+      height: {
+        feet: user?.height?.feet || 0,
+        inches: user?.height?.inches || 0,
+      },
       weight: user?.weight || 0,
       relationshipstatus: user?.relationshipstatus || "",
       lookingfor: user?.lookingfor || "",
@@ -54,7 +57,8 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       bio: values.bio,
       path: pathname,
       age: values.age,
-      height: values.height,
+      feet: values.height.feet,
+      inches: values.height.inches,
       weight: values.weight,
       relationshipstatus: values.relationshipstatus,
       lookingfor: values.lookingfor,
@@ -123,14 +127,26 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
           <label htmlFor="height" className="font-bold px-2">
             Height
           </label>
-          <input
-            type="number"
-            {...form.register("height")}
-            name="height"
-            id="height"
-            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-            placeholder={user?.height.toString()}
-          />
+          <div className="flex items-center bg-white">
+            <p>feet</p>
+            <input
+              type="number"
+              {...form.register("height.feet")}
+              name="feet"
+              id="feet"
+              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+              placeholder={user?.height?.feet?.toString()}
+            />
+            <p>feet</p>
+            <input
+              type="number"
+              {...form.register("height.inches")}
+              name="inches"
+              id="inches"
+              className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
+              placeholder={user?.height?.inches?.toString()}
+            />
+          </div>
         </div>
 
         <div>

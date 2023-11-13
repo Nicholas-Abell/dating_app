@@ -15,7 +15,7 @@ type AccountPhotosProps = {
     username: string;
     bio: string;
     age: number;
-    height: number;
+    height: { feet: Number; inches: Number };
     weight: number;
     relationshipstatus: string;
     lookingfor: string;
