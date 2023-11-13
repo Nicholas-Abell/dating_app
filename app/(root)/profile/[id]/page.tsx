@@ -7,7 +7,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import ImageCarousel from "@/components/shared/ImageCarousel";
 import calculateDistance from "@/utils/getDistance";
-import { BsFillPersonFill, BsPersonHearts } from "react-icons/bs";
+import { BsEye, BsFillPersonFill, BsPersonHearts } from "react-icons/bs";
 import { BiRuler } from "react-icons/bi";
 import { FaTransgender } from "react-icons/fa";
 import { PiGlobeStandBold } from "react-icons/pi";
@@ -32,39 +32,46 @@ async function Page({ params }: { params: { id: string } }) {
   return (
     <section className="w-full min-h-screen relative flex flex-col pb-24 items-center gap-4">
       {imageCount ? (
-        <div className="w-full h-[80vh] relative">
+        <div className="w-full h-[80vh] md:h-[40vh] relative">
           <ImageCarousel images={profileInfo?.images} />
           <div
-            className={`w-full h-full hidden md:grid grid-rows-1 grid-cols-3`}
+            className={`w-full hidden md:flex items-center gap-8 px-24 md:pt-12 bg-black relative`}
           >
-            {profileInfo.images.map((image: string, key: number) => (
-              <div key={key} className="relative h-full">
-                <Image
-                  src={image}
-                  alt="pic"
-                  fill
-                  className="object-cover object-center"
-                />
-              </div>
-            ))}
+            <div className="relative w-[180px] lg:w-[240px] h-[180px] lg:h-[240px] rounded-full">
+              <Image
+                src={profileInfo?.images[0]}
+                alt="pic"
+                fill
+                className="object-cover object-center rounded-full z-10"
+              />
+            </div>
+            <div className="flex flex-col text-white">
+              <h2 className="font-bold uppercase text-4xl">
+                {profileInfo?.username}
+              </h2>
+              <p>
+                {profileInfo?.age} - {profileInfo?.location?.city}
+              </p>
+            </div>
+            <div className="absolute bottom-0 left-0 bg-white w-full h-12 p-4" />
           </div>
         </div>
       ) : (
         <div className="w-full h-[80vh] bg-emerald-800" />
       )}
-      <div className="w-full min-h-screen relative flex flex-col pt-12 pb-24 px-8 items-center gap-4">
-        <div className="w-full flex items-center pt-8 gap-12 text-4xl">
-          <h1 className="font-bold uppercase">{profileInfo?.username}</h1>
-          <h1>{profileInfo?.age}</h1>
+      <div className="w-full relative flex flex-col pt-12 md:pt-0 pb-24 px-8 items-center gap-4">
+        <div className="md:hidden w-full flex items-center pt-8 gap-12 text-4xl">
+          <h2 className="font-bold uppercase">{profileInfo?.username}</h2>
+          <p>{profileInfo?.age}</p>
         </div>
-        <div className="w-full flex items-center gap-4">
+        <div className="w-full flex items-center gap-4 md:hidden">
           <div className="flex items-center gap-1">
             <div className="p-1 bg-green-400 rounded-full" />
             <p>Online Now</p>
           </div>
           <p>{distance}m away</p>
         </div>
-        <div className="w-full flex items-center gap-4">
+        <div className="w-full flex items-center gap-4 md:hidden">
           <div className="flex items-center gap-1">
             <BsFillPersonFill size={20} />
             <p>{profileInfo?.gender}</p>
@@ -78,30 +85,36 @@ async function Page({ params }: { params: { id: string } }) {
             ""
           )}
         </div>
-        <div className="w-full flex flex-col py-8 gap-1">
-          <p className="font-bold">ABOUT ME</p>
-          <div className="bg-gray-200 text-black border rounded-xl p-4 max-w-[620px]">
-            <p>{profileInfo?.bio}</p>
+        <div className="grid md:grid-cols-2 gap-8 w-full">
+          <div className="w-full flex flex-col py-8 md:py-0 gap-1 h-full">
+            <p className="font-bold">ABOUT ME</p>
+            <div className="bg-gray-200 text-black border rounded-xl p-4 max-w-[620px] min-h-[320px]">
+              <p>{profileInfo?.bio}</p>
+            </div>
           </div>
-        </div>
-        <div className="w-full flex flex-col gap-4">
-          <p className="font-bold">STATS</p>
-          <div className="flex items-center gap-4">
-            <BiRuler size={20} />
-            <p>{`6'2"`}</p>
-            <p>{profileInfo?.weight}</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <FaTransgender size={20} />
-            <p>{profileInfo?.gender} - he/him/his</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <PiGlobeStandBold size={20} />
-            <p>{profileInfo?.race}</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <BsPersonHearts size={20} />
-            <p>{profileInfo?.relationshipstatus}</p>
+          <div className="w-full flex flex-col gap-4">
+            <p className="font-bold">STATS</p>
+            <div className="flex items-center gap-4">
+              <BiRuler size={20} />
+              <p>{profileInfo?.height}</p>
+              <p>{profileInfo?.weight} lbs</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <FaTransgender size={20} />
+              <p>{profileInfo?.gender} - he/him/his</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <PiGlobeStandBold size={20} />
+              <p>{profileInfo?.race}</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <BsPersonHearts size={20} />
+              <p>{profileInfo?.relationshipstatus}</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <BsEye size={20} />
+              {profileInfo?.lookingfor}
+            </div>
           </div>
         </div>
         {params.id === userInfo?.id ? (
