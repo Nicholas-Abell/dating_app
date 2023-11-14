@@ -96,7 +96,11 @@ async function Page({ params }: { params: { id: string } }) {
             <p className="font-bold">STATS</p>
             <div className="flex items-center gap-4">
               <BiRuler size={20} />
-              <p>{profileInfo?.height?.feet}</p>
+              <p>
+                {profileInfo?.height?.feet}
+                <em className="text-xs">ft</em> {profileInfo?.height?.inches}
+                <em className="text-xs">in</em>
+              </p>
               <p>{profileInfo?.weight} lbs</p>
             </div>
             <div className="flex items-center gap-4">
