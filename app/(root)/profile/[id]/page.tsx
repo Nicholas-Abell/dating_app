@@ -105,7 +105,7 @@ async function Page({ params }: { params: { id: string } }) {
             </div>
             <div className="flex items-center gap-4">
               <FaTransgender size={20} />
-              <p>{profileInfo?.gender} - he/him/his</p>
+              <p>{profileInfo?.gender}</p>
             </div>
             <div className="flex items-center gap-4">
               <PiGlobeStandBold size={20} />
