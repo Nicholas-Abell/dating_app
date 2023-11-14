@@ -24,6 +24,7 @@ Our dating app comes with several features to help users find and connect with p
 - User Registration: Users can sign up and create a profile with their personal details, photos, and preferences.
 - Profile Management: Users can edit and update their profiles, including adding new photos and information.
 - Messaging: Users can communicate with their matches via a messaging system, making it easy to get to know each other.
+- Search Filter: Users can filter profiles based on their preferences.
 - Privacy and Security: We prioritize user privacy and implement security measures to protect user data.
 
 ## Getting Started
@@ -60,17 +61,28 @@ Before you begin, make sure you have the following software installed:
    Create a `.env.local` file in the project root and add the necessary environment variables, such as your MongoDB connection URL.
 
    ```env
+
    MONGODB_URI=your-mongodb-connection-uri
-   SECRET_KEY=your-secret-key
-   ```
+
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=clerk_api_key
+   CLERK_SECRET_KEY=clerk_secret_key
+
+   EDGE_STORE_ACCESS_KEY=api_key
+   EDGE_STORE_SECRET_KEY=secret_key
+
+   IP_GEOLOCATION_KEY=api_key
+
+```
+
+```
 
 4. Start the development server:
 
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+```bash
+npm run dev
+# or
+yarn dev
+```
 
 5. Open your browser and access the app at `http://localhost:3000`.
 
