@@ -1,3 +1,4 @@
+"use server";
 import { fetchUser } from "@/libs/actions/user.actions";
 import User from "@/libs/models/user.model";
 import { currentUser } from "@clerk/nextjs";
