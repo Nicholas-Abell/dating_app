@@ -1,6 +1,6 @@
 "use client";
 import { UserValidation } from "@/libs/validations/User";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -31,6 +31,8 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
   const router = useRouter();
   const pathname = usePathname();
 
+  const [height, setHeight] = useState({ ft: 0, in: 0 });
+
   const form = useForm({
     resolver: zodResolver(UserValidation),
     defaultValues: {
@@ -51,14 +53,16 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
+    console.log("Form values before submission:", values);
+
     await updateUser({
       userId: user.id,
       username: values.username,
       bio: values.bio,
       path: pathname,
       age: values.age,
-      feet: values.height.feet,
-      inches: values.height.inches,
+      feet: height.ft,
+      inches: height.in,
       weight: values.weight,
       relationshipstatus: values.relationshipstatus,
       lookingfor: values.lookingfor,
@@ -67,7 +71,9 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       sexualOrientation: values.sexualOrientation,
     });
 
-    await fetchAndUpdateUserLocation(user.id);
+    // if(!user.location){
+    // await fetchAndUpdateUserLocation(user.id);
+    // }
 
     console.log("user updated");
 
@@ -77,6 +83,10 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       router.push("/");
     }
   };
+
+  useEffect(() => {
+    console.log(form.watch());
+  }, [form]);
 
   return (
     <section className="w-full bg-gray-400">
@@ -131,16 +141,22 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             <p>feet</p>
             <input
               type="number"
-              {...form.register("height.feet")}
+              // {...form.register("height.feet")}
+              onChange={(e: any) =>
+                setHeight({ ...height, ft: e.target.value })
+              }
               name="feet"
               id="feet"
               className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
               placeholder={user?.height?.feet?.toString()}
             />
-            <p>feet</p>
+            <p>inches</p>
             <input
               type="number"
-              {...form.register("height.inches")}
+              // {...form.register("height.inches")}
+              onChange={(e: any) =>
+                setHeight({ ...height, in: e.target.value })
+              }
               name="inches"
               id="inches"
               className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
