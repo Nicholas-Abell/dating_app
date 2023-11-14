@@ -72,9 +72,7 @@ Before you begin, make sure you have the following software installed:
 
    IP_GEOLOCATION_KEY=api_key
 
-```
-
-```
+   ```
 
 4. Start the development server:
 
