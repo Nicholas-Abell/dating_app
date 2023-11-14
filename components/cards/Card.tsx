@@ -5,6 +5,7 @@ import React from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Image from "next/image";
 import { BsPersonCircle } from "react-icons/bs";
+import LikeButton from "../shared/LikeButton";
 
 type CardsProps = {
   href: string;
@@ -54,19 +55,11 @@ const Card: React.FC<CardsProps> = ({
       <div className="px-4 pt-1">
         <div className="flex justify-between">
           <p className="font-bold text-lg text-gray-800">{username}</p>
-          {!likedByUser ? (
-            <AiOutlineHeart
-              onClick={() => handleLike(userId, likeId)}
-              size={25}
-              className="cursor-pointer text-red-500 hover:text-red-600"
-            />
-          ) : (
-            <AiFillHeart
-              onClick={() => handleLike(userId, likeId)}
-              size={25}
-              className="cursor-pointer text-red-500 hover:text-red-600"
-            />
-          )}
+          <LikeButton
+            userId={userId}
+            likeId={likeId}
+            likedByUser={likedByUser}
+          />
         </div>
         <p className="text-gray-600 text-sm">
           {gender} - {age}
