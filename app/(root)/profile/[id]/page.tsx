@@ -7,7 +7,12 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import ImageCarousel from "@/components/shared/ImageCarousel";
 import calculateDistance from "@/utils/getDistance";
-import { BsEye, BsFillPersonFill, BsPersonHearts } from "react-icons/bs";
+import {
+  BsEye,
+  BsFillPersonFill,
+  BsPersonCircle,
+  BsPersonHearts,
+} from "react-icons/bs";
 import { BiRuler } from "react-icons/bi";
 import { FaTransgender } from "react-icons/fa";
 import { PiGlobeStandBold } from "react-icons/pi";
@@ -31,34 +36,44 @@ async function Page({ params }: { params: { id: string } }) {
 
   return (
     <section className="w-full min-h-screen relative flex flex-col pb-24 items-center gap-4">
-      {imageCount ? (
-        <div className="w-full h-[80vh] md:h-[40vh] relative">
+      <div className="md:hidden w-full h-[80vh] md:h-[40vh] relative">
+        {imageCount ? (
           <ImageCarousel images={profileInfo?.images} />
-          <div
-            className={`w-full hidden md:flex items-center gap-8 px-24 md:pt-12 bg-black relative`}
-          >
-            <div className="relative w-[180px] lg:w-[240px] h-[180px] lg:h-[240px] rounded-full">
-              <Image
-                src={profileInfo?.images[0]}
-                alt="pic"
-                fill
-                className="object-cover object-center rounded-full z-10"
-              />
-            </div>
-            <div className="flex flex-col text-white">
-              <h2 className="font-bold uppercase text-4xl">
-                {profileInfo?.username}
-              </h2>
-              <p>
-                {profileInfo?.age} - {profileInfo?.location?.city}
-              </p>
-            </div>
-            <div className="absolute bottom-0 left-0 bg-white w-full h-12 p-4" />
+        ) : (
+          <div className="w-full h-[80vh] flex items-center justify-center bg-slate-600 bg-opacity-75 relative text-gray-200">
+            <BsPersonCircle size={300} />
           </div>
+        )}
+      </div>
+
+      <div
+        className={`w-full hidden md:flex items-center gap-8 px-24 md:pt-12 bg-black relative`}
+      >
+        <div className="relative w-[180px] lg:w-[240px] h-[180px] lg:h-[240px] rounded-full">
+          {imageCount ? (
+            <Image
+              src={profileInfo?.images[0]}
+              alt="pic"
+              fill
+              className="object-cover object-center rounded-full z-10"
+            />
+          ) : (
+            <div className="relative flex justify-center items-center z-10 w-[180px] lg:w-[240px] h-[180px] lg:h-[240px] rounded-full bg-slate-600">
+              <BsPersonCircle size={80} className="text-gray-200" />
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="w-full h-[80vh] bg-emerald-800" />
-      )}
+        <div className="flex flex-col text-white">
+          <h2 className="font-bold uppercase text-4xl">
+            {profileInfo?.username}
+          </h2>
+          <p>
+            {profileInfo?.age} - {profileInfo?.location?.city}
+          </p>
+        </div>
+        <div className="absolute bottom-0 left-0 bg-white w-full h-12 p-4" />
+      </div>
+
       <div className="w-full relative flex flex-col pt-12 md:pt-0 pb-24 px-8 items-center gap-4">
         <div className="md:hidden w-full flex items-center pt-8 gap-12 text-4xl">
           <h2 className="font-bold uppercase">{profileInfo?.username}</h2>
