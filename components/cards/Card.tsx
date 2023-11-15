@@ -18,10 +18,6 @@ type CardsProps = {
   image?: string;
 };
 
-const handleLike = (userId: string, likeId: string) => {
-  likeProfile(userId, likeId);
-};
-
 const Card: React.FC<CardsProps> = ({
   href,
   userId,
