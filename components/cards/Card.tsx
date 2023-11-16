@@ -1,8 +1,6 @@
 "use client";
-import { likeProfile } from "@/libs/actions/user.actions";
 import Link from "next/link";
 import React from "react";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Image from "next/image";
 import { BsPersonCircle } from "react-icons/bs";
 import LikeButton from "../shared/LikeButton";
@@ -32,16 +30,14 @@ const Card: React.FC<CardsProps> = ({
     <div className="bg-white shadow-lg rounded-lg overflow-hidden p-4 hover:scale-105 ease-in-out duration-300">
       <Link href={href}>
         {image ? (
-          <>
-            <div className="w-full h-[280px] bg-gray-400 bg-opacity-75 relative">
-              <Image
-                src={image}
-                alt={`${username} pic`}
-                fill
-                className=" object-cover"
-              />
-            </div>
-          </>
+          <div className="w-full h-[280px] bg-gray-400 bg-opacity-75 relative">
+            <Image
+              src={image}
+              alt={`${username} pic`}
+              fill
+              className=" object-cover"
+            />
+          </div>
         ) : (
           <div className="w-full flex items-center justify-center h-[280px] bg-slate-600 bg-opacity-75 relative text-gray-200">
             <BsPersonCircle size={200} />
