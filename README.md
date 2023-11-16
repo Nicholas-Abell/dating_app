@@ -103,7 +103,7 @@ Our Dating App is built using the following technologies:
 
 APIs: 
 
-- [Edgstore]([https://nextjs.org/](https://edgestore.dev/docs/quick-start)): For image upload and hosting.
+- [Edgstore](https://nextjs.org/](https://edgestore.dev/docs): For image upload and hosting.
 - [IPGeolocationIP](https://ipgeolocation.io/documentation.html): To determine user location and distance.
 
 ## License
