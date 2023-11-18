@@ -16,6 +16,7 @@ import {
 import { BiRuler } from "react-icons/bi";
 import { FaTransgender } from "react-icons/fa";
 import { PiGlobeStandBold } from "react-icons/pi";
+import LikeButton from "@/components/shared/LikeButton";
 
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
@@ -144,14 +145,21 @@ async function Page({ params }: { params: { id: string } }) {
             <p>Edit Profile</p>
           </Link>
         ) : (
-          <Message
-            userId={userInfo?.id}
-            username={userInfo?.username}
-            image={userInfo?.images[0]}
-            recieverId={profileInfo?.id}
-            recieverName={profileInfo?.username}
-            recieverImage={profileInfo?.images[0]}
-          />
+          <div className="w-full flex items-center justify-center fixed bottom-10 gap-4">
+            <Message
+              userId={userInfo?.id}
+              username={userInfo?.username}
+              image={userInfo?.images[0]}
+              recieverId={profileInfo?.id}
+              recieverName={profileInfo?.username}
+              recieverImage={profileInfo?.images[0]}
+            />
+            <LikeButton
+              userId={userInfo?.id}
+              profileId={profileInfo?.id}
+              likedByUser={userInfo?.likes.includes(profileInfo?.id)}
+            />
+          </div>
         )}
       </div>
     </section>

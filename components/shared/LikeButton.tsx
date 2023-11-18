@@ -1,3 +1,4 @@
+"use client";
 import { likeProfile } from "@/libs/actions/user.actions";
 import React from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";

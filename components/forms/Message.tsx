@@ -56,7 +56,7 @@ const Message: React.FC<MessageProps> = ({
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className="fixed bottom-10 w-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
+      className="max-w-[420px] opacity-40 hover:opacity-100 ease-in-out duration-200"
     >
       {messageSent ? (
         <input
