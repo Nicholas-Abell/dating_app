@@ -10,7 +10,7 @@ type CardsProps = {
   username: string;
   gender: string;
   userId: string;
-  likeId: string;
+  profileId: string;
   likedByUser: boolean;
   age: number;
   image?: string;
@@ -19,7 +19,7 @@ type CardsProps = {
 const Card: React.FC<CardsProps> = ({
   href,
   userId,
-  likeId,
+  profileId,
   likedByUser,
   username,
   age,
@@ -49,7 +49,7 @@ const Card: React.FC<CardsProps> = ({
           <p className="font-bold text-lg text-gray-800">{username}</p>
           <LikeButton
             userId={userId}
-            likeId={likeId}
+            profileId={profileId}
             likedByUser={likedByUser}
           />
         </div>

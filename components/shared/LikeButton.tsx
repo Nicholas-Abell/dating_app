@@ -4,13 +4,13 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 type LikeButtonProps = {
   userId: string;
-  likeId: string;
+  profileId: string;
   likedByUser: boolean;
 };
 
 const LikeButton: React.FC<LikeButtonProps> = ({
   userId,
-  likeId,
+  profileId,
   likedByUser,
 }) => {
   const handleLike = (userId: string, likeId: string) => {
@@ -21,13 +21,13 @@ const LikeButton: React.FC<LikeButtonProps> = ({
     <>
       {!likedByUser ? (
         <AiOutlineHeart
-          onClick={() => handleLike(userId, likeId)}
+          onClick={() => handleLike(userId, profileId)}
           size={25}
           className="cursor-pointer text-red-500 hover:text-red-600"
         />
       ) : (
         <AiFillHeart
-          onClick={() => handleLike(userId, likeId)}
+          onClick={() => handleLike(userId, profileId)}
           size={25}
           className="cursor-pointer text-red-500 hover:text-red-600"
         />

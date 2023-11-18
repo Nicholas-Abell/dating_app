@@ -22,27 +22,21 @@ export default async function Home({
     profilePerPage
   );
 
-  const checkLikedProfiles = (userId: string) => {
-    if (userInfo?.likes?.includes(userId)) {
-      return true;
-    } else return false;
-  };
-
   return (
     <section className="px-8 pb-4 w-full min-h-screen flex justify-between flex-col overflow-y-scroll">
       <h1 className="text-4xl py-12">HOME</h1>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {profiles?.map((profile) => (
+        {profiles?.map((profileInfo) => (
           <Card
-            key={profile.id}
-            href={`/profile/${profile.id}`}
-            username={profile.username}
-            gender={profile.gender}
-            age={profile.age}
-            userId={user.id}
-            likeId={profile.id}
-            likedByUser={checkLikedProfiles(profile.id)}
-            image={profile.images[0]}
+            key={profileInfo?.id}
+            href={`/profile/${profileInfo?.id}`}
+            username={profileInfo?.username}
+            gender={profileInfo?.gender}
+            age={profileInfo?.age}
+            userId={userInfo?.id}
+            profileId={profileInfo?.id}
+            likedByUser={userInfo?.likes.includes(profileInfo?.id)}
+            image={profileInfo?.images[0]}
           />
         ))}
       </div>
