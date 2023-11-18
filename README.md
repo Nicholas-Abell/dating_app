@@ -101,6 +101,11 @@ Our Dating App is built using the following technologies:
 - [Node.js](https://nodejs.org/): The JavaScript runtime used for the server.
 - [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/): Package managers for handling project dependencies.
 
+APIs: 
+
+- [Edgstore](https://edgestore.dev/docs/quick-start): For image upload and hosting.
+- [IPGeolocationIP](https://ipgeolocation.io/documentation.html): To determine user location and distance.
+
 ## License
 
 This Dating App is open-source software licensed under the [MIT License](LICENSE).
