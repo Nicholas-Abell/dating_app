@@ -43,15 +43,17 @@ async function Page({ params }: { params: { conversationId: string } }) {
           </div>
         );
       })}
-      <Message
-        userId={userInfo?.id}
-        username={userInfo?.username}
-        image={userInfo?.images[0]}
-        recieverId={profileInfo?.id}
-        recieverName={profileInfo?.username}
-        recieverImage={profileInfo?.images[0]}
-        conversationId={params.conversationId}
-      />
+      <div className="w-full flex items-center justify-center fixed bottom-10 gap-4">
+        <Message
+          userId={userInfo?.id}
+          username={userInfo?.username}
+          image={userInfo?.images[0]}
+          recieverId={profileInfo?.id}
+          recieverName={profileInfo?.username}
+          recieverImage={profileInfo?.images[0]}
+          conversationId={params.conversationId}
+        />
+      </div>
     </section>
   );
 }
