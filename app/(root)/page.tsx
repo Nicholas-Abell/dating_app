@@ -25,8 +25,7 @@ export default async function Home({
 
   return (
     <section className="px-8 pb-4 w-full min-h-screen flex justify-between flex-col overflow-y-scroll">
-      <h1 className="text-4xl py-12">HOME</h1>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
         {profiles?.map((profileInfo) => (
           <Card
             key={profileInfo?.id}
