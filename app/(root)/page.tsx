@@ -10,6 +10,7 @@ export default async function Home({
   searchParams: { [key: string]: string };
 }) {
   const user = await currentUser();
+  if (!user) return null;
 
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
@@ -17,7 +18,7 @@ export default async function Home({
   const profilePerPage = 20;
 
   let profiles = await fetchProfiles(
-    user.id,
+    userInfo.id,
     searchParams.page ? +searchParams.page : 1,
     profilePerPage
   );
