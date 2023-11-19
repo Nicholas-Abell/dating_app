@@ -30,7 +30,7 @@ const PaginationBar: React.FC<PaginationBarProps> = ({
         page {page === undefined ? "1" : page} of {totalPages}
       </p>
       <div className="flex items-center gap-4">
-        {pageNumber === 0 ? (
+        {pageNumber > totalPages ? (
           <button
             className="text-bold border border-black rounded-xl px-4 py-2 hover:bg-gray-200"
             onClick={() => handleClick(-1)}

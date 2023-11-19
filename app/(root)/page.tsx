@@ -43,7 +43,7 @@ export default async function Home({
       </div>
       <PaginationBar
         page={searchParams.page}
-        profileCount={profiles.length}
+        profileCount={profiles.length + 1}
         profilePerPage={profilePerPage}
       />
     </section>
