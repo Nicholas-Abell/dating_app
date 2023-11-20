@@ -7,6 +7,7 @@ type pageProps = {};
 
 const page: React.FC<pageProps> = async () => {
   const user = await currentUser();
+  if (!user) return null;
 
   const userInfo = await fetchUser(user.id);
 
