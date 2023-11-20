@@ -7,6 +7,8 @@ import { GrRadialSelected, GrRadial } from "react-icons/gr";
 import { updatePreferences } from "@/libs/actions/user.actions";
 import { useRouter } from "next/navigation";
 import { MdFamilyRestroom } from "react-icons/md";
+import { FaPersonRays } from "react-icons/fa6";
+import { FaGlassCheers, FaGlobeAmericas } from "react-icons/fa";
 
 type PreferencesFormProps = {
   user: {
@@ -261,22 +263,89 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
           ))}
         </div>
       )}
-      <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
-        <MdFamilyRestroom size={50} />
-        <p>FAMILY</p>
+
+      <div className="relative w-full h-full">
+        <div className="absolute h-full w-full z-10 top-0 left-0 bg-red-400/50" />
+        <div className="absolute top-10 left-[40%] text-gray-300 p-4 rounded-full bg-black font-bold text-3xl z-20">
+          <p>Coming Soon</p>
+        </div>
+        <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+          <MdFamilyRestroom size={50} />
+          <p>FAMILY</p>
+        </div>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Pets</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Has Kids</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Wants Kids</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+
+        <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+          <FaPersonRays size={50} />
+          <p>LOOKS</p>
+        </div>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Body Type</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Height</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+
+        <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+          <FaGlobeAmericas size={50} />
+          <p>BACKGROUND</p>
+        </div>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Languages</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Orientation</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Religion</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Politcal Views</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Education</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Employement</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+
+        <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+          <FaGlassCheers size={50} />
+          <p>LIFESTYLE</p>
+        </div>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Alcohol</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Smoking</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
+        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
+          <p>Marijuana</p>
+          <BsChevronCompactRight size={25} className="text-blue-600" />
+        </button>
       </div>
-      <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-        <p>Pets</p>
-        <BsChevronCompactRight size={25} className="text-blue-600" />
-      </button>
-      <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-        <p>Has Kids</p>
-        <BsChevronCompactRight size={25} className="text-blue-600" />
-      </button>
-      <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-        <p>Wants Kids</p>
-        <BsChevronCompactRight size={25} className="text-blue-600" />
-      </button>
+
       <div className="w-full flex justify-center items-center py-4">
         <button
           className="bg-blue-500 text-xl text-white rounded-full px-12 py-4 font-bold hover:bg-blue-400 hover:text-gray-100"
