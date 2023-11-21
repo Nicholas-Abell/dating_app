@@ -169,6 +169,19 @@ async function Page({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
+        <div className="w-full bg-gray-200 hidden md:grid grid-cols-3 gap-4 p-4 relative">
+          {profileInfo?.images &&
+            profileInfo?.images.map((image: string, key: number) => (
+              <div className="w-full min-h-[620px] relative" key={key}>
+                <Image
+                  src={image}
+                  fill
+                  alt={`image: ${key.toString()}`}
+                  className="object-cover"
+                />
+              </div>
+            ))}
+        </div>
         {params.id === userInfo?.id ? (
           <Link
             href="/profile/edit"
