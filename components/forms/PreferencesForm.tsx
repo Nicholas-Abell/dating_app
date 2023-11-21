@@ -304,10 +304,6 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
           <p>BACKGROUND</p>
         </div>
         <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Languages</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
           <p>Orientation</p>
           <BsChevronCompactRight size={25} className="text-blue-600" />
         </button>
@@ -317,14 +313,6 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
         </button>
         <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
           <p>Politcal Views</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Education</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Employement</p>
           <BsChevronCompactRight size={25} className="text-blue-600" />
         </button>
 
