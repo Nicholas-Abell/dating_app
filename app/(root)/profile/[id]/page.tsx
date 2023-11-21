@@ -108,7 +108,7 @@ async function Page({ params }: { params: { id: string } }) {
               <p>{profileInfo?.bio}</p>
             </div>
           </div>
-          <div className="w-full flex flex-col gap-4">
+          <div className="w-full flex flex-col gap-4 px-4 pb-8 md:p-0">
             <p className="font-bold">STATS</p>
             <div className="flex items-center gap-4">
               <BiRuler size={20} />
@@ -134,6 +134,38 @@ async function Page({ params }: { params: { id: string } }) {
             <div className="flex items-center gap-4">
               <BsEye size={20} />
               {profileInfo?.lookingfor}
+            </div>
+          </div>
+        </div>
+        <div className="w-full bg-gray-200 grid md:grid-cols-3 gap-4 p-4">
+          <div className="rounded-xl bg-white gap-8">
+            <div className="w-full text-center bg-black text-white rounded-tl-xl rounded-tr-xl">
+              <h3>FAMILY</h3>
+            </div>
+            <div className="w-full px-4 py-2 flex flex-col gap-8 border-2 border-black">
+              <p>Pets</p>
+              <p>Kids</p>
+              <p>wants kids</p>
+            </div>
+          </div>
+          <div className="rounded-xl bg-white gap-8">
+            <div className="w-full text-center bg-black text-white rounded-tl-xl rounded-tr-xl">
+              <h3>LIFESTYLE</h3>
+            </div>
+            <div className="w-full px-4 py-2 flex flex-col gap-8 border-2 border-black">
+              <p>Alcohol</p>
+              <p>Smoking</p>
+              <p>Marijuana</p>
+            </div>
+          </div>
+          <div className="rounded-xl bg-white gap-8">
+            <div className="w-full text-center bg-black text-white rounded-tl-xl rounded-tr-xl">
+              <h3>BACKGROUND</h3>
+            </div>
+            <div className="w-full px-4 py-2 flex flex-col gap-8 border-2 border-black">
+              <p>Orientation</p>
+              <p>Religion</p>
+              <p>Political Views</p>
             </div>
           </div>
         </div>
