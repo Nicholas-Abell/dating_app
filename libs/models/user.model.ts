@@ -63,6 +63,25 @@ const userSchema = new Schema({
     },
     distance: { type: Number, default: 9000 },
     relationshipstatus: [{ type: String, default: [] }],
+    pets: { type: String, enum: ["Cat(s)", "Dog(s)", "Cats and Dogs"] },
+    kids: {
+      type: String,
+      enum: ["Does not want kids", "Wants kids", "Has kids", "Undecided"],
+    },
+    alcohol: {
+      type: String,
+      enum: ["Does not drink", "Drinks Occasionally", "Drinks often"],
+    },
+    smoking: {
+      type: String,
+      enum: ["Does not smoke", "Smokes occasionally", "Smokes often"],
+    },
+    marijuana: {
+      type: String,
+      enum: ["Does not smoke", "Smokes occasionally", "Smokes often"],
+    },
+    religion: { type: String },
+    politicalViews: { type: String },
     desires: [
       {
         type: String,
