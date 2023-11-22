@@ -30,6 +30,14 @@ export default async function Edit() {
     race: userInfo?.race || "",
     images: userInfo?.images || [""],
     sexualOrientation: userInfo?.sexualOrientation || "",
+    pronouns: userInfo?.pronouns || "",
+    pets: userInfo?.pets || "",
+    kids: userInfo?.kids || "",
+    alcohol: userInfo?.alcohol || "",
+    smoking: userInfo?.smoking || "",
+    marijuana: userInfo?.marijuana || "",
+    religion: userInfo?.religion || "",
+    politicalViews: userInfo?.politicalViews || "",
   };
 
   const userImageData = {

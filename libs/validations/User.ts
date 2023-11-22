@@ -33,6 +33,8 @@ export const PreferencesValidation = z.object({
   distance: z.number().min(50),
   desires: z.array(z.string()),
   relationshipstatus: z.array(z.string()),
+  race: z.array(z.string()),
+  sexualOrientation: z.array(z.string()),
   pets: z.array(z.string()),
   kids: z.array(z.string()),
   alcohol: z.array(z.string()),
@@ -40,6 +42,4 @@ export const PreferencesValidation = z.object({
   marijuana: z.array(z.string()),
   religion: z.array(z.string()),
   politicalViews: z.array(z.string()),
-  race: z.array(z.string()),
-  sexualOrientation: z.array(z.string()),
 });

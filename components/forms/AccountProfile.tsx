@@ -24,6 +24,14 @@ type AccountProfileProps = {
     gender: string;
     race: string;
     sexualOrientation: string;
+    pronouns: string;
+    pets: string;
+    kids: string;
+    alcohol: string;
+    smoking: string;
+    marijuana: string;
+    religion: string;
+    politicalViews: string;
   };
 };
 
@@ -49,6 +57,13 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       gender: user?.gender || "",
       race: user?.race || "",
       sexualOrientation: user?.sexualOrientation || "",
+      pets: user?.pets || "",
+      kids: user?.pets || "",
+      alcohol: user?.alcohol || "",
+      smoking: user?.smoking || "",
+      marijuana: user?.marijuana || "",
+      religion: user?.religion || "",
+      politicalViews: user?.politicalViews || "",
     },
   });
 
@@ -268,6 +283,133 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             ))}
           </select>
         </div>
+
+        <div>
+          <label htmlFor="race" className="font-bold px-2">
+            Pets
+          </label>
+          <select
+            {...form.register("pets")}
+            name="pets"
+            id="pets"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500 cursor-pointer"
+          >
+            {userOptions.enumPets.map((pet) => (
+              <option key={pet} value={pet}>
+                {pet}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="race" className="font-bold px-2">
+            Kids
+          </label>
+          <select
+            {...form.register("kids")}
+            name="kids"
+            id="kids"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500 cursor-pointer"
+          >
+            {userOptions.enumKids.map((kid) => (
+              <option key={kid} value={kid}>
+                {kid}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="race" className="font-bold px-2">
+            Alcohol
+          </label>
+          <select
+            {...form.register("alcohol")}
+            name="alcohol"
+            id="alcohol"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500 cursor-pointer"
+          >
+            {userOptions.enumAlcohol.map((alc) => (
+              <option key={alc} value={alc}>
+                {alc}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="race" className="font-bold px-2">
+            Smoking
+          </label>
+          <select
+            {...form.register("smoking")}
+            name="smoking"
+            id="smoking"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500 cursor-pointer"
+          >
+            {userOptions.enumSmoking.map((smoking) => (
+              <option key={smoking} value={smoking}>
+                {smoking}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="race" className="font-bold px-2">
+            Marijuana
+          </label>
+          <select
+            {...form.register("marijuana")}
+            name="marijuana"
+            id="marijuana"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500 cursor-pointer"
+          >
+            {userOptions.enumMarijuana.map((marryj) => (
+              <option key={marryj} value={marryj}>
+                {marryj}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="race" className="font-bold px-2">
+            Religion
+          </label>
+          <select
+            {...form.register("religion")}
+            name="religion"
+            id="religion"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500 cursor-pointer"
+          >
+            {userOptions.enumReligion.map((religion) => (
+              <option key={religion} value={religion}>
+                {religion}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="politicalViews" className="font-bold px-2">
+            Political Views
+          </label>
+          <select
+            {...form.register("politicalViews")}
+            name="politicalViews"
+            id="politicalViews"
+            className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500 cursor-pointer"
+          >
+            {userOptions.enumPoliticalViews.map((politicalViews) => (
+              <option key={politicalViews} value={politicalViews}>
+                {politicalViews}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div className="w-full bg-white">
           <button
             type="submit"
