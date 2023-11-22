@@ -14,6 +14,7 @@ export const enumSexualOrientation = [
   "Straight",
   "Gay",
   "Bisexual",
+  "Pansexual",
   "Lesbian",
   "Homoflexible",
   "Heteroflexible",
@@ -66,5 +67,64 @@ export const enumRace = [
   "Other Indigenous Groups",
   "Other/Mixed Race",
   "Prefer Not to Say",
+  "Other",
+];
+
+export const enumPets = ["Cat(s)", "Dog(s)", "Cats and Dogs"];
+
+export const enumKids = [
+  "Does not want kids",
+  "Wants kids",
+  "Has kids",
+  "Undecided",
+];
+
+export const enumAlcohol = [
+  "Does not drink",
+  "Drinks Occasionally",
+  "Drinks often",
+];
+
+export const enumSmoking = [
+  "Does not smoke",
+  "Smokes occasionally",
+  "Smokes often",
+];
+
+export const enumMarijuana = [
+  "Does not smoke",
+  "Smokes occasionally",
+  "Smokes often",
+];
+
+export const enumReligion = [
+  "Atheism",
+  "Christianity",
+  "Islam",
+  "Hinduism",
+  "Buddhism",
+  "Judaism",
+  "Sikhism",
+  "Jainism",
+  "Shintoism",
+  "Taoism",
+  "Indigenous Religions",
+  "Agnosticism",
+  "Other",
+];
+
+export const enumPoliticalViews = [
+  "Left-wing",
+  "Right-wing",
+  "Centrist",
+  "Liberal",
+  "Conservative",
+  "Progressive",
+  "Populist",
+  "Authoritarian",
+  "Libertarian",
+  "Moderate",
+  "Radical",
+  "Nonpartisan",
   "Other",
 ];
