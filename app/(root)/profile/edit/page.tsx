@@ -32,12 +32,17 @@ export default async function Edit() {
     sexualOrientation: userInfo?.sexualOrientation || "",
   };
 
+  const userImageData = {
+    id: user?.id,
+    images: userInfo?.images || [""],
+  };
+
   return (
     <div className="w-full flex flex-col justify-center items-center overflow-y-scroll scrollbar-hide rounded-lg p-8 shadow-lg mx-auto">
       <h2 className="text-2xl font-semibold text-center text-black mb-6">
         Edit Your Profile
       </h2>
-      <AccountPhotos user={userData} />
+      <AccountPhotos images={userInfo.images} id={userInfo?.id} />
       <AccountProfile user={userData} />
     </div>
   );
