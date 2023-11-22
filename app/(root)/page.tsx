@@ -37,6 +37,7 @@ export default async function Home({
             profileId={profileInfo?.id}
             likedByUser={userInfo?.likes.includes(profileInfo?.id)}
             image={profileInfo?.images[0]}
+            sexualOrientation={profileInfo?.sexualOrientation}
           />
         ))}
       </div>

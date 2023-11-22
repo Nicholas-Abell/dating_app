@@ -14,6 +14,7 @@ type CardsProps = {
   likedByUser: boolean;
   age: number;
   image?: string;
+  sexualOrientation: string;
 };
 
 const Card: React.FC<CardsProps> = ({
@@ -25,6 +26,7 @@ const Card: React.FC<CardsProps> = ({
   age,
   gender,
   image,
+  sexualOrientation,
 }) => {
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden p-4 hover:scale-105 ease-in-out duration-300">
@@ -53,9 +55,12 @@ const Card: React.FC<CardsProps> = ({
             likedByUser={likedByUser}
           />
         </div>
-        <p className="text-gray-600 text-sm">
-          {gender} - {age}
-        </p>
+        <div className="flex justify-between items-center text-gray-600 text-sm">
+          <p>
+            {gender} - {age}
+          </p>
+          <p>{sexualOrientation}</p>
+        </div>
       </div>
     </div>
   );
