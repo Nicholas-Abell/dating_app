@@ -1,5 +1,4 @@
 "use client";
-
 import { addUserImage, deleteUserImage } from "@/libs/actions/user.actions";
 import { SingleImageDropzone } from "../edgeStore/singleImageDropzone";
 import { useEdgeStore } from "@/libs/edgestore";
@@ -10,22 +9,11 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 
 type AccountPhotosProps = {
-  user: {
-    id: string;
-    username: string;
-    bio: string;
-    age: number;
-    height: { feet: Number; inches: Number };
-    weight: number;
-    relationshipstatus: string;
-    lookingfor: string;
-    gender: string;
-    race: string;
-    images?: string[];
-  };
+  id: string;
+  images: string[];
 };
 
-export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
+export const AccountPhotos: React.FC<AccountPhotosProps> = ({ id, images }) => {
   const router = useRouter();
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
@@ -34,9 +22,9 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
 
   return (
     <div className="grid grid-cols-3 gap-2 justify-center items-center w-full md:h-[80vh]">
-      {user.images &&
-        user.images.length > 0 &&
-        user.images?.map((image, key) => (
+      {images &&
+        images.length > 0 &&
+        images?.map((image, key) => (
           <div className="relative h-[40vh] md:h-[80vh]" key={key}>
             <button
               className="absolute z-10 top-0 left-0 text-black hover:text-red-600"
@@ -44,7 +32,7 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
                 const res = await edgestore.publicFiles.delete({
                   url: image,
                 });
-                deleteUserImage(user?.id, image);
+                deleteUserImage(id, image);
                 router.refresh();
                 console.log(res);
               }}
@@ -61,7 +49,7 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
           </div>
         ))}
       <div>
-        {user.images && user.images.length < 3 && (
+        {images && images.length < 3 && (
           <>
             <SingleImageDropzone
               width={200}
@@ -89,7 +77,7 @@ export const AccountPhotos: React.FC<AccountPhotosProps> = ({ user }) => {
                     },
                   });
                   setUrl(res.url);
-                  addUserImage(user?.id, res.url);
+                  addUserImage(id, res.url);
                   router.refresh();
                 }
               }}
