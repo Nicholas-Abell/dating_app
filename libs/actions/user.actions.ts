@@ -19,6 +19,13 @@ type Params = {
   gender: string;
   race: string;
   sexualOrientation: string;
+  pets: string;
+  kids: string;
+  alcohol: string;
+  smoking: string;
+  marijuana: string;
+  religion: string;
+  politicalViews: string;
 };
 
 export async function updateUser({
@@ -35,6 +42,13 @@ export async function updateUser({
   gender,
   race,
   sexualOrientation,
+  pets,
+  kids,
+  alcohol,
+  smoking,
+  marijuana,
+  religion,
+  politicalViews,
 }: Params): Promise<void> {
   connectToDB();
 
@@ -53,6 +67,13 @@ export async function updateUser({
         gender,
         race,
         sexualOrientation,
+        pets,
+        kids,
+        alcohol,
+        smoking,
+        marijuana,
+        religion,
+        politicalViews,
       },
       { upsert: true }
     );
