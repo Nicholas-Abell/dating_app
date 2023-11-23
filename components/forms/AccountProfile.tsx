@@ -17,14 +17,15 @@ type AccountProfileProps = {
     username: string;
     bio: string;
     age: number;
-    height: { feet: number; inches: number };
+    feet: number;
+    inches: number;
     weight: number;
     relationshipstatus: string;
     lookingfor: string;
     gender: string;
     race: string;
     sexualOrientation: string;
-    pronouns: string;
+    // pronouns: string;
     pets: string;
     kids: string;
     alcohol: string;
@@ -39,18 +40,14 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [height, setHeight] = useState({ ft: 0, in: 0 });
-
   const form = useForm({
     resolver: zodResolver(UserValidation),
     defaultValues: {
       username: user?.username || "",
       bio: user?.bio || "",
       age: user?.age || 0,
-      height: {
-        feet: user?.height?.feet || 0,
-        inches: user?.height?.inches || 0,
-      },
+      feet: user?.feet || 0,
+      inches: user?.inches || 0,
       weight: user?.weight || 0,
       relationshipstatus: user?.relationshipstatus || "",
       lookingfor: user?.lookingfor || "",
@@ -58,7 +55,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       race: user?.race || "",
       sexualOrientation: user?.sexualOrientation || "",
       pets: user?.pets || "",
-      kids: user?.pets || "",
+      kids: user?.kids || "",
       alcohol: user?.alcohol || "",
       smoking: user?.smoking || "",
       marijuana: user?.marijuana || "",
@@ -76,19 +73,22 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       bio: values.bio,
       path: pathname,
       age: values.age,
-      feet: height.ft,
-      inches: height.in,
+      feet: values.feet,
+      inches: values.inches,
       weight: values.weight,
       relationshipstatus: values.relationshipstatus,
       lookingfor: values.lookingfor,
       gender: values.gender,
       race: values.race,
       sexualOrientation: values.sexualOrientation,
+      pets: values.pets,
+      kids: values.kids,
+      alcohol: values.alcohol,
+      smoking: values.smoking,
+      marijuana: values.marijuana,
+      religion: values.religion,
+      politicalViews: values.politicalViews,
     });
-
-    // if(!user.location){
-    // await fetchAndUpdateUserLocation(user.id);
-    // }
 
     console.log("user updated");
 
@@ -98,10 +98,6 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
       router.push("/");
     }
   };
-
-  useEffect(() => {
-    console.log(form.watch());
-  }, [form]);
 
   return (
     <section className="w-full bg-gray-400">
@@ -144,7 +140,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             name="age"
             id="age"
             className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-            placeholder={user?.age.toString()}
+            placeholder={user?.age?.toString()}
           />
         </div>
 
@@ -156,26 +152,20 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             <p>feet</p>
             <input
               type="number"
-              // {...form.register("height.feet")}
-              onChange={(e: any) =>
-                setHeight({ ...height, ft: e.target.value })
-              }
+              {...form.register("feet")}
               name="feet"
               id="feet"
               className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder={user?.height?.feet?.toString()}
+              placeholder={user?.feet?.toString()}
             />
             <p>inches</p>
             <input
               type="number"
-              // {...form.register("height.inches")}
-              onChange={(e: any) =>
-                setHeight({ ...height, in: e.target.value })
-              }
+              {...form.register("inches")}
               name="inches"
               id="inches"
               className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder={user?.height?.inches?.toString()}
+              placeholder={user?.inches?.toString()}
             />
           </div>
         </div>
@@ -190,7 +180,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
             name="weight"
             id="weight"
             className="text-black w-full px-4 py-2 border border-white rounded-lg focus:outline-none focus:border-blue-500"
-            placeholder={user?.weight.toString()}
+            placeholder={user?.weight?.toString()}
           />
         </div>
 
@@ -375,7 +365,7 @@ const AccountProfile: React.FC<AccountProfileProps> = ({ user }) => {
         </div>
 
         <div>
-          <label htmlFor="race" className="font-bold px-2">
+          <label htmlFor="religion" className="font-bold px-2">
             Religion
           </label>
           <select
