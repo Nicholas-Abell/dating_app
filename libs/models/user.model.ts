@@ -129,38 +129,40 @@ const userSchema = new Schema({
       max: { type: Number, default: 100 },
     },
     distance: { type: Number, default: 9000 },
-    relationshipstatus: [{ type: String, default: [] }],
-    pets: [{ type: String, enum: ["Cat(s)", "Dog(s)", "Cats and Dogs"] }],
+    relationshipstatus: [{ type: [String], default: [] }],
+    pets: [
+      { type: [String], enum: ["None", "Cat(s)", "Dog(s)", "Cats and Dogs"] },
+    ],
     kids: [
       {
-        type: String,
+        type: [String],
         enum: ["Does not want kids", "Wants kids", "Has kids", "Undecided"],
         default: ["Does not want kids", "Wants kids", "Has kids", "Undecided"],
       },
     ],
     alcohol: [
       {
-        type: String,
+        type: [String],
         enum: ["Does not drink", "Drinks Occasionally", "Drinks often"],
         default: ["Does not drink", "Drinks Occasionally", "Drinks often"],
       },
     ],
     smoking: [
       {
-        type: String,
+        type: [String],
         enum: ["Does not smoke", "Smokes occasionally", "Smokes often"],
         default: ["Does not smoke", "Smokes occasionally", "Smokes often"],
       },
     ],
     marijuana: [
       {
-        type: String,
+        type: [String],
         enum: ["Does not smoke", "Smokes occasionally", "Smokes often"],
         default: ["Does not smoke", "Smokes occasionally", "Smokes often"],
       },
     ],
     religion: {
-      type: String,
+      type: [String],
       enum: [
         "Atheism",
         "Christianity",
@@ -193,7 +195,7 @@ const userSchema = new Schema({
       ],
     },
     politicalViews: {
-      type: String,
+      type: [String],
       enum: [
         "Left-wing",
         "Right-wing",
@@ -227,21 +229,21 @@ const userSchema = new Schema({
     },
     desires: [
       {
-        type: String,
+        type: [String],
         enum: ["Chat", "Dates", "Friends", "Hookups", "Relationship"],
         default: ["Chat", "Dates", "Friends", "Hookups", "Relationship"],
       },
     ],
     gender: [
       {
-        type: String,
+        type: [String],
         enum: ["Man", "Trans Man", "Woman", "Trans Woman", "Non-Binary"],
         default: ["Man", "Trans Man", "Woman", "Trans Woman", "Non-Binary"],
       },
     ],
     race: [
       {
-        type: String,
+        type: [String],
         enum: [
           "White",
           "Black or African American",
@@ -306,7 +308,7 @@ const userSchema = new Schema({
     ],
     sexualOrientation: [
       {
-        type: String,
+        type: [String],
         enum: [
           "Straight",
           "Gay",
