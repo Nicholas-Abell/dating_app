@@ -26,6 +26,14 @@ const page: React.FC<pageProps> = async () => {
       gender: userInfo?.preferences?.gender || "",
       race: userInfo?.preferences?.race || "",
       sexualOrientation: userInfo?.preferences?.sexualOrientation || "",
+      pets: userInfo?.preferences?.pets || "",
+      kids: userInfo?.preferences?.kids || "",
+      orientation: userInfo?.preferences?.orientation || "",
+      religion: userInfo?.preferences?.religion || "",
+      politicalViews: userInfo?.preferences?.politicalViews || "",
+      smoking: userInfo?.preferences?.smoking || "",
+      marijuana: userInfo?.preferences?.marijuana || "",
+      alcohol: userInfo?.preferences?.alcohol || "",
     },
   };
 

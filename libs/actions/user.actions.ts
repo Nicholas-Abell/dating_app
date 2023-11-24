@@ -93,8 +93,15 @@ type PreferenceParams = {
   max: number;
   distance: number;
   desires: string[];
+  pets: string[];
+  kids: string[];
+  orientation: string[];
+  religion: string[];
+  politicalViews: string[];
+  smoking: string[];
+  marijuana: string[];
+  alcohol: string[];
 };
-
 export async function updatePreferences({
   userId,
   gender,
@@ -102,6 +109,14 @@ export async function updatePreferences({
   max,
   distance,
   desires,
+  pets,
+  kids,
+  orientation,
+  religion,
+  politicalViews,
+  smoking,
+  marijuana,
+  alcohol,
 }: PreferenceParams) {
   connectToDB();
 
@@ -115,6 +130,14 @@ export async function updatePreferences({
           age: { min, max },
           distance,
           desires,
+          pets,
+          kids,
+          orientation,
+          religion,
+          politicalViews,
+          smoking,
+          marijuana,
+          alcohol,
         },
       },
       { upsert: true }

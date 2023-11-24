@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import * as userOptions from "../../constants/userOptions";
 
 const userSchema = new Schema({
   username: { type: String, require: true },
@@ -9,50 +10,21 @@ const userSchema = new Schema({
   weight: { type: Number },
   relationshipstatus: {
     type: String,
-    enum: [
-      "No Response",
-      "Committed",
-      "Dating",
-      "Engaged",
-      "Exclusive",
-      "Married",
-      "Open Relationship",
-      "Partnered",
-      "Single",
-    ],
+    enum: userOptions.enumRelationshipStatus,
     default: "Single",
   },
   sexualOrientation: {
     type: String,
-    enum: [
-      "Straight",
-      "Gay",
-      "Bisexual",
-      "Pansexual",
-      "Lesbian",
-      "Homoflexible",
-      "Heteroflexible",
-      "Androsecual",
-      "Gynosecual",
-      "Sapiosexual",
-    ],
+    enum: userOptions.enumSexualOrientation,
   },
   lookingfor: {
     type: String,
-    enum: ["Chat", "Dates", "Friends", "Hookups", "Relationship"],
+    enum: userOptions.enumLookingFor,
     default: "Dates",
   },
   gender: {
     type: String,
-    enum: [
-      "Man",
-      "Cis Man",
-      "Trans Man",
-      "Woman",
-      "Cis Woman",
-      "Trans Woman",
-      "Non-Binary",
-    ],
+    enum: userOptions.enumGender,
   },
   race: {
     type: String,
@@ -70,58 +42,30 @@ const userSchema = new Schema({
     latitude: { type: Number },
     longitude: { type: Number },
   },
-  pets: { type: String, enum: ["Cat(s)", "Dog(s)", "Cats and Dogs"] },
+  pets: { type: String, enum: userOptions.enumPets },
   kids: {
     type: String,
-    enum: ["Does not want kids", "Wants kids", "Has kids", "Undecided"],
+    enum: userOptions.enumKids,
   },
   alcohol: {
     type: String,
-    enum: ["Does not drink", "Drinks Occasionally", "Drinks often"],
+    enum: userOptions.enumAlcohol,
   },
   smoking: {
     type: String,
-    enum: ["Does not smoke", "Smokes occasionally", "Smokes often"],
+    enum: userOptions.enumSmoking,
   },
   marijuana: {
     type: String,
-    enum: ["Does not smoke", "Smokes occasionally", "Smokes often"],
+    enum: userOptions.enumMarijuana,
   },
   religion: {
     type: String,
-    enum: [
-      "Atheism",
-      "Christianity",
-      "Islam",
-      "Hinduism",
-      "Buddhism",
-      "Judaism",
-      "Sikhism",
-      "Jainism",
-      "Shintoism",
-      "Taoism",
-      "Indigenous Religions",
-      "Agnosticism",
-      "Other",
-    ],
+    enum: userOptions.enumReligion,
   },
   politicalViews: {
     type: String,
-    enum: [
-      "Left-wing",
-      "Right-wing",
-      "Centrist",
-      "Liberal",
-      "Conservative",
-      "Progressive",
-      "Populist",
-      "Authoritarian",
-      "Libertarian",
-      "Moderate",
-      "Radical",
-      "Nonpartisan",
-      "Other",
-    ],
+    enum: userOptions.enumPoliticalViews,
   },
   preferences: {
     preferencesSet: { type: Boolean, default: false },
@@ -133,161 +77,70 @@ const userSchema = new Schema({
     relationshipstatus: [
       {
         type: String,
-        default: [
-          "No Response",
-          "Committed",
-          "Dating",
-          "Engaged",
-          "Exclusive",
-          "Married",
-          "Open Relationship",
-          "Partnered",
-          "Single",
-        ],
+        enum: userOptions.enumRelationshipStatus,
       },
     ],
-    // pets: [
-    //   { type: String, default: ["None", "Cat(s)", "Dog(s)", "Cats and Dogs"] },
-    // ],
-    // kids: [
-    //   {
-    //     type: String,
-    //     default: ["Does not want kids", "Wants kids", "Has kids", "Undecided"],
-    //   },
-    // ],
-    // alcohol: [
-    //   {
-    //     type: String,
-    //     default: ["Does not drink", "Drinks Occasionally", "Drinks often"],
-    //   },
-    // ],
-    // smoking: [
-    //   {
-    //     type: String,
-    //     default: ["Does not smoke", "Smokes occasionally", "Smokes often"],
-    //   },
-    // ],
-    // marijuana: [
-    //   {
-    //     type: String,
-    //     default: ["Does not smoke", "Smokes occasionally", "Smokes often"],
-    //   },
-    // ],
-    // religion: {
-    //   type: String,
-    //   enum: [
-    //     "Atheism",
-    //     "Christianity",
-    //     "Islam",
-    //     "Hinduism",
-    //     "Buddhism",
-    //     "Judaism",
-    //     "Sikhism",
-    //     "Jainism",
-    //     "Shintoism",
-    //     "Taoism",
-    //     "Indigenous Religions",
-    //     "Agnosticism",
-    //     "Other",
-    //   ],
-    //   default: [
-    //     "Atheism",
-    //     "Christianity",
-    //     "Islam",
-    //     "Hinduism",
-    //     "Buddhism",
-    //     "Judaism",
-    //     "Sikhism",
-    //     "Jainism",
-    //     "Shintoism",
-    //     "Taoism",
-    //     "Indigenous Religions",
-    //     "Agnosticism",
-    //     "Other",
-    //   ],
-    // },
-    // politicalViews: {
-    //   type: String,
-    //   default: [
-    //     "Left-wing",
-    //     "Right-wing",
-    //     "Centrist",
-    //     "Liberal",
-    //     "Conservative",
-    //     "Progressive",
-    //     "Populist",
-    //     "Authoritarian",
-    //     "Libertarian",
-    //     "Moderate",
-    //     "Radical",
-    //     "Nonpartisan",
-    //     "Other",
-    //   ],
-    // },
+    pets: [{ type: String, enum: userOptions.enumPets }],
+    kids: [
+      {
+        type: String,
+        enum: userOptions.enumKids,
+      },
+    ],
+    alcohol: [
+      {
+        type: String,
+        enum: userOptions.enumAlcohol,
+      },
+    ],
+    smoking: [
+      {
+        type: String,
+        enum: userOptions.enumSmoking,
+      },
+    ],
+    marijuana: [
+      {
+        type: String,
+        enum: userOptions.enumMarijuana,
+      },
+    ],
+    religion: [
+      {
+        type: String,
+        enum: userOptions.enumReligion,
+      },
+    ],
+    politicalViews: [
+      {
+        type: String,
+        enum: userOptions.enumPoliticalViews,
+      },
+    ],
     desires: [
       {
         type: String,
-        default: ["Chat", "Dates", "Friends", "Hookups", "Relationship"],
+        enum: userOptions.enumLookingFor,
       },
     ],
     gender: [
       {
         type: String,
-        default: ["Man", "Trans Man", "Woman", "Trans Woman", "Non-Binary"],
+        enum: userOptions.enumGender,
       },
     ],
-    // race: [
-    //   {
-    //     type: String,
-    //     default: [
-    //       "White",
-    //       "Black or African American",
-    //       "Asian",
-    //       "Hispanic or Latino",
-    //       "Native American",
-    //       "Pacific Islander",
-    //       "Middle Eastern or Arab",
-    //       "Indigenous Peoples",
-    //       "Multiracial",
-    //       "Biracial",
-    //       "South Asian",
-    //       "East Asian",
-    //       "Southeast Asian",
-    //       "Central Asian",
-    //       "North African",
-    //       "Afro-Caribbean",
-    //       "Afro-Latino",
-    //       "European",
-    //       "Jewish",
-    //       "Roma or Romani",
-    //       "Inuit",
-    //       "Maori",
-    //       "Aboriginal Australian",
-    //       "First Nations",
-    //       "Other Indigenous Groups",
-    //       "Other/Mixed Race",
-    //       "Prefer Not to Say",
-    //       "Other",
-    //     ],
-    //   },
-    // ],
-    // sexualOrientation: [
-    //   {
-    //     type: String,
-    //     default: [
-    //       "Straight",
-    //       "Gay",
-    //       "Bisexual",
-    //       "Pansexual",
-    //       "Lesbian",
-    //       "Homoflexible",
-    //       "Heteroflexible",
-    //       "Androsecual",
-    //       "Gynosecual",
-    //       "Sapiosexual",
-    //     ],
-    //   },
-    // ],
+    race: [
+      {
+        type: String,
+        enum: userOptions.enumRace,
+      },
+    ],
+    sexualOrientation: [
+      {
+        type: String,
+        enum: userOptions.enumSexualOrientation,
+      },
+    ],
   },
 });
 

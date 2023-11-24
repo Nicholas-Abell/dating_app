@@ -1,14 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsChevronCompactRight } from "react-icons/bs";
 import { PiShapesLight } from "react-icons/pi";
 import * as userOptions from "../../constants/userOptions";
-import { GrRadialSelected, GrRadial } from "react-icons/gr";
 import { updatePreferences } from "@/libs/actions/user.actions";
 import { useRouter } from "next/navigation";
 import { MdFamilyRestroom } from "react-icons/md";
-import { FaPersonRays } from "react-icons/fa6";
 import { FaGlassCheers, FaGlobeAmericas } from "react-icons/fa";
+import DropDown from "../shared/DropDown";
 
 type PreferencesFormProps = {
   user: {
@@ -23,6 +22,14 @@ type PreferencesFormProps = {
       gender: string[];
       race: string[];
       sexualOrientation: string[];
+      pets: string[];
+      kids: string[];
+      orientation: string[];
+      religion: string[];
+      politicalViews: string[];
+      smoking: string[];
+      marijuana: string[];
+      alcohol: string[];
     };
   };
 };
@@ -30,26 +37,29 @@ type PreferencesFormProps = {
 const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
   const router = useRouter();
 
-  const [options, setOptions] = useState({
-    gender: false,
-    age: false,
-    distance: false,
-    desires: false,
-    family: false,
-    pets: false,
-    hasKids: false,
-    wantsKids: false,
-  });
+  const [options, setOptions] = useState({ distance: false, age: false });
 
   const [selected, setSelected] = useState({
     gender: user.preferences?.gender || [],
     age: {
       min: user.preferences?.age?.min || 18,
       max: user.preferences?.age?.max || 100,
-    }, //slider?
+    },
     distance: user.preferences?.distance || 50, //max miles
     desires: user.preferences?.desires || [],
+    pets: user.preferences?.pets || [],
+    kids: user.preferences?.kids || [],
+    orientation: user.preferences?.orientation || [],
+    religion: user.preferences?.religion || [],
+    politicalViews: user.preferences?.politicalViews || [],
+    smoking: user.preferences?.smoking || [],
+    marijuana: user.preferences?.marijuana || [],
+    alcohol: user.preferences?.alcohol || [],
   });
+
+  useEffect(() => {
+    console.log(selected);
+  }, [selected]);
 
   const handleSubmit = async () => {
     try {
@@ -60,6 +70,14 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
         max: selected.age.max,
         distance: selected.distance,
         desires: selected.desires,
+        pets: selected.pets,
+        kids: selected.kids,
+        orientation: selected.orientation,
+        religion: selected.religion,
+        politicalViews: selected.politicalViews,
+        smoking: selected.smoking,
+        marijuana: selected.marijuana,
+        alcohol: selected.alcohol,
       });
 
       console.log("preferences updated");
@@ -72,9 +90,17 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
 
   type Preferences = {
     gender?: string[] | undefined;
-    age?: number;
+    age?: number | undefined;
     desires?: string[] | undefined;
-    distance?: number;
+    distance?: number | undefined;
+    pets?: string[] | undefined;
+    kids?: string[] | undefined;
+    orientation?: string[] | undefined;
+    religion?: string[] | undefined;
+    politicalViews?: string[] | undefined;
+    smoking?: string[] | undefined;
+    marijuana?: string[] | undefined;
+    alcohol?: string[] | undefined;
   };
 
   const toggleSelected = <T extends keyof Preferences>(
@@ -115,32 +141,14 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
         <PiShapesLight size={50} />
         <p>BASIC</p>
       </div>
-      <button
-        onClick={() => setOptions({ ...options, gender: !options.gender })}
-        className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100"
-      >
-        <p>Gender</p>
-        <BsChevronCompactRight size={25} className="text-blue-600" />
-      </button>
-      {options.gender && (
-        <div className="flex flex-col gap-2 px-12 py-4">
-          {userOptions.enumGender.map((gender, key) => (
-            <div key={key}>
-              <button
-                onClick={() => toggleSelected("gender", gender)}
-                className="flex items-center gap-4"
-              >
-                {selected.gender.includes(gender) ? (
-                  <GrRadialSelected size={20} />
-                ) : (
-                  <GrRadial size={20} />
-                )}
-                {gender}
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+
+      <DropDown
+        title="Gender"
+        userOptions={userOptions.enumGender}
+        onClick={(value: string) => toggleSelected("gender", value)}
+        selectedOptions={selected.gender}
+      />
+
       <button
         onClick={() => setOptions({ ...options, age: !options.age })}
         className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100"
@@ -207,6 +215,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
           </div>
         </div>
       )}
+
       <button
         onClick={() => setOptions({ ...options, distance: !options.distance })}
         className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100"
@@ -237,102 +246,84 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
           </div>
         </div>
       )}
-      <button
-        onClick={() => setOptions({ ...options, desires: !options.desires })}
-        className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100"
-      >
-        <p>Desires</p>
-        <BsChevronCompactRight size={25} className="text-blue-600" />
-      </button>
-      {options.desires && (
-        <div className="flex flex-col gap-2 px-12 py-4">
-          {userOptions.enumLookingFor.map((desires, key) => (
-            <div key={key}>
-              <button
-                onClick={() => toggleSelected("desires", desires)}
-                className="flex items-center gap-4"
-              >
-                {selected.desires.includes(desires) ? (
-                  <GrRadialSelected size={20} />
-                ) : (
-                  <GrRadial size={20} />
-                )}
-                {desires}
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
 
-      <div className="relative w-full h-full">
-        <div className="absolute h-full w-full z-10 top-0 left-0 bg-red-400/50" />
-        <div className="absolute top-10 left-[40%] text-gray-300 p-4 rounded-full bg-black font-bold text-3xl z-20">
-          <p>Coming Soon</p>
-        </div>
-        <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
-          <MdFamilyRestroom size={50} />
-          <p>FAMILY</p>
-        </div>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Pets</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Has Kids</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Wants Kids</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
+      <DropDown
+        userOptions={userOptions.enumLookingFor}
+        selectedOptions={selected.desires}
+        title="Desires"
+        onClick={(value: string) => toggleSelected("desires", value)}
+      />
 
-        <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
-          <FaPersonRays size={50} />
-          <p>LOOKS</p>
-        </div>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Body Type</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Height</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-
-        <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
-          <FaGlobeAmericas size={50} />
-          <p>BACKGROUND</p>
-        </div>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Orientation</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Religion</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Politcal Views</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-
-        <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
-          <FaGlassCheers size={50} />
-          <p>LIFESTYLE</p>
-        </div>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Alcohol</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Smoking</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
-        <button className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100">
-          <p>Marijuana</p>
-          <BsChevronCompactRight size={25} className="text-blue-600" />
-        </button>
+      <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+        <MdFamilyRestroom size={50} />
+        <p>FAMILY</p>
       </div>
+
+      <DropDown
+        title="Pets"
+        userOptions={userOptions.enumPets}
+        selectedOptions={selected.pets}
+        onClick={(value: string) => toggleSelected("pets", value)}
+      />
+
+      <DropDown
+        title="Kids"
+        userOptions={userOptions.enumKids}
+        selectedOptions={selected.kids}
+        onClick={(value: string) => toggleSelected("kids", value)}
+      />
+
+      <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+        <FaGlobeAmericas size={50} />
+        <p>BACKGROUND</p>
+      </div>
+
+      <DropDown
+        title="Orientaion"
+        userOptions={userOptions.enumSexualOrientation}
+        selectedOptions={selected.orientation}
+        onClick={(value: string) => toggleSelected("orientation", value)}
+      />
+
+      <DropDown
+        title="Religion"
+        userOptions={userOptions.enumReligion}
+        selectedOptions={selected.religion}
+        onClick={(value: string) => toggleSelected("religion", value)}
+      />
+
+      <DropDown
+        title="Political Views"
+        userOptions={userOptions.enumPoliticalViews}
+        selectedOptions={selected.politicalViews}
+        onClick={(value: string) => toggleSelected("politicalViews", value)}
+      />
+
+      <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
+        <FaGlassCheers size={50} />
+        <p>LIFESTYLE</p>
+      </div>
+
+      <DropDown
+        title="Alcohol"
+        userOptions={userOptions.enumAlcohol}
+        selectedOptions={selected.alcohol}
+        onClick={(value: string) => toggleSelected("alcohol", value)}
+      />
+
+      <DropDown
+        title="Smoking"
+        userOptions={userOptions.enumSmoking}
+        selectedOptions={selected.smoking}
+        onClick={(value: string) => toggleSelected("smoking", value)}
+      />
+
+      <DropDown
+        title="Marijuana"
+        userOptions={userOptions.enumMarijuana}
+        selectedOptions={selected.marijuana}
+        onClick={(value: string) => toggleSelected("marijuana", value)}
+      />
 
       <div className="w-full flex justify-center items-center py-4">
         <button
