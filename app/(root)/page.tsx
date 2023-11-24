@@ -1,6 +1,10 @@
 import Card from "@/components/cards/Card";
 import PaginationBar from "@/components/navbar/PaginationBar";
-import { fetchUser, fetchProfiles } from "@/libs/actions/user.actions";
+import {
+  fetchUser,
+  fetchProfiles,
+  fetchFilteredProfiles,
+} from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
@@ -16,12 +20,21 @@ export default async function Home({
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const profilePerPage = 20;
+  let profiles;
 
-  let profiles = await fetchProfiles(
-    userInfo.id,
-    searchParams.page ? +searchParams.page : 1,
-    profilePerPage
-  );
+  if (userInfo.preferences?.preferencesSet) {
+    profiles = await fetchFilteredProfiles(
+      userInfo.id,
+      searchParams.page ? +searchParams.page : 1,
+      profilePerPage
+    );
+  } else {
+    profiles = await fetchProfiles(
+      userInfo.id,
+      searchParams.page ? +searchParams.page : 1,
+      profilePerPage
+    );
+  }
 
   return (
     <section className="px-8 pb-4 w-full min-h-screen flex justify-between flex-col overflow-y-scroll">

@@ -109,7 +109,13 @@ export async function updatePreferences({
     await User.findOneAndUpdate(
       { id: userId },
       {
-        preferences: { gender, age: { min, max }, distance, desires },
+        preferences: {
+          preferencesSet: true,
+          gender,
+          age: { min, max },
+          distance,
+          desires,
+        },
       },
       { upsert: true }
     );
@@ -154,13 +160,41 @@ export async function fetchProfiles(
   try {
     connectToDB();
 
+    const users = await User.aggregate([
+      {
+        $match: { id: { $ne: userId } }, // Exclude the user's own profile
+      },
+      { $skip: skipAmount },
+      { $limit: pageSize },
+    ]);
+
+    return users;
+  } catch (error: any) {
+    console.error("Error in fetchProfiles: ", error);
+    throw new Error("fetchProfiles Error: " + error.message);
+  }
+}
+
+export async function fetchFilteredProfiles(
+  userId: string,
+  pageNumber = 1,
+  pageSize = 20
+) {
+  const skipAmount = (pageNumber - 1) * pageSize;
+
+  try {
+    connectToDB();
+
     const user = await User.findOne({ id: userId });
     const userPreferences = user?.preferences;
 
-    const query = {
+    let query = {
       id: { $ne: userId },
       gender: { $in: userPreferences.gender },
-      age: { $lte: userPreferences.age.max, $gte: userPreferences.age.min },
+      age: {
+        $lte: userPreferences?.age?.max,
+        $gte: userPreferences?.age?.min,
+      },
     };
 
     const users = await User.aggregate([
