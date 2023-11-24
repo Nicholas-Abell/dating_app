@@ -70,7 +70,7 @@ export const enumRace = [
   "Other",
 ];
 
-export const enumPets = ["Cat(s)", "Dog(s)", "Cats and Dogs"];
+export const enumPets = ["none", "Cat(s)", "Dog(s)", "Cats and Dogs"];
 
 export const enumKids = [
   "Does not want kids",
