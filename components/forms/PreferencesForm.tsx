@@ -6,7 +6,11 @@ import * as userOptions from "../../constants/userOptions";
 import { updatePreferences } from "@/libs/actions/user.actions";
 import { useRouter } from "next/navigation";
 import { MdFamilyRestroom } from "react-icons/md";
-import { FaGlassCheers, FaGlobeAmericas } from "react-icons/fa";
+import {
+  FaGlassCheers,
+  FaGlobeAmericas,
+  FaTransgenderAlt,
+} from "react-icons/fa";
 import DropDown from "../shared/DropDown";
 
 type PreferencesFormProps = {
@@ -55,6 +59,9 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
     smoking: user.preferences?.smoking || [],
     marijuana: user.preferences?.marijuana || [],
     alcohol: user.preferences?.alcohol || [],
+    race: user.preferences?.race || [],
+    sexualOrientation: user?.preferences?.sexualOrientation || [],
+    relationshipstatus: user?.preferences?.relationshipstatus || [],
   });
 
   useEffect(() => {
@@ -78,6 +85,9 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
         smoking: selected.smoking,
         marijuana: selected.marijuana,
         alcohol: selected.alcohol,
+        race: selected.race,
+        sexualOrientation: selected.sexualOrientation,
+        relationshipstatus: selected.relationshipstatus,
       });
 
       console.log("preferences updated");
@@ -101,6 +111,9 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
     smoking?: string[] | undefined;
     marijuana?: string[] | undefined;
     alcohol?: string[] | undefined;
+    race?: string[] | undefined;
+    relationshipstatus?: string[] | undefined;
+    sexualOrientation?: string[] | undefined;
   };
 
   const toggleSelected = <T extends keyof Preferences>(
@@ -147,6 +160,20 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
         userOptions={userOptions.enumGender}
         onClick={(value: string) => toggleSelected("gender", value)}
         selectedOptions={selected.gender}
+      />
+
+      <DropDown
+        title="Sexual Orientation"
+        userOptions={userOptions.enumSexualOrientation}
+        selectedOptions={selected.sexualOrientation}
+        onClick={(value: string) => toggleSelected("sexualOrientation", value)}
+      />
+
+      <DropDown
+        title="Relationship Status"
+        userOptions={userOptions.enumRelationshipStatus}
+        selectedOptions={selected.relationshipstatus}
+        onClick={(value: string) => toggleSelected("relationshipstatus", value)}
       />
 
       <button
@@ -277,12 +304,12 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
         <FaGlobeAmericas size={50} />
         <p>BACKGROUND</p>
       </div>
-
+      
       <DropDown
-        title="Orientaion"
-        userOptions={userOptions.enumSexualOrientation}
-        selectedOptions={selected.orientation}
-        onClick={(value: string) => toggleSelected("orientation", value)}
+        title="race"
+        userOptions={userOptions.enumRace}
+        selectedOptions={selected.race}
+        onClick={(value: string) => toggleSelected("race", value)}
       />
 
       <DropDown

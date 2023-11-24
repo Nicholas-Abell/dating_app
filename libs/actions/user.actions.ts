@@ -101,6 +101,9 @@ type PreferenceParams = {
   smoking: string[];
   marijuana: string[];
   alcohol: string[];
+  race: string[];
+  sexualOrientation: string[];
+  relationshipstatus: string[];
 };
 export async function updatePreferences({
   userId,
@@ -117,6 +120,9 @@ export async function updatePreferences({
   smoking,
   marijuana,
   alcohol,
+  race,
+  sexualOrientation,
+  relationshipstatus,
 }: PreferenceParams) {
   connectToDB();
 
@@ -138,6 +144,9 @@ export async function updatePreferences({
           smoking,
           marijuana,
           alcohol,
+          race,
+          sexualOrientation,
+          relationshipstatus,
         },
       },
       { upsert: true }
@@ -213,11 +222,22 @@ export async function fetchFilteredProfiles(
 
     let query = {
       id: { $ne: userId },
-      gender: { $in: userPreferences.gender },
+      gender: { $in: userPreferences?.gender },
       age: {
         $lte: userPreferences?.age?.max,
         $gte: userPreferences?.age?.min,
       },
+      relationshipstatus: { $in: userPreferences?.relationshipstatus },
+      sexualOrientation: { $in: userPreferences?.sexualOrientation },
+      race: { $in: userPreferences?.race },
+      pets: { $in: userPreferences?.pets },
+      kids: { $in: userPreferences?.kids },
+      alcohol: { $in: userPreferences?.alcohol },
+      smoking: { $in: userPreferences?.smoking },
+      marijuana: { $in: userPreferences?.marijuana },
+      religion: { $in: userPreferences?.religion },
+      politicalViews: { $in: userPreferences?.politicalViews },
+      lookingfor: { $in: userPreferences?.desires },
     };
 
     const users = await User.aggregate([
