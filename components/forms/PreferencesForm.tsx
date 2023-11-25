@@ -9,7 +9,6 @@ import { MdFamilyRestroom } from "react-icons/md";
 import {
   FaGlassCheers,
   FaGlobeAmericas,
-  FaTransgenderAlt,
 } from "react-icons/fa";
 import DropDown from "../shared/DropDown";
 
@@ -19,6 +18,7 @@ type PreferencesFormProps = {
     sexualOrientation: string;
     gender: string;
     preferences?: {
+      preferencesSet: boolean;
       age: { min: number; max: number };
       distance: number;
       relationshipstatus: string[];
@@ -149,33 +149,34 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
   };
 
   return (
-    <main className="w-full">
+    <main className="w-full relative">
+      {!user?.preferences?.preferencesSet && (
+        <div className="absolute w-full h-full bg-red-600/70 z-20"></div>
+      )}
+
+      {/* Basic Start */}
       <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <PiShapesLight size={50} />
         <p>BASIC</p>
       </div>
-
       <DropDown
         title="Gender"
         userOptions={userOptions.enumGender}
         onClick={(value: string) => toggleSelected("gender", value)}
         selectedOptions={selected.gender}
       />
-
       <DropDown
         title="Sexual Orientation"
         userOptions={userOptions.enumSexualOrientation}
         selectedOptions={selected.sexualOrientation}
         onClick={(value: string) => toggleSelected("sexualOrientation", value)}
       />
-
       <DropDown
         title="Relationship Status"
         userOptions={userOptions.enumRelationshipStatus}
         selectedOptions={selected.relationshipstatus}
         onClick={(value: string) => toggleSelected("relationshipstatus", value)}
       />
-
       <button
         onClick={() => setOptions({ ...options, age: !options.age })}
         className="w-full px-8 py-4 flex items-center justify-between gap-4 md:text-2xl text-black border-t border-b hover:bg-gray-100"
@@ -273,84 +274,82 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
           </div>
         </div>
       )}
-
       <DropDown
         userOptions={userOptions.enumLookingFor}
         selectedOptions={selected.desires}
         title="Desires"
         onClick={(value: string) => toggleSelected("desires", value)}
       />
+      {/* Basic End */}
 
+      {/* Family Start */}
       <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <MdFamilyRestroom size={50} />
         <p>FAMILY</p>
       </div>
-
       <DropDown
         title="Pets"
         userOptions={userOptions.enumPets}
         selectedOptions={selected.pets}
         onClick={(value: string) => toggleSelected("pets", value)}
       />
-
       <DropDown
         title="Kids"
         userOptions={userOptions.enumKids}
         selectedOptions={selected.kids}
         onClick={(value: string) => toggleSelected("kids", value)}
       />
+      {/* Family End */}
 
+      {/* Background Start */}
       <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <FaGlobeAmericas size={50} />
         <p>BACKGROUND</p>
       </div>
-      
       <DropDown
         title="race"
         userOptions={userOptions.enumRace}
         selectedOptions={selected.race}
         onClick={(value: string) => toggleSelected("race", value)}
       />
-
       <DropDown
         title="Religion"
         userOptions={userOptions.enumReligion}
         selectedOptions={selected.religion}
         onClick={(value: string) => toggleSelected("religion", value)}
       />
-
       <DropDown
         title="Political Views"
         userOptions={userOptions.enumPoliticalViews}
         selectedOptions={selected.politicalViews}
         onClick={(value: string) => toggleSelected("politicalViews", value)}
       />
+      {/* Background End */}
 
+      {/* Lifestyle Start */}
       <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <FaGlassCheers size={50} />
         <p>LIFESTYLE</p>
       </div>
-
       <DropDown
         title="Alcohol"
         userOptions={userOptions.enumAlcohol}
         selectedOptions={selected.alcohol}
         onClick={(value: string) => toggleSelected("alcohol", value)}
       />
-
       <DropDown
         title="Smoking"
         userOptions={userOptions.enumSmoking}
         selectedOptions={selected.smoking}
         onClick={(value: string) => toggleSelected("smoking", value)}
       />
-
       <DropDown
         title="Marijuana"
         userOptions={userOptions.enumMarijuana}
         selectedOptions={selected.marijuana}
         onClick={(value: string) => toggleSelected("marijuana", value)}
       />
+      {/* Lifestyle End */}
 
       <div className="w-full flex justify-center items-center py-4">
         <button

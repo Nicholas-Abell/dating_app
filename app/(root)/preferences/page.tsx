@@ -1,4 +1,5 @@
 import PreferencesForm from "@/components/forms/PreferencesForm";
+import PreferencesToggle from "@/components/shared/PreferencesToggle";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import React from "react";
@@ -16,6 +17,7 @@ const page: React.FC<pageProps> = async () => {
     sexualOrientation: userInfo?.sexualOrientation || "",
     gender: userInfo?.gender || "",
     preferences: {
+      preferencesSet: userInfo?.preferences?.preferencesSet,
       age: {
         min: userInfo?.preferences.age.min || 18,
         max: userInfo?.preferences.age.max || 100,
@@ -39,6 +41,12 @@ const page: React.FC<pageProps> = async () => {
 
   return (
     <main className="w-full">
+      <div className="w-full px-12 py-12">
+        <PreferencesToggle
+          id={userInfo?.id}
+          preferencesSet={userInfo?.preferences?.preferencesSet}
+        />
+      </div>
       <PreferencesForm user={userData} />
     </main>
   );
