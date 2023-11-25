@@ -41,7 +41,7 @@ const page: React.FC<pageProps> = async () => {
 
   return (
     <main className="w-full">
-      <div className="w-full px-12 py-12">
+      <div className="w-full">
         <PreferencesToggle
           id={userInfo?.id}
           preferencesSet={userInfo?.preferences?.preferencesSet}
