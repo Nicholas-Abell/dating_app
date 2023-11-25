@@ -90,16 +90,10 @@ async function Page({ params }: { params: { id: string } }) {
         <div className="w-full flex items-center gap-4 md:hidden">
           <div className="flex items-center gap-1">
             <BsFillPersonFill size={20} />
-            <p>{profileInfo?.gender}</p>
+            <p>
+              {profileInfo?.gender} - {profileInfo?.sexualOrientation}
+            </p>
           </div>
-          {profileInfo?.sexualOrientation ? (
-            <>
-              <p>-</p>
-              <p>{profileInfo?.sexualOrientation}</p>
-            </>
-          ) : (
-            ""
-          )}
         </div>
         <div className="grid md:grid-cols-2 gap-8 w-full">
           <div className="w-full flex flex-col py-8 md:py-0 gap-1 h-full">
@@ -121,7 +115,9 @@ async function Page({ params }: { params: { id: string } }) {
             </div>
             <div className="flex items-center gap-4">
               <FaTransgender size={20} />
-              <p>{profileInfo?.gender}</p>
+              <p>
+                {profileInfo?.gender} - {profileInfo?.sexualOrientation}
+              </p>
             </div>
             <div className="flex items-center gap-4">
               <PiGlobeStandBold size={20} />
@@ -137,15 +133,15 @@ async function Page({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
-        <div className="w-full bg-gray-200 grid md:grid-cols-3 gap-4 p-4">
+        <div className="w-full bg-gray-200 grid md:grid-cols-3 gap-4 p-4 text-sm">
           <div className="rounded-xl bg-white gap-8">
             <div className="w-full text-center bg-black text-white rounded-tl-xl rounded-tr-xl">
               <h3>FAMILY</h3>
             </div>
             <div className="w-full px-4 py-2 flex flex-col gap-8 border-2 border-black">
-              <p>Pets</p>
-              <p>Kids</p>
-              <p>wants kids</p>
+              <p>Pets: {profileInfo?.pets}</p>
+              <p>Kids: {profileInfo?.kids}</p>
+              <p>-</p>
             </div>
           </div>
           <div className="rounded-xl bg-white gap-8">
@@ -153,9 +149,9 @@ async function Page({ params }: { params: { id: string } }) {
               <h3>LIFESTYLE</h3>
             </div>
             <div className="w-full px-4 py-2 flex flex-col gap-8 border-2 border-black">
-              <p>Alcohol</p>
-              <p>Smoking</p>
-              <p>Marijuana</p>
+              <p>Alcohol: {profileInfo?.alcohol}</p>
+              <p>Smoking: {profileInfo?.smoking}</p>
+              <p>Marijuana: {profileInfo?.marijuana}</p>
             </div>
           </div>
           <div className="rounded-xl bg-white gap-8">
@@ -163,9 +159,9 @@ async function Page({ params }: { params: { id: string } }) {
               <h3>BACKGROUND</h3>
             </div>
             <div className="w-full px-4 py-2 flex flex-col gap-8 border-2 border-black">
-              <p>Orientation</p>
-              <p>Religion</p>
-              <p>Political Views</p>
+              <p>Race: {profileInfo?.race}</p>
+              <p>Religion: {profileInfo?.religion}</p>
+              <p>Political Views: {profileInfo?.politicalViews}</p>
             </div>
           </div>
         </div>
