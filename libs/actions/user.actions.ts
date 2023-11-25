@@ -390,3 +390,21 @@ export async function fetchAndUpdateUserLocation(userId: string) {
     console.error("Error fetchAndUpdateUserLocation error: ", error);
   }
 }
+
+export async function togglePreferencesSet(userId: string): Promise<void> {
+  try {
+    connectToDB();
+
+    const user = await User.findOne({ id: userId });
+    const preferencesSet = user?.preferences.preferencesSet || false;
+
+    await User.findOneAndUpdate(
+      { id: userId },
+      { "preferences.preferencesSet": !preferencesSet }
+    );
+
+    revalidatePath("/preferences");
+  } catch (error: any) {
+    throw new Error(`Failed to toggle preferencesSet: ${error.message}`);
+  }
+}
