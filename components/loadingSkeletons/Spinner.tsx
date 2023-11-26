@@ -2,16 +2,20 @@ import React from "react";
 import { FaHeart } from "react-icons/fa";
 
 type SpinnerProps = {
-  size?: "small" | "medium" | "large"; // Define size options
+  size?: "small" | "medium" | "large" | "xl";
 };
 
 const Spinner: React.FC<SpinnerProps> = ({ size = "medium" }) => {
   // Map sizes to dimensions
   const sizeToDimensions = {
-    small: "h-8 w-8", // Define dimensions for small size
-    medium: "h-16 w-16", // Define dimensions for medium size (default)
-    large: "h-24 w-24", // Define dimensions for large size
+    small: "h-8 w-8",
+    medium: "h-16 w-16",
+    large: "h-24 w-24",
+    xl: "h-48 w-48",
   };
+
+  const heartSize =
+    size === "small" ? 20 : size === "medium" ? 30 : size === "xl" ? 80 : 40;
 
   return (
     <div className="flex items-center justify-center relative">
@@ -22,8 +26,8 @@ const Spinner: React.FC<SpinnerProps> = ({ size = "medium" }) => {
         className={`absolute bg-gray-100 rounded-full ${sizeToDimensions[size]}`}
       ></div>
       <FaHeart
-        size={size === "small" ? 20 : size === "large" ? 40 : 30} // Adjust heart size based on variant
-        className={`text-gray-400 animate-pulse absolute`}
+        size={heartSize}
+        className="text-gray-400 animate-pulse absolute"
       />
     </div>
   );
