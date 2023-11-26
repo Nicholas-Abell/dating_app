@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { findUsersThatLikedYou } from "@/libs/actions/user.actions";
 import NoLikedBy from "./NoLikedBy";
+import { BsPersonCircle } from "react-icons/bs";
 
 type LikedByProps = {
   likedBy: string[];
@@ -20,12 +21,16 @@ const LikedBy: React.FC<LikedByProps> = async ({ likedBy }) => {
             href={`/profile/${likedYou?.id}`}
             className="w-16 h-16 bg-slate-600 text-gray-200 rounded-full relative flex justify-center items-center"
           >
-            <Image
-              src={likedYou.images[0]}
-              fill
-              alt={likedYou.username.toString()}
-              className="object-cover rounded-full"
-            />
+            {likedYou.images[0] ? (
+              <Image
+                src={likedYou.images[0]}
+                fill
+                alt={likedYou.username.toString()}
+                className="object-cover rounded-full"
+              />
+            ) : (
+              <BsPersonCircle size={30} />
+            )}
           </Link>
         ))
       ) : (
