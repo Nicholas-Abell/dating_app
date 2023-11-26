@@ -9,26 +9,28 @@ const page: React.FC<pageProps> = async () => {
   if (!user) return null; // to avoid typescript warnings
 
   const userInfo = await fetchUser(user?.id);
-  // if (userInfo?.onboarded) redirect(/);
-
-  //user clerk
-  //userInfo MongoDb
 
   const userData = {
     id: user?.id,
     username: userInfo ? userInfo.username : user?.username,
     bio: userInfo?.bio || "",
     age: userInfo?.age || 0,
-    height: {
-      feet: userInfo?.height?.feet || 0,
-      inches: userInfo?.height?.inches || 0,
-    },
+    feet: userInfo?.height?.feet || 0,
+    inches: userInfo?.height?.inches || 0,
     weight: userInfo?.weight || 0,
     lookingfor: userInfo?.lookingfor || "",
     gender: userInfo?.gender || user.gender || "",
     race: userInfo?.race || "",
     relationshipstatus: userInfo?.relationshipstatus || "",
     sexualOrientation: userInfo?.sexualOrientation || "",
+    // pronouns: string;
+    pets: userInfo?.pets || "",
+    kids: userInfo?.kids || "",
+    alcohol: userInfo?.alcohol || "",
+    smoking: userInfo?.smoking || "",
+    marijuana: userInfo?.marijuana || "",
+    religion: userInfo?.religion || "",
+    politicalViews: userInfo?.politicalViews || "",
   };
 
   return (
