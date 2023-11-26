@@ -305,8 +305,6 @@ export async function fetchUser(userId: string) {
 
 export async function likeProfile(userId: string, likeId: string) {
   try {
-    connectToDB();
-
     const userToLike = await User.findOne({ id: likeId });
     console.log("Like/Disliked: ", userToLike?.username);
     const user = await User.findOne({ id: userId });
@@ -338,7 +336,6 @@ export async function likeProfile(userId: string, likeId: string) {
         { new: true }
       );
     }
-    revalidatePath("/");
   } catch (error: any) {
     throw new Error(`likeUser Error: ${error.message}`);
   }
