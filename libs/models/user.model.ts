@@ -10,7 +10,7 @@ const userSchema = new Schema({
   weight: { type: Number },
   relationshipstatus: {
     type: String,
-    enum: userOptions.enumRelationshipStatus,
+    enum: userOptions.enumRelationshipstatus,
     default: "Single",
   },
   sexualOrientation: {
@@ -77,7 +77,7 @@ const userSchema = new Schema({
     relationshipstatus: [
       {
         type: String,
-        enum: userOptions.enumRelationshipStatus,
+        enum: userOptions.enumRelationshipstatus,
       },
     ],
     pets: [{ type: String, enum: userOptions.enumPets }],
