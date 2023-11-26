@@ -6,10 +6,7 @@ import * as userOptions from "../../constants/userOptions";
 import { updatePreferences } from "@/libs/actions/user.actions";
 import { useRouter } from "next/navigation";
 import { MdFamilyRestroom } from "react-icons/md";
-import {
-  FaGlassCheers,
-  FaGlobeAmericas,
-} from "react-icons/fa";
+import { FaGlassCheers, FaGlobeAmericas } from "react-icons/fa";
 import DropDown from "../shared/DropDown";
 
 type PreferencesFormProps = {
@@ -173,7 +170,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
       />
       <DropDown
         title="Relationship Status"
-        userOptions={userOptions.enumRelationshipStatus}
+        userOptions={userOptions.enumRelationshipstatus}
         selectedOptions={selected.relationshipstatus}
         onClick={(value: string) => toggleSelected("relationshipstatus", value)}
       />

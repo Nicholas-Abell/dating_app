@@ -23,7 +23,7 @@ const page: React.FC<pageProps> = async () => {
         max: userInfo?.preferences.age.max || 100,
       },
       distance: userInfo?.preferences?.distance || 9000,
-      relationshipstatus: userInfo?.preferences?.relationShipStatus || "",
+      relationshipstatus: userInfo?.preferences?.relationshipstatus || "",
       desires: userInfo?.preferences?.desires || "",
       gender: userInfo?.preferences?.gender || "",
       race: userInfo?.preferences?.race || "",

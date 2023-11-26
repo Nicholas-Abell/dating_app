@@ -4,12 +4,18 @@ import { FaGlobeAmericas, FaGlassCheers } from "react-icons/fa";
 import { FaPersonRays } from "react-icons/fa6";
 import { MdFamilyRestroom } from "react-icons/md";
 import { PiShapesLight } from "react-icons/pi";
+import Spinner from "./Spinner";
 
 type PreferencesSkeletonProps = {};
 
 const PreferencesSkeleton: React.FC<PreferencesSkeletonProps> = () => {
   return (
     <main className="w-full">
+      <div className="w-full flex justify-center items-center px-8 h-32">
+        <div className=" animate-pulse">
+          <Spinner size="large" />
+        </div>
+      </div>
       <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <PiShapesLight size={50} />
         <p>BASIC</p>

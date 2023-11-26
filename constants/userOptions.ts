@@ -1,4 +1,4 @@
-export const enumRelationshipStatus = [
+export const enumRelationshipstatus = [
   "No Response",
   "Committed",
   "Dating",
