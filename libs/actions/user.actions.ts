@@ -50,8 +50,6 @@ export async function updateUser({
   religion,
   politicalViews,
 }: Params): Promise<void> {
-  connectToDB();
-
   try {
     await User.findOneAndUpdate(
       { id: userId },
@@ -124,8 +122,6 @@ export async function updatePreferences({
   sexualOrientation,
   relationshipstatus,
 }: PreferenceParams) {
-  connectToDB();
-
   try {
     await User.findOneAndUpdate(
       { id: userId },
@@ -159,7 +155,6 @@ export async function updatePreferences({
 
 export async function addUserImage(userId: string, imageUrl: string) {
   try {
-    connectToDB();
     await User.findOneAndUpdate(
       { id: userId },
       { $push: { images: imageUrl } },
@@ -172,7 +167,6 @@ export async function addUserImage(userId: string, imageUrl: string) {
 
 export async function deleteUserImage(userId: string, imageUrl: string) {
   try {
-    connectToDB();
     await User.findOneAndUpdate(
       { id: userId },
       { $pull: { images: imageUrl } }
@@ -191,6 +185,7 @@ export async function fetchProfiles(
 
   try {
     connectToDB();
+    console.log("Fetch All Profiles");
 
     const users = await User.aggregate([
       {
@@ -216,6 +211,7 @@ export async function fetchFilteredProfiles(
 
   try {
     connectToDB();
+    console.log("Fetch Filtered Profiles");
 
     const user = await User.findOne({ id: userId });
     const userPreferences = user?.preferences;
@@ -296,6 +292,7 @@ export async function fetchFilteredProfiles(
 export async function fetchUser(userId: string) {
   try {
     connectToDB();
+    console.log("Fetch user");
     const user = await User.findOne({ id: userId });
     return user;
   } catch (error: any) {
@@ -341,28 +338,19 @@ export async function likeProfile(userId: string, likeId: string) {
   }
 }
 
-export async function findUsersThatLikedYou(userId: string) {
+export async function findUsersThatLikedYou(likedBy: string[]) {
   try {
-    connectToDB();
-    const user = await fetchUser(userId);
-    if (!user) {
-      console.log("User not found.");
-      return [];
-    }
-    const likedByUserIds = user.likedBy;
+    const users = await User.find({ id: { $in: likedBy } });
 
-    const users = await User.find({ id: { $in: likedByUserIds } });
-
-    console.log("Users liked by the user: ", users);
     return users;
   } catch (error) {
     console.error("Error finding users by likedBy:", error);
     throw error;
   }
 }
+
 export async function fetchAndUpdateUserLocation(userId: string) {
   try {
-    connectToDB();
     let ipgeolocationApi = new IPGeolocationAPI(
       process.env.IP_GEOLOCATION_KEY,
       false
@@ -390,8 +378,6 @@ export async function fetchAndUpdateUserLocation(userId: string) {
 
 export async function togglePreferencesSet(userId: string): Promise<void> {
   try {
-    connectToDB();
-
     const user = await User.findOne({ id: userId });
     const preferencesSet = user?.preferences.preferencesSet || false;
 

@@ -54,11 +54,9 @@ export async function createConversation({
 
 export async function populateConversations(userId: string) {
   try {
-    connectToDB();
     const conversations = await Conversation.find({
       "users.id": userId,
     });
-    console.log(conversations);
     return conversations;
   } catch (error: any) {
     throw new Error("populateConversations Error: ", error);
@@ -85,7 +83,6 @@ export async function sendMessage({
   recieverImage,
 }: params) {
   try {
-    connectToDB();
     const existingConversation = await checkExistingConversation({
       userId,
       recieverId,
