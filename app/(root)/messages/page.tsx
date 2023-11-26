@@ -18,7 +18,7 @@ const page: React.FC<pageProps> = async () => {
   return (
     <main className="w-full h-screen overflow-y-scroll scrollbar-hide">
       <h2 className="p-4 font-bold text-3xl">Likes you</h2>
-      <LikedBy userId={userInfo?.id} />
+      <LikedBy likedBy={userInfo?.likedBy} />
       <h1 className="p-4 font-bold text-3xl">Messages</h1>
       {conversations.length > 0 ? (
         conversations.map((convo, key) => {

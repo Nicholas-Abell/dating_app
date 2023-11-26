@@ -1,16 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import User from "@/libs/models/user.model";
 import { findUsersThatLikedYou } from "@/libs/actions/user.actions";
 import NoLikedBy from "./NoLikedBy";
 
 type LikedByProps = {
-  userId: string;
+  likedBy: string[];
 };
 
-const LikedBy: React.FC<LikedByProps> = async ({ userId }) => {
-  const likesYou = await findUsersThatLikedYou(userId);
+const LikedBy: React.FC<LikedByProps> = async ({ likedBy }) => {
+  const likesYou = await findUsersThatLikedYou(likedBy);
 
   return (
     <aside className="flex items-center justify-start overflow-x-scroll scrollbar-hide px-4 gap-8">
