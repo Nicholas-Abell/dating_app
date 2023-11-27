@@ -195,9 +195,27 @@ export async function fetchProfiles(
       { $limit: pageSize },
     ]);
 
+    const today = new Date();
+    const formattedDate = `${today.getDate()}/${today.getMonth() + 1}/${String(
+      today.getFullYear()
+    ).slice(-2)}`;
+
+    // Fetch the user
+    const currentUser = await User.findOne({ id: userId });
+
+    // Check if the formatted date is already in the array
+    if (!currentUser.lastOn.includes(formattedDate)) {
+      // Update Time Stamp for the user
+      await User.findOneAndUpdate(
+        { id: userId },
+        { lastOn: formattedDate },
+        { new: true }
+      );
+      console.log("lastOn set: ", formattedDate);
+    }
+
     return users;
   } catch (error: any) {
-    console.error("Error in fetchProfiles: ", error);
     throw new Error("fetchProfiles Error: " + error.message);
   }
 }
@@ -282,6 +300,26 @@ export async function fetchFilteredProfiles(
       { $skip: skipAmount },
       { $limit: pageSize },
     ]);
+
+    const today = new Date();
+    const formattedDate = `${today.getDate()}/${today.getMonth() + 1}/${String(
+      today.getFullYear()
+    ).slice(-2)}`;
+
+    // Fetch the user
+    const currentUser = await User.findOne({ id: userId });
+
+    // Check if the formatted date is already in the array
+    if (!currentUser.lastOn.includes(formattedDate)) {
+      // Update Time Stamp for the user
+      await User.findOneAndUpdate(
+        { id: userId },
+        { lastOn: formattedDate },
+        { new: true }
+      );
+      console.log("lastOn set: ", formattedDate);
+    }
+
     return users;
   } catch (error: any) {
     console.error("Error in fetchProfiles: ", error);

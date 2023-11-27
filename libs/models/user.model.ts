@@ -3,6 +3,7 @@ import * as userOptions from "../../constants/userOptions";
 
 const userSchema = new Schema({
   username: { type: String, require: true },
+  lastOn: { type: String },
   bio: { type: String },
   onboarded: { type: Boolean, default: false },
   age: { type: Number },

@@ -15,6 +15,7 @@ import {
 } from "react-icons/bs";
 import { BiRuler } from "react-icons/bi";
 import { FaTransgender } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 import { PiGlobeStandBold } from "react-icons/pi";
 import LikeButton from "@/components/shared/LikeButton";
 
@@ -81,11 +82,11 @@ async function Page({ params }: { params: { id: string } }) {
           <p>{profileInfo?.age}</p>
         </div>
         <div className="w-full flex items-center gap-4 md:hidden">
-          <div className="flex items-center gap-1">
-            <div className="p-1 bg-green-400 rounded-full" />
-            <p>Online Now</p>
-          </div>
           <p>{distance}m away</p>
+          <p>-</p>
+          <p>
+            Last Seen: <em>{profileInfo?.lastOn}</em>
+          </p>
         </div>
         <div className="w-full flex items-center gap-4 md:hidden">
           <div className="flex items-center gap-1">
@@ -130,6 +131,15 @@ async function Page({ params }: { params: { id: string } }) {
             <div className="flex items-center gap-4">
               <BsEye size={20} />
               {profileInfo?.lookingfor}
+            </div>
+            <p className="font-bold">STATS</p>
+            <div className="flex items-center gap-4">
+              <FaLocationDot size={20} />
+              {distance}m away
+            </div>
+            <div className="flex items-center gap-4">
+              <p>Last Seen: </p>
+              {profileInfo?.lastOn}
             </div>
           </div>
         </div>
