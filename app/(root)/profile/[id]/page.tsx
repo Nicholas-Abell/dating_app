@@ -103,7 +103,7 @@ async function Page({ params }: { params: { id: string } }) {
               <p>{profileInfo?.bio}</p>
             </div>
           </div>
-          <div className="w-full flex flex-col gap-4 px-4 pb-8 md:p-0">
+          <div className="w-full flex flex-col justify-between gap-4 px-4 pb-8 md:p-0">
             <p className="font-bold">STATS</p>
             <div className="flex items-center gap-4">
               <BiRuler size={20} />
@@ -132,7 +132,6 @@ async function Page({ params }: { params: { id: string } }) {
               <BsEye size={20} />
               {profileInfo?.lookingfor}
             </div>
-            <p className="font-bold">STATS</p>
             <div className="flex items-center gap-4">
               <FaLocationDot size={20} />
               {distance}m away
@@ -143,32 +142,32 @@ async function Page({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
-        <div className="w-full bg-gray-200 grid md:grid-cols-3 gap-4 p-4 text-sm">
-          <div className="rounded-xl bg-white gap-8">
+        <div className="w-full bg-gray-200 grid md:grid-cols-3 grid-rows-1 md:min-h-[320px] gap-4 p-4 text-sm">
+          <div className="rounded-xl bg-white gap-8 h-full border-black border-2 border-t-0">
             <div className="w-full text-center bg-black text-white rounded-tl-xl rounded-tr-xl">
               <h3>FAMILY</h3>
             </div>
-            <div className="w-full px-4 py-2 flex flex-col gap-8 border-2 border-black">
+            <div className="w-full px-4 py-2 flex flex-col gap-8">
               <p>Pets: {profileInfo?.pets}</p>
               <p>Kids: {profileInfo?.kids}</p>
               <p>-</p>
             </div>
           </div>
-          <div className="rounded-xl bg-white gap-8">
+          <div className="rounded-xl bg-white gap-8 border-black border-2 border-t-0">
             <div className="w-full text-center bg-black text-white rounded-tl-xl rounded-tr-xl">
               <h3>LIFESTYLE</h3>
             </div>
-            <div className="w-full px-4 py-2 flex flex-col gap-8 border-2 border-black">
+            <div className="w-full px-4 py-2 flex flex-col gap-8">
               <p>Alcohol: {profileInfo?.alcohol}</p>
               <p>Smoking: {profileInfo?.smoking}</p>
               <p>Marijuana: {profileInfo?.marijuana}</p>
             </div>
           </div>
-          <div className="rounded-xl bg-white gap-8">
+          <div className="rounded-xl bg-white gap-8 border-black border-2 border-t-0">
             <div className="w-full text-center bg-black text-white rounded-tl-xl rounded-tr-xl">
               <h3>BACKGROUND</h3>
             </div>
-            <div className="w-full px-4 py-2 flex flex-col gap-8 border-2 border-black">
+            <div className="w-full px-4 py-2 flex flex-col gap-8">
               <p>Race: {profileInfo?.race}</p>
               <p>Religion: {profileInfo?.religion}</p>
               <p>Political Views: {profileInfo?.politicalViews}</p>
