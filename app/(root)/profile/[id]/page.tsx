@@ -38,6 +38,7 @@ async function Page({ params }: { params: { id: string } }) {
 
   return (
     <section className="w-full min-h-screen relative flex flex-col pb-24 items-center gap-4">
+      {/* Hero Mobile Start*/}
       <div className="md:hidden w-full h-[80vh] md:h-[40vh] relative">
         {imageCount ? (
           <ImageCarousel images={profileInfo?.images} />
@@ -47,7 +48,9 @@ async function Page({ params }: { params: { id: string } }) {
           </div>
         )}
       </div>
+      {/* Hero End*/}
 
+      {/* Hero Destop Start*/}
       <div
         className={`w-full hidden md:flex items-center gap-8 px-24 md:pt-12 bg-black relative`}
       >
@@ -75,27 +78,27 @@ async function Page({ params }: { params: { id: string } }) {
         </div>
         <div className="absolute bottom-0 left-0 bg-white w-full h-12 p-4" />
       </div>
+      {/* Hero Destop End*/}
 
       <div className="w-full relative flex flex-col pt-12 md:pt-0 pb-24 px-8 items-center gap-4">
-        <div className="md:hidden w-full flex items-center pt-8 gap-12 text-4xl">
-          <h2 className="font-bold uppercase">{profileInfo?.username}</h2>
-          <p>{profileInfo?.age}</p>
-        </div>
-        <div className="w-full flex items-center gap-4 md:hidden">
-          <p>{distance}m away</p>
-          <p>-</p>
-          <p>
-            Last Seen: <em>{profileInfo?.lastOn}</em>
-          </p>
-        </div>
-        <div className="w-full flex items-center gap-4 md:hidden">
-          <div className="flex items-center gap-1">
-            <BsFillPersonFill size={20} />
-            <p>
-              {profileInfo?.gender} - {profileInfo?.sexualOrientation}
-            </p>
+        {/*Mobile Basic Info Start*/}
+        <div className="md:hidden w-full">
+          <div className="w-full flex items-center pt-8 gap-2 sm:gap-12 sm:text-4xl">
+            <h2 className="font-bold uppercase">{profileInfo?.username}</h2>
+            <p>{profileInfo?.age}</p>
+          </div>
+          <div className="w-full flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <BsFillPersonFill size={20} />
+              <p>
+                {profileInfo?.gender} - {profileInfo?.sexualOrientation}
+              </p>
+            </div>
           </div>
         </div>
+        {/*Mobile Basic Info End*/}
+
+        {/* Stats/Bio Start */}
         <div className="grid md:grid-cols-2 gap-8 w-full">
           <div className="w-full flex flex-col py-8 md:py-0 gap-1 h-full">
             <p className="font-bold">ABOUT ME</p>
@@ -142,6 +145,9 @@ async function Page({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
+        {/* Stats/Bio End */}
+
+        {/* Additional Info Start */}
         <div className="w-full bg-gray-200 grid md:grid-cols-3 grid-rows-1 md:min-h-[320px] gap-4 p-4 text-sm">
           <div className="rounded-xl bg-white gap-8 h-full border-black border-2 border-t-0">
             <div className="w-full text-center bg-black text-white rounded-tl-xl rounded-tr-xl">
@@ -174,6 +180,9 @@ async function Page({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
+        {/* Additional Info End */}
+
+        {/* Desktop Images */}
         <div className="w-full bg-gray-200 hidden md:grid grid-cols-3 gap-4 p-4 relative">
           {profileInfo?.images &&
             profileInfo?.images.map((image: string, key: number) => (
@@ -187,10 +196,12 @@ async function Page({ params }: { params: { id: string } }) {
               </div>
             ))}
         </div>
+        {/* Desktop Images */}
+
         {params.id === userInfo?.id ? (
           <Link
             href="/profile/edit"
-            className="fixed bottom-10 bg-yellow-500 text-2xl px-24 py-2 rounded-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
+            className="fixed bottom-10 bg-yellow-500 text-2xl px-4 sm:px-24 py-2 rounded-full max-w-[380px] opacity-40 hover:opacity-100 ease-in-out duration-200"
           >
             <p>Edit Profile</p>
           </Link>
