@@ -19,18 +19,21 @@ const LikedBy: React.FC<LikedByProps> = async ({ likedBy }) => {
           <Link
             key={key}
             href={`/profile/${likedYou?.id}`}
-            className="w-16 h-16 bg-slate-600 text-gray-200 rounded-full relative flex justify-center items-center"
+            className="flex flex-col justify-center items-center gap-1"
           >
-            {likedYou.images[0] ? (
-              <Image
-                src={likedYou.images[0]}
-                fill
-                alt={likedYou.username.toString()}
-                className="object-cover rounded-full"
-              />
-            ) : (
-              <BsPersonCircle size={30} />
-            )}
+            <div className="w-16 h-16 relative bg-slate-600 text-gray-200 rounded-full flex justify-center items-center">
+              {likedYou.images[0] ? (
+                <Image
+                  src={likedYou.images[0]}
+                  fill
+                  alt={likedYou.username.toString()}
+                  className="object-cover rounded-full"
+                />
+              ) : (
+                <BsPersonCircle size={30} />
+              )}
+            </div>
+            <p className="text-sm font-bold">{likedYou.username}</p>
           </Link>
         ))
       ) : (
