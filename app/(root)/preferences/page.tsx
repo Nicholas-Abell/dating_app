@@ -15,7 +15,6 @@ const page: React.FC<pageProps> = async () => {
 
   const userData = {
     id: userInfo?.id,
-    city: userInfo?.location?.city,
     sexualOrientation: userInfo?.sexualOrientation || "",
     gender: userInfo?.gender || "",
     preferences: {

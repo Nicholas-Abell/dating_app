@@ -12,7 +12,6 @@ import DropDown from "../shared/DropDown";
 type PreferencesFormProps = {
   user: {
     id: string;
-    city: string;
     sexualOrientation: string;
     gender: string;
     preferences?: {
@@ -360,17 +359,6 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ user }) => {
       <div className="bg-gray-200 w-full px-8 py-2 flex items-center gap-4 text-2xl font-bold text-black">
         <PiShapesLight size={50} />
         <p>Location</p>
-      </div>
-      <div className="px-8 py-4">
-        <p>Current Location: {user.city}</p>
-        <div className="flex items-center">
-          <button
-            onClick={() => updateLocation(user.id)}
-            className="bg-blue-500 text-xl text-white rounded-full px-8 py-2 font-bold hover:bg-blue-400 hover:text-gray-100"
-          >
-            Update
-          </button>
-        </div>
       </div>
     </main>
   );

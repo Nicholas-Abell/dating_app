@@ -1,6 +1,7 @@
 import { AccountPhotos } from "@/components/forms/AccountPhotos";
 import AccountProfile from "@/components/forms/AccountProfile";
-import { fetchUser } from "@/libs/actions/user.actions";
+import LocationButton from "@/components/shared/LocationButton";
+import { fetchUser, updateLocation } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -16,6 +17,7 @@ export default async function Edit() {
 
   const userData = {
     id: user?.id,
+    city: userInfo?.location?.city,
     username: userInfo ? userInfo.username : user?.username,
     bio: userInfo?.bio || "",
     age: userInfo?.age || 0,
@@ -43,7 +45,8 @@ export default async function Edit() {
       <h2 className="text-2xl font-semibold text-center text-black mb-6">
         Edit Your Profile
       </h2>
-      <AccountPhotos images={userInfo.images} id={userInfo?.id} />
+      <AccountPhotos images={userInfo.images} id={userInfo.id} />
+      <LocationButton id={userInfo.id} city={userInfo.location.city} />
       <AccountProfile user={userData} />
     </div>
   );
