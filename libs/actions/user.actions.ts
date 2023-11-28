@@ -103,6 +103,7 @@ type PreferenceParams = {
   sexualOrientation: string[];
   relationshipstatus: string[];
 };
+
 export async function updatePreferences({
   userId,
   gender,
@@ -387,7 +388,7 @@ export async function findUsersThatLikedYou(likedBy: string[]) {
   }
 }
 
-export async function fetchAndUpdateUserLocation(userId: string) {
+export async function updateLocation(userId: string) {
   try {
     let ipgeolocationApi = new IPGeolocationAPI(
       process.env.IP_GEOLOCATION_KEY,

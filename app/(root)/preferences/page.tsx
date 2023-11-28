@@ -3,6 +3,7 @@ import PreferencesToggle from "@/components/shared/PreferencesToggle";
 import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import React from "react";
+import { PiShapesLight } from "react-icons/pi";
 
 type pageProps = {};
 
@@ -14,6 +15,7 @@ const page: React.FC<pageProps> = async () => {
 
   const userData = {
     id: userInfo?.id,
+    city: userInfo?.location?.city,
     sexualOrientation: userInfo?.sexualOrientation || "",
     gender: userInfo?.gender || "",
     preferences: {
