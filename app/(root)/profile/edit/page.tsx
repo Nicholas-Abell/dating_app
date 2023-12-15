@@ -1,7 +1,7 @@
 import { AccountPhotos } from "@/components/forms/AccountPhotos";
 import AccountProfile from "@/components/forms/AccountProfile";
 import LocationButton from "@/components/shared/LocationButton";
-import { fetchUser, updateLocation } from "@/libs/actions/user.actions";
+import { fetchUser } from "@/libs/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";

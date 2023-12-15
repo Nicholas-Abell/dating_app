@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { BsChevronCompactRight } from "react-icons/bs";
 import { PiShapesLight } from "react-icons/pi";
 import * as userOptions from "../../constants/userOptions";
-import { updateLocation, updatePreferences } from "@/libs/actions/user.actions";
+import { updatePreferences } from "@/libs/actions/user.actions";
 import { useRouter } from "next/navigation";
 import { MdFamilyRestroom } from "react-icons/md";
 import { FaGlassCheers, FaGlobeAmericas } from "react-icons/fa";

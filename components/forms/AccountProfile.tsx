@@ -4,10 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import {
-  updateLocation,
-  updateUser,
-} from "@/libs/actions/user.actions";
+import { updateUser } from "@/libs/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
 import * as userOptions from "../../constants/userOptions";
 

@@ -2,8 +2,8 @@
 import { revalidatePath } from "next/cache";
 import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
-import { IPGeolocationAPI } from "../../node_modules/ip-geolocation-api-sdk-typescript/IPGeolocationAPI";
-import { GeolocationParams } from "ip-geolocation-api-sdk-typescript/GeolocationParams";
+// import { IPGeolocationAPI } from "../../node_modules/ip-geolocation-api-sdk-typescript/IPGeolocationAPI";
+// import { GeolocationParams } from "ip-geolocation-api-sdk-typescript/GeolocationParams";
 
 type Params = {
   userId: string;
@@ -388,32 +388,32 @@ export async function findUsersThatLikedYou(likedBy: string[]) {
   }
 }
 
-export async function updateLocation(userId: string) {
-  try {
-    let ipgeolocationApi = new IPGeolocationAPI(
-      process.env.IP_GEOLOCATION_KEY,
-      false
-    );
-    let geolocationParams = new GeolocationParams();
+// export async function updateLocation(userId: string) {
+//   try {
+//     let ipgeolocationApi = new IPGeolocationAPI(
+//       process.env.IP_GEOLOCATION_KEY,
+//       false
+//     );
+//     let geolocationParams = new GeolocationParams();
 
-    ipgeolocationApi.getGeolocation(async (res) => {
-      console.log(res);
-      await User.findOneAndUpdate(
-        { id: userId },
-        {
-          location: {
-            city: res.city,
-            latitude: res.latitude,
-            longitude: res.longitude,
-          },
-        },
-        { upsert: true }
-      );
-    }, geolocationParams);
-  } catch (error) {
-    console.error("Error fetchAndUpdateUserLocation error: ", error);
-  }
-}
+//     ipgeolocationApi.getGeolocation(async (res) => {
+//       console.log(res);
+//       await User.findOneAndUpdate(
+//         { id: userId },
+//         {
+//           location: {
+//             city: res.city,
+//             latitude: res.latitude,
+//             longitude: res.longitude,
+//           },
+//         },
+//         { upsert: true }
+//       );
+//     }, geolocationParams);
+//   } catch (error) {
+//     console.error("Error fetchAndUpdateUserLocation error: ", error);
+//   }
+// }
 
 export async function togglePreferencesSet(userId: string): Promise<void> {
   try {
