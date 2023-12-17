@@ -1,10 +1,10 @@
-import Navbar from "@/components/navbar/Navbar";
 import "../globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import LeftSidebar from "@/components/navbar/LeftSidebar";
 import { EdgeStoreProvider } from "@/libs/edgestore";
+import MobileNav from "@/components/navbar/MobileNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +22,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <main className="flex">
+          <main className="flex flex-col md:flex-row">
+            <MobileNav />
             <LeftSidebar />
             <EdgeStoreProvider>{children}</EdgeStoreProvider>
           </main>
