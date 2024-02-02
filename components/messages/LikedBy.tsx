@@ -1,6 +1,7 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+
 import { findUsersThatLikedYou } from "@/libs/actions/user.actions";
 import NoLikedBy from "./NoLikedBy";
 import { BsPersonCircle } from "react-icons/bs";
