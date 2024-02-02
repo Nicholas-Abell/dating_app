@@ -1,9 +1,9 @@
 import React from "react";
-import { BsChevronCompactRight } from "react-icons/bs";
 import { FaGlobeAmericas, FaGlassCheers } from "react-icons/fa";
 import { FaPersonRays } from "react-icons/fa6";
 import { MdFamilyRestroom } from "react-icons/md";
 import { PiShapesLight } from "react-icons/pi";
+
 import Spinner from "./Spinner";
 
 type PreferencesSkeletonProps = {};
