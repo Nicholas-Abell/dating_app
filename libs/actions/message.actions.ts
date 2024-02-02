@@ -1,7 +1,9 @@
 "use server";
+
+import { revalidatePath } from "next/cache";
+
 import { connectToDB } from "../mongoose";
 import Conversation from "../models/conversation.model";
-import { revalidatePath } from "next/cache";
 
 type params = {
   userId: string;
