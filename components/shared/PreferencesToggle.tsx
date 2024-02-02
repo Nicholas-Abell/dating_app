@@ -1,6 +1,8 @@
 "use client";
-import { togglePreferencesSet } from "@/libs/actions/user.actions";
+
 import React, { useState } from "react";
+
+import { togglePreferencesSet } from "@/libs/actions/user.actions";
 import Spinner from "../loadingSkeletons/Spinner";
 
 type PreferencesToggleProps = {
