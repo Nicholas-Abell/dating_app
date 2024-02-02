@@ -1,10 +1,6 @@
-Certainly! Here's a sample README for a dating app built with Next.js, MongoDB, and Mongoose:
-
----
-
 # Dating App with Next.js, MongoDB, and Mongoose
 
-Welcome to our Dating App, a web application built using Next.js, MongoDB, and Mongoose. The backend uses NextJs 13's server actions. This README provides an overview of the app's features, setup instructions, and important details for developers and users.
+Welcome to my Dating App, a web application built using Next.js, MongoDB, and Mongoose. The backend uses NextJs 13's server actions. This README provides an overview of the app's features, setup instructions, and important details for developers and users.
 
 ## Table of Contents
 
