@@ -1,12 +1,14 @@
 "use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+
 import { addUserImage, deleteUserImage } from "@/libs/actions/user.actions";
 import { SingleImageDropzone } from "../edgeStore/singleImageDropzone";
 import { useEdgeStore } from "@/libs/edgestore";
-import Link from "next/link";
-import { useState } from "react";
-import Image from "next/image";
-import { RiDeleteBin5Fill } from "react-icons/ri";
-import { useRouter } from "next/navigation";
 
 type AccountPhotosProps = {
   id: string;

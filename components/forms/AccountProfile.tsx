@@ -1,11 +1,13 @@
 "use client";
-import { UserValidation } from "@/libs/validations/User";
+
 import React from "react";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { updateUser } from "@/libs/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+
+import { UserValidation } from "@/libs/validations/User";
+import { updateUser } from "@/libs/actions/user.actions";
 import * as userOptions from "../../constants/userOptions";
 
 type AccountProfileProps = {
