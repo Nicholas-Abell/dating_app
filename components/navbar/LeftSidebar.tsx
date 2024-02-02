@@ -3,8 +3,9 @@ import React from "react";
 import { BiHome, BiMessageSquareDots } from "react-icons/bi";
 import { ImProfile } from "react-icons/im";
 import { IoOptions } from "react-icons/io5";
-import { fetchUser } from "@/libs/actions/user.actions";
 import { UserButton, currentUser } from "@clerk/nextjs";
+
+import { fetchUser } from "@/libs/actions/user.actions";
 
 type LeftSidebarProps = {};
 
