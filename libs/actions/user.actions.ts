@@ -204,18 +204,18 @@ export async function fetchProfiles(
     ).slice(-2)}`;
 
     // Fetch the user
-    const currentUser = await User.findOne({ id: userId });
+    // const currentUser = await User.findOne({ id: userId });
 
-    // Check if the formatted date is already in the array
-    if (!currentUser.lastOn.includes(formattedDate)) {
-      // Update Time Stamp for the user
-      await User.findOneAndUpdate(
-        { id: userId },
-        { lastOn: formattedDate },
-        { new: true }
-      );
-      console.log("lastOn set: ", formattedDate);
-    }
+    // // Check if the formatted date is already in the array
+    // if (!currentUser.lastOn.includes(formattedDate)) {
+    //   // Update Time Stamp for the user
+    //   await User.findOneAndUpdate(
+    //     { id: userId },
+    //     { lastOn: formattedDate },
+    //     { new: true }
+    //   );
+    //   console.log("lastOn set: ", formattedDate);
+    // }
 
     return users;
   } catch (error: any) {
@@ -309,19 +309,19 @@ export async function fetchFilteredProfiles(
       today.getFullYear()
     ).slice(-2)}`;
 
-    // Fetch the user
-    const currentUser = await User.findOne({ id: userId });
+    // // Fetch the user
+    // const currentUser = await User.findOne({ id: userId });
 
-    // Check if the formatted date is already in the array
-    if (!currentUser.lastOn.includes(formattedDate)) {
-      // Update Time Stamp for the user
-      await User.findOneAndUpdate(
-        { id: userId },
-        { lastOn: formattedDate },
-        { new: true }
-      );
-      console.log("lastOn set: ", formattedDate);
-    }
+    // // Check if the formatted date is already in the array
+    // if (!currentUser.lastOn.includes(formattedDate)) {
+    //   // Update Time Stamp for the user
+    //   await User.findOneAndUpdate(
+    //     { id: userId },
+    //     { lastOn: formattedDate },
+    //     { new: true }
+    //   );
+    //   console.log("lastOn set: ", formattedDate);
+    // }
 
     return users;
   } catch (error: any) {
